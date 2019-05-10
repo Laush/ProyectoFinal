@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Registracion";
 }
 
 <head>
@@ -17,27 +17,39 @@
     <header class="masthead">
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in">Ingresa con tus datos</div>
+                <div class="intro-lead-in">Complete con sus datos</div>
                 <div class="row">
                     <div class="col-lg-4">
                     </div>
                     <div class="col-lg-4">
-                        <form method="post" action="/Home/Login">
+                        <form method="post" action="#">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Correo electronico</label>
-                                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Ingresa email">
+                                <label for="exampleInputNombre1">Nombre de Usuario</label>
+                                <input type="email" class="form-control" id="nombreUsuario" name="nombreUsuario" aria-describedby="emailHelp" placeholder="Ingresa email">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Direccion de Email</label>
+                                <input type="password" class="form-control" id="email" name="email" placeholder="Password">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                             </div>
+
                             <div class="form-group">
-                                <input type="submit" class="btn btn-block btn-lg btn-primary" value="INGRESAR" />
+                                <label for="exampleInputTipo1">Seleccione Tipo de usuario</label>
+                                <input type="password" class="form-control" id="tipoUsuario" name="tipoUsuario" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-block btn-lg btn-primary" value="REGISTRARME" />
                             </div>
 
                             <hr />
 
                         </form>
+
+
+
 
                     </div>
                 </div>
@@ -57,5 +69,6 @@
     <!-- Custom scripts for this template -->
     <script src="~/Content/js/agency.min.js"></script>
 </body>
+
 
 
