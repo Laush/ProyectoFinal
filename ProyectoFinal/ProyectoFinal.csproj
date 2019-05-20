@@ -184,6 +184,8 @@
     <Content Include="Content\img\portfolio\05-thumbnail.jpg" />
     <Content Include="Content\img\portfolio\06-full.jpg" />
     <Content Include="Content\img\portfolio\06-thumbnail.jpg" />
+    <Content Include="Content\img\portfolio\destino_icon.jpg" />
+    <Content Include="Content\img\portfolio\vuelo_icon.jpg" />
     <Content Include="Content\img\team\1.jpg" />
     <Content Include="Content\img\team\2.jpg" />
     <Content Include="Content\img\team\3.jpg" />
