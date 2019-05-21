@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "RegistroViajero";
+}
+
+<head>
+
+</head>
+
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="/Home/Logout"><img src="~/Content/img/logos/logo2.png" alt="logo"></a>
+
+        </div>
+    </nav>
+    <!-- Header-->
+    <header class="masthead">
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in">Registro viajero</div>
+                <div class="row">
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-4">
+                        <form method="post" action="#">
+                            <div class="form-group">
+                                <label for="exampleInputNombre1">Nombre de Usuario</label>
+                                <input type="email" class="form-control" id="nombreUsuario" name="nombreUsuario" aria-describedby="emailHelp" placeholder="Ingresa email">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Direccion de Email</label>
+                                <input type="password" class="form-control" id="email" name="email" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-block btn-lg btn-primary" value="REGISTRARME" />
+                            </div>
+
+                            <br />
+                        </form>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-block btn-lg btn-primary" value="Ingresar con Facebook" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Contact form JavaScript -->
+    <script src="~/Content/js/jqBootstrapValidation.js"></script>
+    <script src="~/Content/js/contact_me.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="~/Content/js/agency.min.js"></script>
+</body>

@@ -22,8 +22,18 @@ namespace ProyectoFinal.Controllers
 
         public ActionResult Registracion()
         {
-           
-
+            return View();
+        }
+        public ActionResult RegistroViajero()
+        {
+            return View();
+        }
+        public ActionResult BusquedaPorDestino()
+        {
+            return View();
+        }
+        public ActionResult BusquedaPorVuelo()
+        {
             return View();
         }
     }

@@ -192,6 +192,7 @@
     <Content Include="Content\js\agency.js" />
     <Content Include="Content\js\agency.min.js" />
     <Content Include="Content\js\contact_me.js" />
+    <Content Include="Content\js\dateSpicker.js" />
     <Content Include="Content\js\jqBootstrapValidation.js" />
     <Content Include="Content\mail\contact_me.php" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css" />
@@ -1905,6 +1906,9 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Home\RegistroViajero.cshtml" />
+    <Content Include="Views\Home\BusquedaPorDestino.cshtml" />
+    <Content Include="Views\Home\BusquedaPorVuelo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
