@@ -1909,6 +1909,8 @@
     <Content Include="Views\Home\RegistroViajero.cshtml" />
     <Content Include="Views\Home\BusquedaPorDestino.cshtml" />
     <Content Include="Views\Home\BusquedaPorVuelo.cshtml" />
+    <Content Include="Views\Home\RegistroGuia.cshtml" />
+    <Content Include="Views\Home\RegistroEntidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

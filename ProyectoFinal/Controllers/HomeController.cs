@@ -24,6 +24,14 @@ namespace ProyectoFinal.Controllers
         {
             return View();
         }
+        public ActionResult RegistroGuia()
+        {
+            return View();
+        }
+        public ActionResult RegistroEntidad()
+        {
+            return View();
+        }
         public ActionResult RegistroViajero()
         {
             return View();

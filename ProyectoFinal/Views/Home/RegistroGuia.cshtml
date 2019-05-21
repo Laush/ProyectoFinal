@@ -1,5 +1,6 @@
-﻿@{
-    ViewBag.Title = "Login";
+﻿
+@{
+    ViewBag.Title = "RegistroGuia";
 }
 
 <head>
@@ -10,47 +11,37 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="/Home/Logout"><img src="~/Content/img/logos/logo2.png" alt="logo"></a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/Home/Registracion">Registrate</a>
-                    </li>
-                   
-                </ul>
-            </div>
+
         </div>
     </nav>
     <!-- Header-->
     <header class="masthead">
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in">Ingresa con tus datos</div>
+                <div class="intro-lead-in">Guia turistico</div>
                 <div class="row">
                     <div class="col-lg-4">
                     </div>
                     <div class="col-lg-4">
-                        <form method="post" action="/Home/Login">
+                        <form method="post" action="#">
                             <div class="form-group">
-                                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Ingresa email">
+                                <input type="email" class="form-control" id="nombreUsuario" name="nombreUsuario" aria-describedby="emailHelp" placeholder="Ingresa nombre de usuario">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="email" name="email" placeholder="Ingresa Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="matricula" name="matricula" placeholder="Inresa numero de Matricula">
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa Password">
                             </div>
+
                             <div class="form-group">
-                                <input type="submit" class="btn btn-block btn-lg btn-primary" value="INGRESAR" />
+                                <input type="submit" class="btn btn-block btn-lg btn-primary" value="REGISTRARME" />
                             </div>
-                            <br />
                         </form>
-                        <div class="form-group">
-
-                        <input type="submit" class="btn btn-block btn-lg btn-primary" value="Ingresar con Facebook"/>
-                      
-
-                        </div>
+                        <a class="nav-link js-scroll-trigger" href="/Home/Registracion">Ingresa como otro tipo de usuario</a>
 
                     </div>
                 </div>
@@ -70,5 +61,3 @@
     <!-- Custom scripts for this template -->
     <script src="~/Content/js/agency.min.js"></script>
 </body>
-
-
