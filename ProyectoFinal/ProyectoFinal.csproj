@@ -146,6 +146,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -160,6 +161,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\agency.css" />
     <Content Include="Content\css\agency.min.css" />
+    <Content Include="Content\css\agencyUsu.css" />
     <Content Include="Content\img\about\1.jpg" />
     <Content Include="Content\img\about\2.jpg" />
     <Content Include="Content\img\about\3.jpg" />
@@ -185,6 +187,8 @@
     <Content Include="Content\img\portfolio\06-full.jpg" />
     <Content Include="Content\img\portfolio\06-thumbnail.jpg" />
     <Content Include="Content\img\portfolio\destino_icon.jpg" />
+    <Content Include="Content\img\portfolio\fondo4.jpg" />
+    <Content Include="Content\img\portfolio\fondo5.jpg" />
     <Content Include="Content\img\portfolio\vuelo_icon.jpg" />
     <Content Include="Content\img\team\1.jpg" />
     <Content Include="Content\img\team\2.jpg" />
@@ -1911,6 +1915,7 @@
     <Content Include="Views\Home\BusquedaPorVuelo.cshtml" />
     <Content Include="Views\Home\RegistroGuia.cshtml" />
     <Content Include="Views\Home\RegistroEntidad.cshtml" />
+    <Content Include="Views\Usuario\IndexViajero.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
