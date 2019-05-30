@@ -67,7 +67,7 @@ namespace ProyectoFinal.Controllers
                         return RedirectToAction("IndexAdmin", "Usuario");
                        
                     case 2:
-                        return RedirectToAction("IndexViajero", "Usuario");
+                        return RedirectToAction("IndexAgencia", "Usuario");
                        
                     case 3:
                         return RedirectToAction("IndexViajero", "Usuario");
@@ -111,6 +111,11 @@ namespace ProyectoFinal.Controllers
             return View();
         }
         public ActionResult BusquedaPorVuelo()
+        {
+            return View();
+        }
+
+        public ActionResult Buscador()
         {
             return View();
         }

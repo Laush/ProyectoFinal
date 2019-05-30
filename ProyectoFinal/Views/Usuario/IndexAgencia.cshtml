@@ -1,7 +1,7 @@
-﻿@{
-    ViewBag.Title = "IndexAdmin";
+﻿
+@{
+    ViewBag.Title = "IndexAgencia";
 }
-@model IEnumerable<Usuario>
 
 <head>
     <link href="~/Content/css/agencyUsu.css" rel="stylesheet">
@@ -17,16 +17,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#page-top">Perfil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#viajeros">Viajeros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#agencias">Agencias</a>
-                    </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Home/Buscador">Buscar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#">Publicaciones</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion">Salir</a>
                     </li>
@@ -45,8 +45,9 @@
 
                     <div class="col-lg-4">
                         <div class="text-center">
-                            <h4> ADMIN </h4>
+                            <h4> AGENCIA  </h4>
                             <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                            <h6>Upload a different photo...</h6>
                             <input type="file" class="text-center center-block file-upload">
                         </div>
                     </div>
@@ -61,71 +62,16 @@
                         <h4>Calificacion</h4>
                     </div>
 
+
                 </div>
                 <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Editar Perfil</button>
 
             </div>
 
         </div>
+
     </header>
-    <!-- ABM viajeros -->
-    <section id="viajeros">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading text-uppercase">Lista de Usuarios</h2>
-                </div>
-            </div>
-            <div class="intro-text">
-                <table border="1">
-                    <tr>
-                        <th>Id</th>
-                        <th>NombreUsuario</th>
-                        <th>Email</th>
-                    </tr>
 
-                    @foreach (Usuario j in Model)
-                    {
-                        <tr>
-                            <td>@j.IdUsuario</td>
-                            <td>@j.NombreUsuario</td>
-                            <td>@j.Email</td>
-                        </tr>
-                    }
-                </table>
-
-            </div>
-        </div>
-    </section>
-    <!-- ABM Agencias -->
-    <section id="agencias">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading text-uppercase">Lista de Agencias</h2>
-                </div>
-            </div>
-            <div class="intro-text">
-                <table border="1">
-                    <tr>
-                        <th>Id</th>
-                        <th>NombreUsuario</th>
-                        <th>Email</th>
-                    </tr>
-
-                    @foreach (Usuario j in Model)
-                    {
-                        <tr>
-                            <td>@j.IdUsuario</td>
-                            <td>@j.NombreUsuario</td>
-                            <td>@j.Email</td>
-                        </tr>
-                    }
-                </table>
-
-            </div>
-        </div>
-    </section>
 
     <!-- Bootstrap core JavaScript -->
     <script src="~/Content/vendor/jquery/jquery.min.js"></script>
