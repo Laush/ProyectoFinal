@@ -177,6 +177,7 @@
       <DependentUpon>Model_FriendsTrip.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\UsuarioServicio.cs" />
     <Compile Include="Usuario.cs">
       <DependentUpon>Model_FriendsTrip.tt</DependentUpon>
     </Compile>
@@ -222,8 +223,12 @@
     <Content Include="Content\img\portfolio\06-full.jpg" />
     <Content Include="Content\img\portfolio\06-thumbnail.jpg" />
     <Content Include="Content\img\portfolio\destino_icon.jpg" />
+    <Content Include="Content\img\portfolio\fondo2.jpg" />
     <Content Include="Content\img\portfolio\fondo4.jpg" />
     <Content Include="Content\img\portfolio\fondo5.jpg" />
+    <Content Include="Content\img\portfolio\fondo6.jpg" />
+    <Content Include="Content\img\portfolio\fondo7.jpg" />
+    <Content Include="Content\img\portfolio\fondo8.jpg" />
     <Content Include="Content\img\portfolio\vuelo_icon.jpg" />
     <Content Include="Content\img\team\1.jpg" />
     <Content Include="Content\img\team\2.jpg" />
@@ -1968,6 +1973,7 @@
     <Content Include="Views\Home\RegistroGuia.cshtml" />
     <Content Include="Views\Home\RegistroEntidad.cshtml" />
     <Content Include="Views\Usuario\IndexViajero.cshtml" />
+    <Content Include="Views\Usuario\IndexAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

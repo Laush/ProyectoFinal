@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'C:\ProyectoFinal_Grupo2_1C_2019\ProyectoFinal\ProyectoFinal\Model_FriendsTrip.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\Cris_Tech\Desktop\ProyectoFinal\ProyectoFinal\Model_FriendsTrip.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

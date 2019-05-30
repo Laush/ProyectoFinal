@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "IndexAdmin";
+}
+@model IEnumerable<Usuario>
+
+<head>
+    <link href="~/Content/css/agencyUsu.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#"><img src="~/Content/img/logos/logo2.png" alt="logo"></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#page-top">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#viajeros">Viajeros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#agencias">Agencias</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion">Salir</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Header-->
+    <header class="masthead">
+
+        <div class="container">
+            <div class="intro-text">
+
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="text-center">
+                            <h4> ADMIN </h4>
+                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                            <input type="file" class="text-center center-block file-upload">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h4 class="section-subheading text-muted">Nombre</h4><br><br>
+                        <h4>Apellido</h4><br><br>
+                        <h4>Sobre mi..</h4><br><br>
+                    </div>
+                    <div class="col-lg-4">
+                        <h4>Email</h4><br><br>
+                        <h4>Password</h4><br><br>
+                        <h4>Calificacion</h4>
+                    </div>
+
+                </div>
+                <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Editar Perfil</button>
+
+            </div>
+
+        </div>
+    </header>
+    <!-- ABM viajeros -->
+    <section id="viajeros">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading text-uppercase">Lista de Usuarios</h2>
+                </div>
+            </div>
+            <div class="intro-text">
+                <table border="1">
+                    <tr>
+                        <th>Id</th>
+                        <th>NombreUsuario</th>
+                        <th>Email</th>
+                    </tr>
+
+                    @foreach (Usuario j in Model)
+                    {
+                        <tr>
+                            <td>@j.IdUsuario</td>
+                            <td>@j.NombreUsuario</td>
+                            <td>@j.Email</td>
+                        </tr>
+                    }
+                </table>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Contact form JavaScript -->
+    <script src="~/Content/js/jqBootstrapValidation.js"></script>
+    <script src="~/Content/js/contact_me.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="~/Content/js/agency.min.js"></script>
+</body>
+
+
+
+
+
+
+
+
+
