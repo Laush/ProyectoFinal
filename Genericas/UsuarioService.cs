@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using API.Models;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace API.Services
+namespace Genericas
 {
     public class UsuarioService
     {
-        Context context = new Context();
+        Context Context = new Context();
 
         public bool registrarViajero(Usuario Viajero)
         {
             try
             {
-                context.Usuario.Add(Viajero);
-                context.SaveChanges();
+                Context.Usuario.Add(Viajero);
+                Context.SaveChanges();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -26,15 +26,14 @@ namespace API.Services
 
         public bool existeUsuario(Usuario Usuario) // verifica la existencia de un usuario, ya sea por nombre de usuario o por e-mail
         {
-            Usuario UsuarioExistente = context.Usuario.FirstOrDefault(u => u.NombreUsuario == Usuario.NombreUsuario || u.Email == Usuario.Email);
+            Usuario UsuarioExistente = Context.Usuario.FirstOrDefault(u => u.NombreUsuario == Usuario.NombreUsuario || u.Email == Usuario.Email);
 
             return (UsuarioExistente == null) ? false : true;
         }
 
         public Usuario login(LoginRequestModel loginRequest)
         {
-            return context.Usuario.FirstOrDefault(u => (u.NombreUsuario == loginRequest.usuario || u.Email == loginRequest.usuario) && u.Password == loginRequest.contrasenia);
+            return Context.Usuario.FirstOrDefault(u => (u.NombreUsuario == loginRequest.usuario || u.Email == loginRequest.usuario) && u.Password == loginRequest.contrasenia);
         }
-
     }
 }

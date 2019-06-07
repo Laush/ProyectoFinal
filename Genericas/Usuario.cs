@@ -7,30 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace API.Models
+namespace Genericas
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Usuario
     {
         public Usuario()
         {
-            this.AmistadUsuarioUsuario = new HashSet<AmistadUsuarioUsuario>();
+            this.Viaje = new HashSet<Viaje>();
+            this.Usuario1 = new HashSet<Usuario>();
+            this.Usuario2 = new HashSet<Usuario>();
         }
     
         public int IdUsuario { get; set; }
-        [Required]
         public string NombreUsuario { get; set; }
-        [Required]
         public string Password { get; set; }
-        [Required]
         public string Email { get; set; }
-        public int Rol { get; set; }
-        [Required]
+        public int IdRol { get; set; }
+        public string Descripcion { get; set; }
         public string PaisOrigen { get; set; }
     
-        public virtual ICollection<AmistadUsuarioUsuario> AmistadUsuarioUsuario { get; set; }
+        public virtual ICollection<Viaje> Viaje { get; set; }
+        public virtual ICollection<Usuario> Usuario1 { get; set; }
+        public virtual ICollection<Usuario> Usuario2 { get; set; }
     }
 }

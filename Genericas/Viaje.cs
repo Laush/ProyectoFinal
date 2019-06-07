@@ -7,17 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace API.Models
+namespace Genericas
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Vuelo
+    public partial class Viaje
     {
-        public int IdVuelo { get; set; }
-        public string Aerolinea { get; set; }
-        public int NumeroVuelo { get; set; }
-        public int FechaVuelo { get; set; }
+        public Viaje()
+        {
+            this.Destino = new HashSet<Destino>();
+            this.Vuelo = new HashSet<Vuelo>();
+        }
+    
         public int IdViaje { get; set; }
+        public string Alojamiento { get; set; }
+        public int IdUsuario { get; set; }
+    
+        public virtual Usuario Usuario { get; set; }
+        public virtual ICollection<Destino> Destino { get; set; }
+        public virtual ICollection<Vuelo> Vuelo { get; set; }
     }
 }

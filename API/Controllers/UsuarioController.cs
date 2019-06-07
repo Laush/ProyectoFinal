@@ -1,5 +1,7 @@
 ﻿using API.Models;
 using API.Services;
+//using API.Services;
+using Genericas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +15,14 @@ namespace API.Controllers
     public class UsuarioController : ApiController
     {
         private UsuarioService usuarioService = new UsuarioService();
+        
 
         [HttpPost]
         [AllowAnonymous]
         public HttpResponseMessage registroViajero(Usuario Viajero)
         {
-            Viajero.Rol = 1;
+            Viajero.IdRol = 1;
+            Viajero.Descripcion = ""; // el rol se setea en blanco porque el campo es obligatorio
 
             if(!ModelState.IsValid)
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
@@ -36,12 +40,17 @@ namespace API.Controllers
         [AllowAnonymous]
         public HttpResponseMessage login(LoginRequestModel LoginRequest)
         {
+            LoginResponse LoginResponse = new LoginResponse();
             Usuario UsuarioEncontrado = usuarioService.login(LoginRequest);
 
             if (UsuarioEncontrado == null)
                 return Request.CreateResponse(HttpStatusCode.NotFound);
 
-            return Request.CreateResponse(HttpStatusCode.OK, TokenGenerator.GenerateTokenJwt(UsuarioEncontrado));
+            LoginResponse.IdUsuario = UsuarioEncontrado.IdUsuario;
+            LoginResponse.Usuario = UsuarioEncontrado.NombreUsuario;
+            LoginResponse.Token = TokenGenerator.GenerateTokenJwt(UsuarioEncontrado);
+
+            return Request.CreateResponse(HttpStatusCode.OK, LoginResponse);
         }
 
         //falta el metodo para eliminar perfil, que requiere la anotaacion [Authorize]

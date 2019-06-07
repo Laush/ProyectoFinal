@@ -5,7 +5,7 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="FriendsTrip_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="AmistadUsuarioUsuario">
+        <EntityType Name="AmistadUsuario">
           <Key>
             <PropertyRef Name="IdUsuarioUno" />
             <PropertyRef Name="IdUsuarioDos" />
@@ -21,9 +21,8 @@
           <Property Name="Pais" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Localidad" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Ciudad" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="FechaDesde" Type="int" Nullable="false" />
-          <Property Name="FechaHasta" Type="int" Nullable="false" />
-          <Property Name="IdViaje" Type="int" Nullable="false" />
+          <Property Name="FechaDesde" Type="datetime" Nullable="false" />
+          <Property Name="FechaHasta" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -31,9 +30,10 @@
           </Key>
           <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NombreUsuario" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Rol" Type="int" Nullable="false" />
+          <Property Name="IdRol" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="PaisOrigen" Type="nvarchar" MaxLength="300" Nullable="false" />
         </EntityType>
         <EntityType Name="Viaje">
@@ -42,8 +42,7 @@
           </Key>
           <Property Name="IdViaje" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Alojamiento" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="IdVuelo" Type="int" Nullable="false" />
-          <Property Name="IdDestino" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ViajeDestino">
           <Key>
@@ -68,18 +67,41 @@
           <Property Name="IdVuelo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Aerolinea" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="NumeroVuelo" Type="int" Nullable="false" />
-          <Property Name="FechaVuelo" Type="int" Nullable="false" />
-          <Property Name="IdViaje" Type="int" Nullable="false" />
+          <Property Name="FechaVuelo" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Amistad_Usuario_Usuario">
+        <Association Name="FK_Amistad_UsuarioDos">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="AmistadUsuarioUsuario" Type="Self.AmistadUsuarioUsuario" Multiplicity="*" />
+          <End Role="AmistadUsuario" Type="Self.AmistadUsuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="IdUsuario" />
             </Principal>
-            <Dependent Role="AmistadUsuarioUsuario">
+            <Dependent Role="AmistadUsuario">
+              <PropertyRef Name="IdUsuarioDos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Amistad_UsuarioUno">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="AmistadUsuario" Type="Self.AmistadUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AmistadUsuario">
               <PropertyRef Name="IdUsuarioUno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Destino_Viaje">
+          <End Role="Destino" Type="Self.Destino" Multiplicity="1" />
+          <End Role="ViajeDestino" Type="Self.ViajeDestino" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Destino">
+              <PropertyRef Name="IdDestino" />
+            </Principal>
+            <Dependent Role="ViajeDestino">
+              <PropertyRef Name="IdDestino" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -95,6 +117,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Viaje_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Viaje" Type="Self.Viaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Viaje">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Viaje_Vuelo">
           <End Role="Viaje" Type="Self.Viaje" Multiplicity="1" />
           <End Role="ViajeVuelo" Type="Self.ViajeVuelo" Multiplicity="*" />
@@ -107,24 +141,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Vuelo_Viaje">
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="1" />
+          <End Role="ViajeVuelo" Type="Self.ViajeVuelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vuelo">
+              <PropertyRef Name="IdVuelo" />
+            </Principal>
+            <Dependent Role="ViajeVuelo">
+              <PropertyRef Name="IdVuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="FriendsTrip_DBModelStoreContainer">
-          <EntitySet Name="AmistadUsuarioUsuario" EntityType="Self.AmistadUsuarioUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AmistadUsuario" EntityType="Self.AmistadUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Destino" EntityType="Self.Destino" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Viaje" EntityType="Self.Viaje" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ViajeDestino" EntityType="Self.ViajeDestino" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ViajeVuelo" EntityType="Self.ViajeVuelo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vuelo" EntityType="Self.Vuelo" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Amistad_Usuario_Usuario" Association="Self.FK_Amistad_Usuario_Usuario">
+          <AssociationSet Name="FK_Amistad_UsuarioDos" Association="Self.FK_Amistad_UsuarioDos">
             <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="AmistadUsuarioUsuario" EntitySet="AmistadUsuarioUsuario" />
+            <End Role="AmistadUsuario" EntitySet="AmistadUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Amistad_UsuarioUno" Association="Self.FK_Amistad_UsuarioUno">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AmistadUsuario" EntitySet="AmistadUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Destino_Viaje" Association="Self.FK_Destino_Viaje">
+            <End Role="Destino" EntitySet="Destino" />
+            <End Role="ViajeDestino" EntitySet="ViajeDestino" />
           </AssociationSet>
           <AssociationSet Name="FK_Viaje_Destino" Association="Self.FK_Viaje_Destino">
             <End Role="Viaje" EntitySet="Viaje" />
             <End Role="ViajeDestino" EntitySet="ViajeDestino" />
           </AssociationSet>
+          <AssociationSet Name="FK_Viaje_Usuario" Association="Self.FK_Viaje_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Viaje" EntitySet="Viaje" />
+          </AssociationSet>
           <AssociationSet Name="FK_Viaje_Vuelo" Association="Self.FK_Viaje_Vuelo">
             <End Role="Viaje" EntitySet="Viaje" />
+            <End Role="ViajeVuelo" EntitySet="ViajeVuelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vuelo_Viaje" Association="Self.FK_Vuelo_Viaje">
+            <End Role="Vuelo" EntitySet="Vuelo" />
             <End Role="ViajeVuelo" EntitySet="ViajeVuelo" />
           </AssociationSet>
         </EntityContainer>
@@ -133,15 +195,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FriendsTrip_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AmistadUsuarioUsuario">
-          <Key>
-            <PropertyRef Name="IdUsuarioUno" />
-            <PropertyRef Name="IdUsuarioDos" />
-          </Key>
-          <Property Name="IdUsuarioUno" Type="Int32" Nullable="false" />
-          <Property Name="IdUsuarioDos" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Amistad_Usuario_Usuario" FromRole="AmistadUsuarioUsuario" ToRole="Usuario" />
-        </EntityType>
         <EntityType Name="Destino">
           <Key>
             <PropertyRef Name="IdDestino" />
@@ -150,9 +203,9 @@
           <Property Name="Pais" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Localidad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FechaDesde" Type="Int32" Nullable="false" />
-          <Property Name="FechaHasta" Type="Int32" Nullable="false" />
-          <Property Name="IdViaje" Type="Int32" Nullable="false" />
+          <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaHasta" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Viaje" Relationship="Self.ViajeDestino" FromRole="Destino" ToRole="Viaje" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -160,11 +213,14 @@
           </Key>
           <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Rol" Type="Int32" Nullable="false" />
+          <Property Name="IdRol" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PaisOrigen" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AmistadUsuarioUsuario" Relationship="Self.FK_Amistad_Usuario_Usuario" FromRole="Usuario" ToRole="AmistadUsuarioUsuario" />
+          <NavigationProperty Name="Viaje" Relationship="Self.FK_Viaje_Usuario" FromRole="Usuario" ToRole="Viaje" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.AmistadUsuario" FromRole="Usuario" ToRole="Usuario1" />
+          <NavigationProperty Name="Usuario2" Relationship="Self.AmistadUsuario" FromRole="Usuario1" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Viaje">
           <Key>
@@ -172,28 +228,10 @@
           </Key>
           <Property Name="IdViaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Alojamiento" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdVuelo" Type="Int32" Nullable="false" />
-          <Property Name="IdDestino" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ViajeDestino" Relationship="Self.FK_Viaje_Destino" FromRole="Viaje" ToRole="ViajeDestino" />
-          <NavigationProperty Name="ViajeVuelo" Relationship="Self.FK_Viaje_Vuelo" FromRole="Viaje" ToRole="ViajeVuelo" />
-        </EntityType>
-        <EntityType Name="ViajeDestino">
-          <Key>
-            <PropertyRef Name="IdViaje" />
-            <PropertyRef Name="IdDestino" />
-          </Key>
-          <Property Name="IdViaje" Type="Int32" Nullable="false" />
-          <Property Name="IdDestino" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Viaje" Relationship="Self.FK_Viaje_Destino" FromRole="ViajeDestino" ToRole="Viaje" />
-        </EntityType>
-        <EntityType Name="ViajeVuelo">
-          <Key>
-            <PropertyRef Name="IdViaje" />
-            <PropertyRef Name="IdVuelo" />
-          </Key>
-          <Property Name="IdViaje" Type="Int32" Nullable="false" />
-          <Property Name="IdVuelo" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Viaje" Relationship="Self.FK_Viaje_Vuelo" FromRole="ViajeVuelo" ToRole="Viaje" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Viaje_Usuario" FromRole="Viaje" ToRole="Usuario" />
+          <NavigationProperty Name="Destino" Relationship="Self.ViajeDestino" FromRole="Viaje" ToRole="Destino" />
+          <NavigationProperty Name="Vuelo" Relationship="Self.ViajeVuelo" FromRole="Viaje" ToRole="Vuelo" />
         </EntityType>
         <EntityType Name="Vuelo">
           <Key>
@@ -202,64 +240,53 @@
           <Property Name="IdVuelo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Aerolinea" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="NumeroVuelo" Type="Int32" Nullable="false" />
-          <Property Name="FechaVuelo" Type="Int32" Nullable="false" />
-          <Property Name="IdViaje" Type="Int32" Nullable="false" />
+          <Property Name="FechaVuelo" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Viaje" Relationship="Self.ViajeVuelo" FromRole="Vuelo" ToRole="Viaje" />
         </EntityType>
-        <Association Name="FK_Amistad_Usuario_Usuario">
+        <Association Name="FK_Viaje_Usuario">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="AmistadUsuarioUsuario" Type="Self.AmistadUsuarioUsuario" Multiplicity="*" />
+          <End Role="Viaje" Type="Self.Viaje" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="IdUsuario" />
             </Principal>
-            <Dependent Role="AmistadUsuarioUsuario">
-              <PropertyRef Name="IdUsuarioUno" />
+            <Dependent Role="Viaje">
+              <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Viaje_Destino">
-          <End Role="Viaje" Type="Self.Viaje" Multiplicity="1" />
-          <End Role="ViajeDestino" Type="Self.ViajeDestino" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Viaje">
-              <PropertyRef Name="IdViaje" />
-            </Principal>
-            <Dependent Role="ViajeDestino">
-              <PropertyRef Name="IdViaje" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="AmistadUsuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <End Role="Usuario1" Type="Self.Usuario" Multiplicity="*" />
         </Association>
-        <Association Name="FK_Viaje_Vuelo">
-          <End Role="Viaje" Type="Self.Viaje" Multiplicity="1" />
-          <End Role="ViajeVuelo" Type="Self.ViajeVuelo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Viaje">
-              <PropertyRef Name="IdViaje" />
-            </Principal>
-            <Dependent Role="ViajeVuelo">
-              <PropertyRef Name="IdViaje" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="ViajeDestino">
+          <End Role="Destino" Type="Self.Destino" Multiplicity="*" />
+          <End Role="Viaje" Type="Self.Viaje" Multiplicity="*" />
+        </Association>
+        <Association Name="ViajeVuelo">
+          <End Role="Viaje" Type="Self.Viaje" Multiplicity="*" />
+          <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="*" />
         </Association>
         <EntityContainer Name="Context" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AmistadUsuarioUsuario" EntityType="Self.AmistadUsuarioUsuario" />
           <EntitySet Name="Destino" EntityType="Self.Destino" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="Viaje" EntityType="Self.Viaje" />
-          <EntitySet Name="ViajeDestino" EntityType="Self.ViajeDestino" />
-          <EntitySet Name="ViajeVuelo" EntityType="Self.ViajeVuelo" />
           <EntitySet Name="Vuelo" EntityType="Self.Vuelo" />
-          <AssociationSet Name="FK_Amistad_Usuario_Usuario" Association="Self.FK_Amistad_Usuario_Usuario">
+          <AssociationSet Name="FK_Viaje_Usuario" Association="Self.FK_Viaje_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="AmistadUsuarioUsuario" EntitySet="AmistadUsuarioUsuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Viaje_Destino" Association="Self.FK_Viaje_Destino">
             <End Role="Viaje" EntitySet="Viaje" />
-            <End Role="ViajeDestino" EntitySet="ViajeDestino" />
           </AssociationSet>
-          <AssociationSet Name="FK_Viaje_Vuelo" Association="Self.FK_Viaje_Vuelo">
+          <AssociationSet Name="AmistadUsuario" Association="Self.AmistadUsuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Usuario1" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="ViajeDestino" Association="Self.ViajeDestino">
+            <End Role="Destino" EntitySet="Destino" />
             <End Role="Viaje" EntitySet="Viaje" />
-            <End Role="ViajeVuelo" EntitySet="ViajeVuelo" />
+          </AssociationSet>
+          <AssociationSet Name="ViajeVuelo" Association="Self.ViajeVuelo">
+            <End Role="Viaje" EntitySet="Viaje" />
+            <End Role="Vuelo" EntitySet="Vuelo" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -268,14 +295,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FriendsTrip_DBModelStoreContainer" CdmEntityContainer="Context">
-          <EntitySetMapping Name="AmistadUsuarioUsuario">
-            <EntityTypeMapping TypeName="FriendsTrip_DBModel.AmistadUsuarioUsuario">
-              <MappingFragment StoreEntitySet="AmistadUsuarioUsuario">
-                <ScalarProperty Name="IdUsuarioUno" ColumnName="IdUsuarioUno" />
-                <ScalarProperty Name="IdUsuarioDos" ColumnName="IdUsuarioDos" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Destino">
             <EntityTypeMapping TypeName="FriendsTrip_DBModel.Destino">
               <MappingFragment StoreEntitySet="Destino">
@@ -285,7 +304,6 @@
                 <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
                 <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
                 <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
-                <ScalarProperty Name="IdViaje" ColumnName="IdViaje" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -296,7 +314,8 @@
                 <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="PaisOrigen" ColumnName="PaisOrigen" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -306,24 +325,7 @@
               <MappingFragment StoreEntitySet="Viaje">
                 <ScalarProperty Name="IdViaje" ColumnName="IdViaje" />
                 <ScalarProperty Name="Alojamiento" ColumnName="Alojamiento" />
-                <ScalarProperty Name="IdVuelo" ColumnName="IdVuelo" />
-                <ScalarProperty Name="IdDestino" ColumnName="IdDestino" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ViajeDestino">
-            <EntityTypeMapping TypeName="FriendsTrip_DBModel.ViajeDestino">
-              <MappingFragment StoreEntitySet="ViajeDestino">
-                <ScalarProperty Name="IdViaje" ColumnName="IdViaje" />
-                <ScalarProperty Name="IdDestino" ColumnName="IdDestino" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ViajeVuelo">
-            <EntityTypeMapping TypeName="FriendsTrip_DBModel.ViajeVuelo">
-              <MappingFragment StoreEntitySet="ViajeVuelo">
-                <ScalarProperty Name="IdViaje" ColumnName="IdViaje" />
-                <ScalarProperty Name="IdVuelo" ColumnName="IdVuelo" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -334,10 +336,33 @@
                 <ScalarProperty Name="Aerolinea" ColumnName="Aerolinea" />
                 <ScalarProperty Name="NumeroVuelo" ColumnName="NumeroVuelo" />
                 <ScalarProperty Name="FechaVuelo" ColumnName="FechaVuelo" />
-                <ScalarProperty Name="IdViaje" ColumnName="IdViaje" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="AmistadUsuario" TypeName="FriendsTrip_DBModel.AmistadUsuario" StoreEntitySet="AmistadUsuario">
+            <EndProperty Name="Usuario">
+              <ScalarProperty Name="IdUsuario" ColumnName="IdUsuarioDos" />
+            </EndProperty>
+            <EndProperty Name="Usuario1">
+              <ScalarProperty Name="IdUsuario" ColumnName="IdUsuarioUno" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ViajeDestino" TypeName="FriendsTrip_DBModel.ViajeDestino" StoreEntitySet="ViajeDestino">
+            <EndProperty Name="Destino">
+              <ScalarProperty Name="IdDestino" ColumnName="IdDestino" />
+            </EndProperty>
+            <EndProperty Name="Viaje">
+              <ScalarProperty Name="IdViaje" ColumnName="IdViaje" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ViajeVuelo" TypeName="FriendsTrip_DBModel.ViajeVuelo" StoreEntitySet="ViajeVuelo">
+            <EndProperty Name="Viaje">
+              <ScalarProperty Name="IdViaje" ColumnName="IdViaje" />
+            </EndProperty>
+            <EndProperty Name="Vuelo">
+              <ScalarProperty Name="IdVuelo" ColumnName="IdVuelo" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

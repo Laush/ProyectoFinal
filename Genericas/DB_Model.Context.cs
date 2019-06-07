@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace API.Models
+namespace Genericas
 {
     using System;
     using System.Data.Entity;
@@ -25,12 +25,9 @@ namespace API.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<AmistadUsuarioUsuario> AmistadUsuarioUsuario { get; set; }
         public DbSet<Destino> Destino { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Viaje> Viaje { get; set; }
-        public DbSet<ViajeDestino> ViajeDestino { get; set; }
-        public DbSet<ViajeVuelo> ViajeVuelo { get; set; }
         public DbSet<Vuelo> Vuelo { get; set; }
     }
 }
