@@ -16,21 +16,26 @@ namespace Genericas
     {
         public Usuario()
         {
-            this.Viaje = new HashSet<Viaje>();
             this.Usuario1 = new HashSet<Usuario>();
             this.Usuario2 = new HashSet<Usuario>();
+            this.Viaje = new HashSet<Viaje>();
         }
     
-        public int IdUsuario { get; set; }
+        public long IdUsuario { get; set; }
         public string NombreUsuario { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public Nullable<int> Edad { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public int IdRol { get; set; }
+        public long IdRol { get; set; }
+        public string MatriculaGuia { get; set; }
         public string Descripcion { get; set; }
-        public string PaisOrigen { get; set; }
+        public long Nacionalidad { get; set; }
     
-        public virtual ICollection<Viaje> Viaje { get; set; }
+        public virtual Ciudad Ciudad { get; set; }
         public virtual ICollection<Usuario> Usuario1 { get; set; }
         public virtual ICollection<Usuario> Usuario2 { get; set; }
+        public virtual ICollection<Viaje> Viaje { get; set; }
     }
 }

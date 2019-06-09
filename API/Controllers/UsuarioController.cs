@@ -1,12 +1,12 @@
 ﻿using API.Models;
 using API.Services;
-//using API.Services;
 using Genericas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Web.Http;
 
 namespace API.Controllers
@@ -23,6 +23,7 @@ namespace API.Controllers
         {
             Viajero.IdRol = 1;
             Viajero.Descripcion = ""; // el rol se setea en blanco porque el campo es obligatorio
+            Viajero.Password = usuarioService.HashPassword(Viajero.Password);
 
             if(!ModelState.IsValid)
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);
@@ -48,10 +49,12 @@ namespace API.Controllers
 
             LoginResponse.IdUsuario = UsuarioEncontrado.IdUsuario;
             LoginResponse.Usuario = UsuarioEncontrado.NombreUsuario;
-            LoginResponse.Token = TokenGenerator.GenerateTokenJwt(UsuarioEncontrado);
+            LoginResponse.Token = TokenManager.GenerateTokenJwt(UsuarioEncontrado);
 
             return Request.CreateResponse(HttpStatusCode.OK, LoginResponse);
         }
+
+        
 
         //falta el metodo para eliminar perfil, que requiere la anotaacion [Authorize]
     }

@@ -6,10 +6,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using Genericas;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace API.Services
 {
-    public class TokenGenerator
+    public class TokenManager
     {
         public static string GenerateTokenJwt(Usuario Usuario)
         {
@@ -28,12 +29,12 @@ namespace API.Services
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] {
                 new Claim(ClaimTypes.Name, Usuario.NombreUsuario),
                 new Claim(ClaimTypes.Email, Usuario.Email),
-                new Claim(ClaimTypes.Name, Usuario.IdUsuario.ToString())
+                new Claim("Id", Usuario.IdUsuario.ToString())
             });
 
 
             // create token to the user
-            var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+            var tokenHandler = new JwtSecurityTokenHandler();
             var jwtSecurityToken = tokenHandler.CreateJwtSecurityToken(
                 audience: audienceToken,
                 issuer: issuerToken,
@@ -45,6 +46,20 @@ namespace API.Services
 
             var jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
             return jwtTokenString;
+        }
+
+        public long GetUserId(string Token)
+        {
+            int IdUsuario;
+            JwtSecurityTokenHandler TokenHandler = new JwtSecurityTokenHandler();
+
+            JwtSecurityToken SecurityToken = TokenHandler.ReadJwtToken(Token);
+
+            IEnumerable<Claim> Claims = SecurityToken.Claims;
+
+            int.TryParse(Claims.FirstOrDefault(c => c.Type == "Id").Value, out IdUsuario);
+
+            return IdUsuario;
         }
     }
 }

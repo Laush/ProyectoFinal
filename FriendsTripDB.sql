@@ -1,6 +1,7 @@
 USE [master]
 GO
 
+--drop database [FriendsTripDB]
 /*Creacion DB FriendsTrip*/
 CREATE DATABASE [FriendsTripDB]
 GO
@@ -23,16 +24,17 @@ GO
 
 /*Tabla Usuario*/
 CREATE TABLE [dbo].[Usuario](
-	[IdUsuario] [int] IDENTITY(1,1) NOT NULL,
+	[IdUsuario] [bigint] IDENTITY(1,1) NOT NULL,
 	[NombreUsuario] [nvarchar](100) NOT NULL,
 	[Nombre] [nvarchar](100) NULL,
 	[Apellido] [nvarchar](100) NULL,
 	[Edad] [int] NULL,
 	[Password] [nvarchar](256) NOT NULL,
 	[Email] [nvarchar](300) NOT NULL,
-	[IdRol] [int] NOT NULL,
+	[IdRol] [bigint] NOT NULL,
+	[MatriculaGuia] nvarchar(100),
 	[Descripcion] [nvarchar](300) NULL,
-	[Nacionalidad] [int] NOT NULL,
+	[Nacionalidad] [bigint] NOT NULL,
  CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED 
 (
 	[IdUsuario] ASC
@@ -42,15 +44,21 @@ GO
 
 /*Tabla Viaje*/
 CREATE TABLE [dbo].[Viaje](
-	[IdViaje] [int] IDENTITY(1,1) NOT NULL,
+	[IdViaje] [bigint] IDENTITY(1,1) NOT NULL,
 	[Alojamiento] [nvarchar](200) NULL,	
 	[Aerolinea] [nvarchar](200) NULL,
 	[NumeroVuelo] [nvarchar](50) NULL,
 	[FechaDesde] [datetime] NOT NULL,
 	[FechaHasta] [datetime] NULL,
-	[IdUsuario] [int] NULL,
-	[IdOrigen] [int] NOT NULL,
-	[IdDestino] [int] NOT NULL,
+	[IdUsuario] [bigint] NULL,
+	[IdOrigen] [bigint] NOT NULL,
+	[IdDestino] [bigint] NOT NULL,
+	InteresActividades bit,
+	InteresExcursiones bit null,
+	InteresTraslados bit null,
+	InteresAmistades bit null,
+	InteresAlojamiento bit null,
+	InteresOtros bit null,
  CONSTRAINT [PK_Viaje] PRIMARY KEY CLUSTERED 
 (
 	[IdViaje] ASC
@@ -59,6 +67,7 @@ CREATE TABLE [dbo].[Viaje](
 GO
 
 /*Tabla Interes*/
+/*
 CREATE TABLE [dbo].[Interes](
 	[IdInteres] [int] IDENTITY(1,1) NOT NULL,
 	[TipoInteres] [nvarchar](200) NULL,
@@ -69,12 +78,12 @@ CREATE TABLE [dbo].[Interes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-
+*/
 /*Tabla Ciudad*/
 CREATE TABLE [dbo].[Ciudad](
-	[IdCiudad] [int] IDENTITY(1,1) NOT NULL,
+	[IdCiudad] [bigint] IDENTITY(1,1) NOT NULL,
 	[Nombre] [nvarchar](200) NULL,
-	[IdProvincia] [int] NOT NULL,
+	[IdProvincia] [bigint] NOT NULL,
  CONSTRAINT [IdCiudad] PRIMARY KEY CLUSTERED 
 (
 	[IdCiudad] ASC
@@ -84,9 +93,9 @@ GO
 
 /*Tabla Provincia*/
 CREATE TABLE [dbo].[Provincia](
-	[IdProvincia] [int] IDENTITY(1,1) NOT NULL,
+	[IdProvincia] [bigint] IDENTITY(1,1) NOT NULL,
 	[Nombre] [nvarchar](200) NULL,
-	[IdPais] [int] NOT NULL,
+	[IdPais] [bigint] NOT NULL,
  CONSTRAINT [IdProvincia] PRIMARY KEY CLUSTERED 
 (
 	[IdProvincia] ASC
@@ -96,7 +105,7 @@ GO
 
 /*Tabla Pais*/
 CREATE TABLE [dbo].[Pais](
-	[IdPais] [int] IDENTITY(1,1) NOT NULL,
+	[IdPais] [bigint] IDENTITY(1,1) NOT NULL,
 	[Nombre] [nvarchar](200) NULL,
  CONSTRAINT [IdPais] PRIMARY KEY CLUSTERED 
 (
@@ -107,8 +116,8 @@ GO
 
 /*Tabla usuario usuario, donde se guardaran las coincidencias*/
 CREATE TABLE [dbo].[AmistadUsuario](
-	[IdUsuarioUno] [int] NOT NULL,
-	[IdUsuarioDos] [int] NOT NULL,
+	[IdUsuarioUno] [bigint] NOT NULL,
+	[IdUsuarioDos] [bigint] NOT NULL,
  CONSTRAINT [PK_AmistadUsuario] PRIMARY KEY CLUSTERED 
 (
 	[IdUsuarioUno] ASC,
@@ -119,8 +128,8 @@ GO
 
 /*Tabla usuario viaje*/
 CREATE TABLE [dbo].[UsuarioViaje](
-	[IdUsuario] [int] NOT NULL,
-	[IdViaje] [int] NOT NULL,
+	[IdUsuario] [bigint] NOT NULL,
+	[IdViaje] [bigint] NOT NULL,
  CONSTRAINT [PK_UsuarioViaje] PRIMARY KEY CLUSTERED 
 (
 	[IdUsuario] ASC,
@@ -148,10 +157,11 @@ REFERENCES [dbo].[Viaje] ([IdViaje])
 GO
 
 /*relacion 1 a n viaje interes*/
+/*
 ALTER TABLE [dbo].[Interes]  WITH CHECK ADD  CONSTRAINT [FK_Interes_Viaje] FOREIGN KEY([IdViaje])
 REFERENCES [dbo].[Viaje] ([IdViaje])
 GO
-
+*/
 /*relacion 1 a n viaje destino (ciudad)*/
 ALTER TABLE [dbo].[Viaje]  WITH CHECK ADD  CONSTRAINT [FK_Viaje_Destino] FOREIGN KEY([IdDestino])
 REFERENCES [dbo].[Ciudad] ([IdCiudad])

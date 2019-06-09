@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,15 @@ namespace Genericas
 {
     public class UsuarioService
     {
+        public string HashPassword(string Password)
+        {
+            SHA256 sha256 = SHA256.Create();
+
+            byte[] Bytes = sha256.ComputeHash(Encoding.ASCII.GetBytes(Password));
+
+            return Encoding.UTF8.GetString(Bytes);
+        }
+
         Context Context = new Context();
 
         public bool registrarViajero(Usuario Viajero)
@@ -33,7 +43,9 @@ namespace Genericas
 
         public Usuario login(LoginRequestModel loginRequest)
         {
-            return Context.Usuario.FirstOrDefault(u => (u.NombreUsuario == loginRequest.usuario || u.Email == loginRequest.usuario) && u.Password == loginRequest.contrasenia);
+            string hashedPassword = HashPassword(loginRequest.contrasenia);
+
+            return Context.Usuario.FirstOrDefault(u => (u.NombreUsuario == loginRequest.usuario || u.Email == loginRequest.usuario) && u.Password == hashedPassword);
         }
     }
 }

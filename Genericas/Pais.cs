@@ -12,18 +12,16 @@ namespace Genericas
     using System;
     using System.Collections.Generic;
     
-    public partial class Vuelo
+    public partial class Pais
     {
-        public Vuelo()
+        public Pais()
         {
-            this.Viaje = new HashSet<Viaje>();
+            this.Provincia = new HashSet<Provincia>();
         }
     
-        public int IdVuelo { get; set; }
-        public string Aerolinea { get; set; }
-        public int NumeroVuelo { get; set; }
-        public System.DateTime FechaVuelo { get; set; }
+        public long IdPais { get; set; }
+        public string Nombre { get; set; }
     
-        public virtual ICollection<Viaje> Viaje { get; set; }
+        public virtual ICollection<Provincia> Provincia { get; set; }
     }
 }

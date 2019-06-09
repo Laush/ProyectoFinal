@@ -25,9 +25,10 @@ namespace Genericas
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Destino> Destino { get; set; }
+        public DbSet<Ciudad> Ciudad { get; set; }
+        public DbSet<Pais> Pais { get; set; }
+        public DbSet<Provincia> Provincia { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Viaje> Viaje { get; set; }
-        public DbSet<Vuelo> Vuelo { get; set; }
     }
 }

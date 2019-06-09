@@ -16,16 +16,27 @@ namespace Genericas
     {
         public Viaje()
         {
-            this.Destino = new HashSet<Destino>();
-            this.Vuelo = new HashSet<Vuelo>();
+            this.Usuario = new HashSet<Usuario>();
         }
     
-        public int IdViaje { get; set; }
+        public long IdViaje { get; set; }
         public string Alojamiento { get; set; }
-        public int IdUsuario { get; set; }
+        public string Aerolinea { get; set; }
+        public string NumeroVuelo { get; set; }
+        public System.DateTime FechaDesde { get; set; }
+        public Nullable<System.DateTime> FechaHasta { get; set; }
+        public Nullable<long> IdUsuario { get; set; }
+        public long IdOrigen { get; set; }
+        public long IdDestino { get; set; }
+        public Nullable<bool> InteresActividades { get; set; }
+        public Nullable<bool> InteresExcursiones { get; set; }
+        public Nullable<bool> InteresTraslados { get; set; }
+        public Nullable<bool> InteresAmistades { get; set; }
+        public Nullable<bool> InteresAlojamiento { get; set; }
+        public Nullable<bool> InteresOtros { get; set; }
     
-        public virtual Usuario Usuario { get; set; }
-        public virtual ICollection<Destino> Destino { get; set; }
-        public virtual ICollection<Vuelo> Vuelo { get; set; }
+        public virtual Ciudad Ciudad { get; set; }
+        public virtual Ciudad Ciudad1 { get; set; }
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

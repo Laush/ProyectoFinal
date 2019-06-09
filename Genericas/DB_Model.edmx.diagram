@@ -4,15 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="92ad40754ddb4279a2667231fa9b1d46" Name="Diagram1">
-        <EntityTypeShape EntityType="FriendsTrip_DBModel.Destino" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="FriendsTrip_DBModel.Usuario" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FriendsTrip_DBModel.Viaje" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="FriendsTrip_DBModel.Vuelo" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="FriendsTrip_DBModel.FK_Viaje_Usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="FriendsTrip_DBModel.AmistadUsuario" ManuallyRouted="false" />
-        <AssociationConnector Association="FriendsTrip_DBModel.ViajeDestino" ManuallyRouted="false" />
-        <AssociationConnector Association="FriendsTrip_DBModel.ViajeVuelo" ManuallyRouted="false" />
+      <Diagram DiagramId="74c378c7a340477fb8525596acf1c47e" Name="Diagram1">
+        <EntityTypeShape EntityType="FriendsTripDBModel.Ciudad" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FriendsTripDBModel.Pais" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FriendsTripDBModel.Provincia" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FriendsTripDBModel.Usuario" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FriendsTripDBModel.Viaje" Width="1.5" PointX="9.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="FriendsTripDBModel.FK_Ciudad_Provincia" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendsTripDBModel.FK_Usuario_Nacionalidad" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendsTripDBModel.FK_Viaje_Destino" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendsTripDBModel.FK_Viaje_Origen" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendsTripDBModel.FK_Provincia_Pais" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendsTripDBModel.AmistadUsuario" ManuallyRouted="false" />
+        <AssociationConnector Association="FriendsTripDBModel.UsuarioViaje" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
