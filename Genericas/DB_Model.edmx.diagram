@@ -8,8 +8,8 @@
         <EntityTypeShape EntityType="FriendsTripDBModel.Ciudad" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FriendsTripDBModel.Pais" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FriendsTripDBModel.Provincia" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FriendsTripDBModel.Usuario" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FriendsTripDBModel.Viaje" Width="1.5" PointX="9.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FriendsTripDBModel.Usuario" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FriendsTripDBModel.Viaje" Width="1.5" PointX="9.75" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="FriendsTripDBModel.FK_Ciudad_Provincia" ManuallyRouted="false" />
         <AssociationConnector Association="FriendsTripDBModel.FK_Usuario_Nacionalidad" ManuallyRouted="false" />
         <AssociationConnector Association="FriendsTripDBModel.FK_Viaje_Destino" ManuallyRouted="false" />

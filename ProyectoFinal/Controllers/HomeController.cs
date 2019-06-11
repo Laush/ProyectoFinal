@@ -1,4 +1,4 @@
-﻿using ProyectoFinal.Services;
+﻿using Genericas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,9 @@ namespace ProyectoFinal.Controllers
 {
     public class HomeController : Controller
     {
-        private UsuarioServicio srvUsuario = new UsuarioServicio();
+        private UsuarioService srvUsuario = new UsuarioService();
+
+        private ViajeService srvViaje = new ViajeService();
         //Landing Page
         public ActionResult Logout()
         {
@@ -106,10 +108,12 @@ namespace ProyectoFinal.Controllers
         {
             return View();
         }
+
         public ActionResult BusquedaPorDestino()
         {
             return View();
         }
+
         public ActionResult BusquedaPorVuelo()
         {
             return View();

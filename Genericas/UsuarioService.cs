@@ -47,5 +47,30 @@ namespace Genericas
 
             return Context.Usuario.FirstOrDefault(u => (u.NombreUsuario == loginRequest.usuario || u.Email == loginRequest.usuario) && u.Password == hashedPassword);
         }
+
+        // INICIO - Estos metodos los traigo de Servicios/UsuarioServicio.cs que estaban en ProyectoFinal (web)
+        public List<Usuario> Listar()
+        {
+            return Context.Usuario.ToList();
+        }
+        public Usuario VerificarExistenciaUsuario(Usuario u)
+        {
+            var user = Context.Usuario.Where(us => us.Email.Equals(u.Email) && us.Password.Equals(u.Password)).FirstOrDefault();
+
+            return user;
+        }
+
+
+        public Usuario GetById(int id)
+        {
+            return Context.Usuario.FirstOrDefault(x => x.IdUsuario == id);
+        }
+
+        //prueba
+        public Usuario GetUsuario(Usuario u)
+        {
+            return Context.Usuario.FirstOrDefault(x => x.IdUsuario.Equals(u));
+        }
+        // FIN - Estos metodos los traigo de Servicios/UsuarioServicio.cs que estaban en ProyectoFinal (web)
     }
 }

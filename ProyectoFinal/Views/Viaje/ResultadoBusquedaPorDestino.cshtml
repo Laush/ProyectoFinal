@@ -1,0 +1,126 @@
+﻿@using Genericas;
+
+@{
+    ViewBag.Title = "ResultadoBusquedaPorDestino";
+}
+
+@model List<Viaje>
+
+<head>
+    <link href="~/Content/Viaje/ResultadoBusqueda.css" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="/Home/Logout"><img src="~/Content/img/logos/logo2.png" alt="logo"></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Home/Registracion">Registrate</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Home/Login">Login</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Header-->
+    <header class="masthead">
+        <div class="container">
+            <div class="intro-text">
+                <h2 class="section-heading text-uppercase">Resultados Busqueda por Destino</h2>
+                <br>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Alojamiento</th>
+                                <th>Aerolinea</th>
+                                <th>N de Vuelo</th>
+                                <th>Desde</th>
+                                <th>Hasta</th>
+                                <th>Origen</th>
+                                <th>Destino</th>
+                                <th>Intereses</th>
+                            </tr>
+                            @foreach (Viaje v in Model)
+                            {
+                                <tr>
+                                    <td>@v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).NombreUsuario</td>
+                                    <td>@v.Alojamiento</td>
+                                    <td>@v.Aerolinea</td>
+                                    <td>@v.NumeroVuelo</td>
+                                    <td>@v.FechaDesde.ToShortDateString()</td>
+                                    <td>
+                                        @if (v.FechaHasta != null)
+                                        {
+                                            v.FechaHasta.ToString();
+                                        }
+                                        else
+                                        {
+                                            @: No sabe
+                                        }
+
+                                    </td>
+                                    <td>@v.Ciudad1.Nombre</td>
+                                    <td>@v.Ciudad.Nombre</td>
+                                    <td>
+                                        @if (v.InteresActividades == true)
+                                        {
+                                            @: Actividades
+                                        }
+                                        @if (v.InteresAlojamiento == true)
+                                        {
+                                            @: Alojamientos
+                                        }
+
+                                        @if (v.InteresAmistades == true)
+                                        {
+                                            @: Amistades
+                                        }
+                                        @if (v.InteresExcursiones == true)
+                                        {
+                                            @: Excursiones
+                                        }@if (v.InteresTraslados == true)
+                                        {
+                                            @: Traslados
+                                        }
+                                        @if (v.InteresOtros == true)
+                                        {
+                                            @: Otros
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                        @Html.ActionLink("Nueva Busqueda", "BusquedaDestino", "Viaje")
+                        @Html.ActionLink("Busqueda por Vuelo", "BusquedaPorVuelo", "Viaje")
+                        <h1>@ViewBag.Error</h1>
+                    </div>
+                </div>
+            </div>
+    </header>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Contact form JavaScript -->
+    <script src="~/Content/js/jqBootstrapValidation.js"></script>
+    <script src="~/Content/js/contact_me.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="~/Content/js/agency.min.js"></script>
+</body>
+
+
+
