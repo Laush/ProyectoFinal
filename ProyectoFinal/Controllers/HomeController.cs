@@ -34,7 +34,7 @@ namespace ProyectoFinal.Controllers
                     if (usuario != null)
                     {
                         Session["Usuario"] = usuario;
-                        return RedirectToAction("Listar", "Pedidos");
+                        return RedirectToAction("Buscador", "Home");
                     }
                     else
                     {
