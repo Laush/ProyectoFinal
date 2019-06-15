@@ -40,7 +40,8 @@ namespace API.Services
                 issuer: issuerToken,
                 subject: claimsIdentity,
                 notBefore: DateTime.UtcNow,
-                expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(expireTime)),
+                //expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(expireTime)), //Si puedde ser nulo este dato,
+                //entonces se puede remover la variable de sistema que fija el tiempo de expiracion
                 signingCredentials: signingCredentials);
 
 
