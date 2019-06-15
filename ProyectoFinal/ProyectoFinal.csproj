@@ -1927,9 +1927,10 @@
     <Content Include="Views\Usuario\IndexAdmin.cshtml" />
     <Content Include="Views\Home\Buscador.cshtml" />
     <Content Include="Views\Usuario\IndexAgencia.cshtml" />
-    <Content Include="Views\Viaje\ResultadoBusquedaPorDestino.cshtml" />
     <Content Include="Views\Viaje\Index.cshtml" />
     <Content Include="Views\Viaje\BusquedaDestino.cshtml" />
+    <Content Include="Views\Viaje\BusquedaVuelo.cshtml" />
+    <Content Include="Views\Viaje\ResultadoBusqueda.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

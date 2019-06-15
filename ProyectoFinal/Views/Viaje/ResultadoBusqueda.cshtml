@@ -1,7 +1,7 @@
 ﻿@using Genericas;
 
 @{
-    ViewBag.Title = "ResultadoBusquedaPorDestino";
+    ViewBag.Title = "ResultadoBusqueda";
 }
 
 @model List<Viaje>
@@ -36,7 +36,7 @@
     <header class="masthead">
         <div class="container">
             <div class="intro-text">
-                <h2 class="section-heading text-uppercase">Resultados Busqueda por Destino</h2>
+                <h2 class="section-heading text-uppercase">Resultado B&uacute;squeda</h2>
                 <br>
                 <div class="row">
                     <div class="col-lg-4">
@@ -102,8 +102,8 @@
                                 </tr>
                             }
                         </table>
-                        @Html.ActionLink("Nueva Busqueda", "BusquedaDestino", "Viaje")
-                        @Html.ActionLink("Busqueda por Vuelo", "BusquedaPorVuelo", "Viaje")
+                        @Html.ActionLink("Buscar por Destino", "BusquedaDestino", "Viaje")
+                        @Html.ActionLink("Buscar por Vuelo", "BusquedaVuelo", "Viaje")
                         <h1>@ViewBag.Error</h1>
                     </div>
                 </div>
@@ -121,6 +121,4 @@
     <!-- Custom scripts for this template -->
     <script src="~/Content/js/agency.min.js"></script>
 </body>
-
-
 

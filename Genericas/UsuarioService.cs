@@ -55,9 +55,10 @@ namespace Genericas
         }
         public Usuario VerificarExistenciaUsuario(Usuario u)
         {
-            var user = Context.Usuario.Where(us => us.Email.Equals(u.Email) && us.Password.Equals(u.Password)).FirstOrDefault();
+            //var user = Context.Usuario.Where(us => us.Email.Equals(u.Email) && us.Password.Equals(u.Password)).FirstOrDefault();
+            var user2 = Context.Usuario.FirstOrDefault(us => us.Email.Equals(u.Email) && us.Password.Equals(u.Password));
 
-            return user;
+            return user2;
         }
 
 

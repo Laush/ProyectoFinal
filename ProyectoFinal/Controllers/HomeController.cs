@@ -81,7 +81,7 @@ namespace ProyectoFinal.Controllers
 
             else 
             {
-                ViewBag.ErrorLogin = " Usuario y/o Contraseña Invalidos";
+                ViewBag.ErrorLogin = "Usuario y/o Contraseña Invalidos";
                 return View();
             }
         }

@@ -30,23 +30,39 @@ namespace ProyectoFinal.Controllers
         [HttpPost]
         public ActionResult BusquedaDestino(params string[] buscarDestino)
         {
-            TempData["ResultadoBusquedaDestino"] = srvViaje.BuscarDestino(buscarDestino);
+            TempData["ResultadoBusqueda"] = srvViaje.BuscarDestino(buscarDestino);
 
-            return RedirectToAction("ResultadoBusquedaPorDestino");
+            return RedirectToAction("ResultadoBusqueda");
         }
 
-        // GET: Resultado Busqueda por Destino
+        //GET: Busqueda Vuelo
         [HttpGet]
-        public ActionResult ResultadoBusquedaPorDestino()
+        public ActionResult BusquedaVuelo()
+        {
+            return View();
+        }
+
+        //POST: Busqueda Vuelo
+        [HttpPost]
+        public ActionResult BusquedaVuelo(params string[] buscarVuelo)
+        {
+            TempData["ResultadoBusqueda"] = srvViaje.BuscarVuelo(buscarVuelo);
+
+            return RedirectToAction("ResultadoBusqueda");
+        }
+
+        // GET: Resultado Busqueda por Vuelo
+        [HttpGet]
+        public ActionResult ResultadoBusqueda()
         {
             List<Viaje> ds = new List<Viaje>();
 
             //devuelvo la lista con los datos de busqueda
-            if (TempData["ResultadoBusquedaDestino"] != null)
+            if (TempData["ResultadoBusqueda"] != null)
             {
-                var destinos = TempData["ResultadoBusquedaDestino"];
+                var viajes = TempData["ResultadoBusqueda"];
 
-                return View(destinos);
+                return View(viajes);
             }
             //devuelvo una lista vacia si no ingresa a la condicion
             return View(ds);

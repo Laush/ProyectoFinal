@@ -31,6 +31,7 @@ namespace Genericas
             return Context.Viaje.ToList();
         }
 
+        //Metodo para buscar por destinos, devuelve una lista de viajes
         public List<Viaje> BuscarDestino(params string[] keywords)
         {
             var predicate = PredicateBuilder.False<Viaje>();
@@ -42,6 +43,23 @@ namespace Genericas
                                             v.Ciudad.Nombre.Contains(temp) ||
                                             v.Ciudad.Provincia.Nombre.Contains(temp) ||
                                             v.Ciudad.Provincia.Pais.Nombre.Contains(temp)
+                                        );
+            }
+
+            return Context.Viaje.AsExpandable().Where(predicate).ToList();
+        }
+
+        //Metodo para buscar por vuelos, devuelve una lista de viajes
+        public List<Viaje> BuscarVuelo(params string[] keywords)
+        {
+            var predicate = PredicateBuilder.False<Viaje>();
+
+            foreach (string keyword in keywords)
+            {
+                string temp = keyword;
+                predicate = predicate.Or(v =>
+                                            v.NumeroVuelo.Contains(temp) ||
+                                            v.Aerolinea.Contains(temp)
                                         );
             }
 
