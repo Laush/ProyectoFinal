@@ -83,7 +83,6 @@
       <DependentUpon>DB_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ViajeModel.cs" />
-    <Compile Include="ViajeResponseModel.cs" />
     <Compile Include="ViajeService.cs" />
   </ItemGroup>
   <ItemGroup>

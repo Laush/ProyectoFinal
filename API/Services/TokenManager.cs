@@ -18,7 +18,7 @@ namespace API.Services
             var secretKey = ConfigurationManager.AppSettings["JWT_SECRET_KEY"];
             var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
             var issuerToken = ConfigurationManager.AppSettings["JWT_ISSUER_TOKEN"];
-            var expireTime = ConfigurationManager.AppSettings["JWT_EXPIRE_MINUTES"];
+            var expireTime = ConfigurationManager.AppSettings["JWT_EXPIRE_DAYS"];
 
 
             var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(secretKey));
@@ -40,7 +40,7 @@ namespace API.Services
                 issuer: issuerToken,
                 subject: claimsIdentity,
                 notBefore: DateTime.UtcNow,
-                //expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(expireTime)), //Si puedde ser nulo este dato,
+                expires: DateTime.UtcNow.AddDays(Convert.ToInt32(expireTime)), //Si puedde ser nulo este dato,
                 //entonces se puede remover la variable de sistema que fija el tiempo de expiracion
                 signingCredentials: signingCredentials);
 
