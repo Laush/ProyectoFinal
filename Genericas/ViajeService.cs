@@ -154,6 +154,24 @@ namespace Genericas
             return Context.Viaje.AsExpandable().Where(predicate).ToList();
         }
 
+        //Metodo para cargar el texto que muestro en la busqueda sin usuario logeado
+        public string CargarResultadoSinLogin(int numero, string tipo)
+        {
+            string rtdo =   "Encontraste " + numero + " resultados en el " + tipo + " indicado. ¡Segui buscando y ";
+
+            if (numero == 1)
+            {
+                rtdo = "Encontraste " + numero + " resultado en el " + tipo + " indicado. ¡Para conocerlo ";
+            }
+
+            if (numero > 1)
+            {
+                rtdo = "Se encontraron " + numero + " resultados en el " + tipo + " indicado. ¡Para conocerlos ";
+            }
+
+            return rtdo;
+        }
+
         private ViajeModel TransformarDatos(Viaje Viaje)
         {
             ViajeModel Model = new ViajeModel();

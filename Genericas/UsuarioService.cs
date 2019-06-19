@@ -9,6 +9,8 @@ namespace Genericas
 {
     public class UsuarioService
     {
+        Context contexto = new Context();
+
         public string HashPassword(string Password)
         {
             SHA256 sha256 = SHA256.Create();
@@ -18,14 +20,12 @@ namespace Genericas
             return Encoding.UTF8.GetString(Bytes);
         }
 
-        Context Context = new Context();
-
         public bool registrarViajero(Usuario Viajero)
         {
             try
             {
-                Context.Usuario.Add(Viajero);
-                Context.SaveChanges();
+                contexto.Usuario.Add(Viajero);
+                contexto.SaveChanges();
                 return true;
             }
             catch (Exception e)
@@ -36,7 +36,7 @@ namespace Genericas
 
         public bool existeUsuario(Usuario Usuario) // verifica la existencia de un usuario, ya sea por nombre de usuario o por e-mail
         {
-            Usuario UsuarioExistente = Context.Usuario.FirstOrDefault(u => u.NombreUsuario == Usuario.NombreUsuario || u.Email == Usuario.Email);
+            Usuario UsuarioExistente = contexto.Usuario.FirstOrDefault(u => u.NombreUsuario == Usuario.NombreUsuario || u.Email == Usuario.Email);
 
             return (UsuarioExistente == null) ? false : true;
         }
@@ -45,33 +45,37 @@ namespace Genericas
         {
             string hashedPassword = HashPassword(loginRequest.contrasenia);
 
-            return Context.Usuario.FirstOrDefault(u => (u.NombreUsuario == loginRequest.usuario || u.Email == loginRequest.usuario) && u.Password == hashedPassword);
+            return contexto.Usuario.FirstOrDefault(u => (u.NombreUsuario == loginRequest.usuario || u.Email == loginRequest.usuario) && u.Password == hashedPassword);
         }
 
         // INICIO - Estos metodos los traigo de Servicios/UsuarioServicio.cs que estaban en ProyectoFinal (web)
         public List<Usuario> Listar()
         {
-            return Context.Usuario.ToList();
+            return contexto.Usuario.ToList();
         }
         public Usuario VerificarExistenciaUsuario(Usuario u)
         {
-            //var user = Context.Usuario.Where(us => us.Email.Equals(u.Email) && us.Password.Equals(u.Password)).FirstOrDefault();
-            var user2 = Context.Usuario.FirstOrDefault(us => us.Email.Equals(u.Email) && us.Password.Equals(u.Password));
+            var user = contexto.Usuario.Where(us => us.Email.Equals(u.Email) && us.Password.Equals(u.Password)).FirstOrDefault();
 
-            return user2;
+            return user;
         }
 
 
         public Usuario GetById(int id)
         {
-            return Context.Usuario.FirstOrDefault(x => x.IdUsuario == id);
+            return contexto.Usuario.FirstOrDefault(x => x.IdUsuario == id);
         }
 
         //prueba
         public Usuario GetUsuario(Usuario u)
         {
-            return Context.Usuario.FirstOrDefault(x => x.IdUsuario.Equals(u));
+            return contexto.Usuario.FirstOrDefault(x => x.IdUsuario.Equals(u));
         }
         // FIN - Estos metodos los traigo de Servicios/UsuarioServicio.cs que estaban en ProyectoFinal (web)
+
+        public List<Viaje> ObtenerViajesUsuario(long id)
+        {
+            return contexto.Viaje.Where(v => v.Usuario.FirstOrDefault().IdUsuario == id).ToList();
+        }
     }
 }

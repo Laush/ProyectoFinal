@@ -24,7 +24,6 @@
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="/Home/Login">Login</a>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -33,7 +32,7 @@
     <header class="masthead">
         <div class="container">
             <div class="intro-text">
-                <h2 class="section-heading text-uppercase">Busqueda por Destino</h2>
+                <h2 class="section-heading text-uppercase">B&uacute;squeda por Destino</h2>
                 <br>
                 <div class="row">
                     <div class="col-lg-4">
@@ -48,61 +47,18 @@
                                 <input type="submit" class="btn btn-block btn-lg btn-primary" value="Buscar" />
                             </div>
                         </form>
-                        <!--
-                                        <form method="post" action="#">
-                                            <div class="form-group">
-                                                <select class="form-control" id="aerolinea">
-                                                    <option selected> Ingrese Pais.. </option>
-                                                    <option> Argentina</option>
-                                                    <option>Brasil</option>
-                                                    <option>Chile</option>
-                                                    <option>Uruguay</option>
-                                                </select>
-                                            </div>
-                                            <br>
-                                            <div class="form-group">
-                                                <select class="form-control" id="aerolinea">
-                                                    <option selected> Ingrese Ciudad.. </option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                </select>
-                                            </div>
-                                            <br>
-                                                 <div class="form-group">
-                            <input type="text" class="form-control" id="fecha" name="fecha" placeholder="Desde..">
-                            <input type="text" class="form-control" id="fecha" name="fecha" placeholder="Hasta..">
-                        </div>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" id="fecha" name="fecha" placeholder="Fecha del viaje">
-                                            </div>
-                                            <br>
-                                            <div class="form-group">
-                                                <input type="submit" class="btn btn-block btn-lg btn-primary" value="Buscar" />
-                                            </div>
-                                            </form>
-
-                        -->
                         <a class="nav-link js-scroll-trigger" href="/Viaje/BusquedaVuelo">Busca por Vuelo</a>
-
+                        @if (Session["Usuario"] == null && ViewBag.ResultadoCantidad != null)
+                        {
+                        <div class="alert alert-light" role="alert">
+                            <h6>@ViewBag.ResultadoCantidad<a href="/Home/RegistroViajero" class="alert-link"> Reg&iacute;strate</a>!</h6>
+                        </div>                    
+                        }
                     </div>
-
                 </div>
             </div>
         </div>
     </header>
-
-    <!-- mostrar resultados
-       if (TempData["mensaje"] != null)
-       {
-           <div class="container text-center">
-               <div class="alert alert-warning alert-dismissible">
-                   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                   <h4>  <strong>TempData["mensaje"]</strong> </h4>
-               </div>
-           </div>
-       }-->
     <!-- Bootstrap core JavaScript -->
     <script src="~/Content/vendor/jquery/jquery.min.js"></script>
     <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
