@@ -71,6 +71,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DB_Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DestinoService.cs" />
     <Compile Include="LoginRequestModel.cs" />
     <Compile Include="Pais.cs">
       <DependentUpon>DB_Model.tt</DependentUpon>
@@ -86,7 +87,7 @@
     <Compile Include="Viaje.cs">
       <DependentUpon>DB_Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViajeRequestModel.cs" />
+    <Compile Include="ViajeModel.cs" />
     <Compile Include="ViajeService.cs" />
   </ItemGroup>
   <ItemGroup>
