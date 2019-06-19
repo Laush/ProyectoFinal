@@ -1,4 +1,4 @@
-﻿using ProyectoFinal.Services;
+﻿using Genericas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace ProyectoFinal.Controllers
 {
     public class UsuarioController : Controller
     {
-        private UsuarioServicio srvUsuario = new UsuarioServicio();
+        private UsuarioService srvUsuario = new UsuarioService();
         // GET: Usuario
         public ActionResult IndexAdmin()
         {

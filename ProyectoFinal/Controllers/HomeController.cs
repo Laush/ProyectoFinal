@@ -1,4 +1,4 @@
-﻿using ProyectoFinal.Services;
+﻿using Genericas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,9 @@ namespace ProyectoFinal.Controllers
 {
     public class HomeController : Controller
     {
-        private UsuarioServicio srvUsuario = new UsuarioServicio();
+        private UsuarioService srvUsuario = new UsuarioService();
+
+        private ViajeService srvViaje = new ViajeService();
         //Landing Page
         public ActionResult Logout()
         {
@@ -32,7 +34,7 @@ namespace ProyectoFinal.Controllers
                     if (usuario != null)
                     {
                         Session["Usuario"] = usuario;
-                        return RedirectToAction("Listar", "Pedidos");
+                        return RedirectToAction("Buscador", "Home");
                     }
                     else
                     {
@@ -79,7 +81,7 @@ namespace ProyectoFinal.Controllers
 
             else 
             {
-                ViewBag.ErrorLogin = " Usuario y/o Contraseña Invalidos";
+                ViewBag.ErrorLogin = "Usuario y/o Contraseña Invalidos";
                 return View();
             }
         }
@@ -106,10 +108,12 @@ namespace ProyectoFinal.Controllers
         {
             return View();
         }
+
         public ActionResult BusquedaPorDestino()
         {
             return View();
         }
+
         public ActionResult BusquedaPorVuelo()
         {
             return View();

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "BusquedaPorDestino";
+    ViewBag.Title = "BusquedaVuelo";
 }
 
 <head>
@@ -33,15 +33,15 @@
     <header class="masthead">
         <div class="container">
             <div class="intro-text">
-                <h2 class="section-heading text-uppercase">Busqueda por Destino</h2>
+                <h2 class="section-heading text-uppercase">B&uacute;squeda por Vuelo</h2>
                 <br>
                 <div class="row">
                     <div class="col-lg-4">
                     </div>
                     <div class="col-lg-4">
-                        <form method="post" action="/Viaje/ResultadoBusquedaPorDestino">
+                        <form method="post" action="/Viaje/BusquedaVuelo">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="buscarDestino" name="buscarDestino" placeholder="Pais, Localidad, Ciudad">
+                                <input type="text" class="form-control" id="buscarVuelo" name="buscarVuelo" placeholder="N&deg; de Vuelo, Aerol&iacute;nea">
                             </div>
                             <br>
                             <div class="form-group">
@@ -84,7 +84,7 @@
                                             </form>
 
                         -->
-                        <a class="nav-link js-scroll-trigger" href="/Home/BusquedaPorVuelo">Busca por Vuelo</a>
+                        <a class="nav-link js-scroll-trigger" href="/Viaje/BusquedaDestino">Busca por Destino</a>
 
                     </div>
 
@@ -114,5 +114,4 @@
     <!-- Custom scripts for this template -->
     <script src="~/Content/js/agency.min.js"></script>
 </body>
-
 
