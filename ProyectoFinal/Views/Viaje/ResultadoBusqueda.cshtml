@@ -2,9 +2,12 @@
 
 @{
     ViewBag.Title = "ResultadoBusqueda";
+
+
 }
 
 @model List<Viaje>
+
 
 <head>
     <link href="~/Content/Viaje/ResultadoBusqueda.css" rel="stylesheet" />
@@ -21,13 +24,30 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/Home/Registracion">Registrate</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/Home/Login">Login</a>
-                    </li>
 
+
+
+                    @if (ViewBag.Rol.IdRol == 1)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexAdmin">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+                    }
+                    @if (ViewBag.Rol.IdRol == 2)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexAgencia">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+                    }
+                    @if (ViewBag.Rol.IdRol == 3)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexViajero">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion">Salir</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -38,43 +58,88 @@
             <div class="intro-text">
                 <h2 class="section-heading text-uppercase">Resultado B&uacute;squeda</h2>
                 <br>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <!--
-                        <table class="table table-striped">
-                            <tr>
-                                <th>Usuario</th>
-                                <th>Alojamiento</th>
-                                <th>Aerolinea</th>
-                                <th>N de Vuelo</th>
-                                <th>Desde</th>
-                                <th>Hasta</th>
-                                <th>Origen</th>
-                                <th>Destino</th>
-                                <th>Intereses</th>
-                            </tr>
-                            @foreach (Viaje v in Model)
-                            {
-                                <tr>
-                                    <td>@v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).NombreUsuario</td>
-                                    <td>@v.Alojamiento</td>
-                                    <td>@v.Aerolinea</td>
-                                    <td>@v.NumeroVuelo</td>
-                                    <td>@v.FechaDesde.ToShortDateString()</td>
-                                    <td>
-                                        @if (v.FechaHasta != null)
-                                        {
-                                            v.FechaHasta.ToString();
-                                        }
-                                        else
-                                        {
-                                            @: No sabe
-                                        }
 
-                                    </td>
-                                    <td>@v.Ciudad1.Nombre</td>
-                                    <td>@v.Ciudad.Nombre</td>
-                                    <td>
+
+                <!--
+                <table class="table table-striped">
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Alojamiento</th>
+                        <th>Aerolinea</th>
+                        <th>N de Vuelo</th>
+                        <th>Desde</th>
+                        <th>Hasta</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Intereses</th>
+                    </tr>
+                    @foreach (Viaje v in Model)
+                                 {
+                        <tr>
+                            <td>@v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).NombreUsuario</td>
+                            <td>@v.Alojamiento</td>
+                            <td>@v.Aerolinea</td>
+                            <td>@v.NumeroVuelo</td>
+                            <td>@v.FechaDesde.ToShortDateString()</td>
+                            <td>
+                                @if (v.FechaHasta != null)
+                                {
+                                         v.FechaHasta.ToString();
+                                     }
+                                else
+                                {
+                                    @: No sabe
+                                }
+
+                            </td>
+                            <td>@v.Ciudad1.Nombre</td>
+                            <td>@v.Ciudad.Nombre</td>
+                            <td>
+                                @if (v.InteresActividades == true)
+                                {
+                                    @: Actividades
+                                }
+                                @if (v.InteresAlojamiento == true)
+                                {
+                                    @: Alojamientos
+                                }
+
+                                @if (v.InteresAmistades == true)
+                                {
+                                    @: Amistades
+                                }
+                                @if (v.InteresExcursiones == true)
+                                {
+                                    @: Excursiones
+                                }
+                                @if (v.InteresTraslados == true)
+                                {
+                                    @: Traslados
+                                }
+                                @if (v.InteresOtros == true)
+                                {
+                                    @: Otros
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+                -->
+                <!-- inicio tabla nueva-->
+                @foreach (Viaje v in Model)
+                {
+                    <div class="card" style="color:black;">
+                        <div class="gaadiex-list" style="padding: 0 22px;">
+                            <div class="gaadiex-list-item">
+                                <img class="gaadiex-list-item-img" style="float: left;width: 70px; height: 70px; margin-top: 20px;
+                                        margin-bottom: 8px; margin-right: 60px; border-radius: 50%;" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="List user">
+                                <div class="gaadiex-list-item-text">
+                                    <h3><a href="#">@v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).NombreUsuario</a> @v.Ciudad1.Nombre - @v.Ciudad.Nombre</h3>
+
+
+                                    <h4> Vuelo: @v.Aerolinea ,@v.NumeroVuelo</h4>
+                                    <h5>
+                                        Intereses:
                                         @if (v.InteresActividades == true)
                                         {
                                             @: Actividades
@@ -83,7 +148,6 @@
                                         {
                                             @: Alojamientos
                                         }
-
                                         @if (v.InteresAmistades == true)
                                         {
                                             @: Amistades
@@ -100,63 +164,21 @@
                                         {
                                             @: Otros
                                         }
-                                    </td>
-                                </tr>
-                            }
-                        </table>
-                        -->
-                        <!-- inicio tabla nueva-->
-                        @foreach (Viaje v in Model)
-                        {
-                            <div class="card" style="color:black;">
-                                <div class="gaadiex-list" style="padding: 0 22px;">
-                                    <div class="gaadiex-list-item">
-                                        <img class="gaadiex-list-item-img" style="float: left;width: 70px; height: 70px; margin-top: 20px;
-                                        margin-bottom: 8px; margin-right: 60px; border-radius: 50%;" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="List user">
-                                        <div class="gaadiex-list-item-text">
-                                            <h3><a href="#">@v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).NombreUsuario</a> @v.Ciudad1.Nombre - @v.Ciudad.Nombre</h3>
-
-
-                                            <h4> Vuelo: @v.Aerolinea ,@v.NumeroVuelo</h4>
-                                            <h5>
-                                                Intereses:  
-                                                @if (v.InteresActividades == true)
-                                                {
-                                                    @: Actividades
-                                                }
-                                                @if (v.InteresAlojamiento == true)
-                                                {
-                                                    @: Alojamientos
-                                                }
-                                                @if (v.InteresAmistades == true)
-                                                {
-                                                    @: Amistades
-                                                }
-                                                @if (v.InteresExcursiones == true)
-                                                {
-                                                    @: Excursiones
-                                                }
-                                                @if (v.InteresTraslados == true)
-                                                {
-                                                    @: Traslados
-                                                }
-                                                @if (v.InteresOtros == true)
-                                                {
-                                                    @: Otros
-                                                }
-                                            </h5>
-                                        </div>
-                                    </div>
+                                    </h5>
                                 </div>
                             </div>
-                        }
-                        <!-- fin tabla nueva-->
-                        @Html.ActionLink("Buscar por Destino", "BusquedaDestino", "Viaje")
-                        @Html.ActionLink("Buscar por Vuelo", "BusquedaVuelo", "Viaje")
-                        <h1>@ViewBag.Error</h1>
+                        </div>
                     </div>
-                </div>
+                }
+                <!-- fin tabla nueva-->
+                <br>
+                @Html.ActionLink("Buscar por Destino", "BusquedaDestino", "Viaje")
+                |
+                @Html.ActionLink("Buscar por Vuelo", "BusquedaVuelo", "Viaje")
+                <h1>@ViewBag.Error</h1>
+
             </div>
+
         </div>
     </header>
     <!-- Bootstrap core JavaScript -->

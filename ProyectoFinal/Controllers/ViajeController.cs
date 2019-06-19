@@ -16,6 +16,7 @@ namespace ProyectoFinal.Controllers
         [HttpGet]
         public ActionResult BusquedaDestino()
         {
+            ViewBag.Rol = Session["Usuario"] as Usuario;
             if (Session["Usuario"] == null && TempData["ResultadoBusqueda"] != null)
             {
                 int.TryParse(TempData["ResultadoBusqueda"].ToString(), out int num);
@@ -30,6 +31,8 @@ namespace ProyectoFinal.Controllers
         [HttpPost]
         public ActionResult BusquedaDestino(params string[] buscarDestino)
         {
+            ViewBag.Rol = Session["Usuario"] as Usuario;
+
             if (Session["Usuario"] == null)
             {
                 TempData["ResultadoBusqueda"] = srvViaje.BuscarDestino(buscarDestino).Count();
@@ -45,6 +48,7 @@ namespace ProyectoFinal.Controllers
         [HttpGet]
         public ActionResult BusquedaVuelo()
         {
+            ViewBag.Rol = Session["Usuario"] as Usuario;
             if (Session["Usuario"] == null && TempData["ResultadoBusqueda"] != null)
             {
                 int.TryParse(TempData["ResultadoBusqueda"].ToString(), out int num);
@@ -75,7 +79,7 @@ namespace ProyectoFinal.Controllers
         public ActionResult ResultadoBusqueda()
         {
             List<Viaje> ds = new List<Viaje>();
-
+            ViewBag.Rol = Session["Usuario"] as Usuario;
             //devuelvo la lista con los datos de busqueda
             if (TempData["ResultadoBusqueda"] != null)
             {

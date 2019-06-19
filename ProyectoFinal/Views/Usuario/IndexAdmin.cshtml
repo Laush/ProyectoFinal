@@ -19,16 +19,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#page-top">Perfil</a>
 
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#viajeros">Viajeros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#agencias">Agencias</a>
-                    </li>
+
+
+                    @if (ViewBag.UsuarioAdmin.IdRol == 1)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#page-top">Perfil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#viajeros">Usuarios</a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#agencias">Agencias</a>
+                        </li>
+                    }
+
 
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion">Salir</a>
@@ -54,9 +62,10 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <h4>Nombre</h4>@ViewBag.UsuarioAdmin.Nombre<br><br>
+                        <h4>Nombre</h4>@ViewBag.UsuarioAdmin.Nombre<br> <br>
                         <h4>Apellido</h4>@ViewBag.UsuarioAdmin.Apellido<br><br>
                         <h4>Sobre mi..</h4>@ViewBag.UsuarioAdmin.Descripcion<br><br>
+
                     </div>
                     <div class="col-lg-4">
                         <h4>Email</h4>@ViewBag.UsuarioAdmin.Email<br><br>
@@ -76,30 +85,61 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading text-uppercase">Lista de Usuarios Viajeros</h2>
+                    <h2 class="section-heading text-uppercase">Lista de Usuarios viajeros</h2>
                 </div>
             </div>
-            <div class="intro-text">
-                <table border="1">
-                    <tr>
-                        <th>Id</th>
-                        <th>NombreUsuario</th>
-                        <th>Email</th>
-                    </tr>
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
 
-                    @foreach (Usuario u in Model)
-                    {
-                        if (u.IdRol == 2)
+                        <div class="col-sm-6">
+                            <a href="#" class="btn btn-primary" data-toggle="modal"><i class="fa fa-user fa-lg"></i> <span>Nuevo Usuario</span></a>
+
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+
+                            <th></th>
+                            <th>Id</th>
+                            <th>NombreUsuario</th>
+                            <th>Email</th>
+                            <th>Edad</th>
+                            <th>Rol</th>
+                            <th> </th>
+                            <th> x</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Usuario u in Model)
                         {
-                            <tr>
-                                <td>@u.IdUsuario</td>
-                                <td>@u.NombreUsuario</td>
-                                <td>@u.Email</td>
-                            </tr>
+                            if (u.IdRol == 3)
+                            {
+                                <tr>
+                                    <td>
+                                        <img style="float: left;width: 50px; height: 50px; margin-top: 10px;
+                                        margin-bottom: 8px; margin-right: -10px; border-radius: 50%;" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="gaadiex-list-item-img" alt="Avatar">
+                                    </td>
 
+                                    <td>@u.IdUsuario</td>
+                                    <td>@u.NombreUsuario</td>
+                                    <td>@u.Email</td>
+                                    <td>@u.Edad</td>
+                                    <td>@u.IdRol</td>
+                                    <td>
+                                        <a href="#"><i class="fa fa-edit fa-lg"></i></a>
+                                    </td>
+                                    <td>
+                                        <a style="color:firebrick;" href="#"><i class="fa fa-window-close fa-lg"></i></a>
+                                    </td>
+                                </tr>
+                            }
                         }
-                    }
 
+                    </tbody>
                 </table>
 
             </div>
@@ -114,27 +154,41 @@
                 </div>
             </div>
             <div class="intro-text">
-                <table border="1">
-                    <tr>
-                        <th>Id</th>
-                        <th>NombreUsuario</th>
-                        <th>Email</th>
-                    </tr>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>NombreUsuario</th>
+                            <th>Email</th>
+                            <th>Edad</th>
+                            <th>Rol</th>
+                            <th> </th>
+                            <th> x</th>
 
-                    @foreach (Usuario u in Model)
-                    {
-                        if (u.IdRol == 3)
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Usuario u in Model)
                         {
-                            <tr>
-                                <td>@u.IdUsuario</td>
-                                <td>@u.NombreUsuario</td>
-                                <td>@u.Email</td>
-                            </tr>
-
+                            if (u.IdRol == 2)
+                            {
+                                <tr>
+                                    <td>@u.IdUsuario</td>
+                                    <td>@u.NombreUsuario</td>
+                                    <td>@u.Email</td>
+                                    <td>@u.Edad</td>
+                                    <td>@u.IdRol</td>
+                                    <td>
+                                        <a href="#"><i class="fa fa-edit fa-lg"></i></a>
+                                    </td>
+                                    <td>
+                                        <a style="color:firebrick;" href="#"><i class="fa fa-window-close fa-lg"></i></a>
+                                    </td>
+                                </tr>
+                            }
                         }
-                    }
 
-
+                    </tbody>
                 </table>
 
             </div>
@@ -152,9 +206,6 @@
     <!-- Custom scripts for this template -->
     <script src="~/Content/js/agency.min.js"></script>
 </body>
-
-
-
 
 
 

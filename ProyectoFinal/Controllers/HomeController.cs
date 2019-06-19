@@ -109,7 +109,7 @@ namespace ProyectoFinal.Controllers
             return View();
         }
 
-        public ActionResult BusquedaPorDestino()
+      /*  public ActionResult BusquedaPorDestino()
         {
             return View();
         }
@@ -117,10 +117,11 @@ namespace ProyectoFinal.Controllers
         public ActionResult BusquedaPorVuelo()
         {
             return View();
-        }
+        }*/
 
         public ActionResult Buscador()
         {
+            ViewBag.Rol = Session["Usuario"] as Usuario;
             return View();
         }
     }

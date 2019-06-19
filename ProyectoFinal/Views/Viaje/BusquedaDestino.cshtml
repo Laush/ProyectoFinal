@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "BusquedaDestino";
 }
 
@@ -18,12 +17,30 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/Home/Registracion">Registrate</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/Home/Login">Login</a>
-                    </li>
+                    @if (Session["Usuario"] == null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/Registracion">Registrate</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/Login">Login</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/Buscador">Buscar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#">Viajes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion">Salir</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -50,9 +67,9 @@
                         <a class="nav-link js-scroll-trigger" href="/Viaje/BusquedaVuelo">Busca por Vuelo</a>
                         @if (Session["Usuario"] == null && ViewBag.ResultadoCantidad != null)
                         {
-                        <div class="alert alert-light" role="alert">
-                            <h6>@ViewBag.ResultadoCantidad<a href="/Home/RegistroViajero" class="alert-link"> Reg&iacute;strate</a>!</h6>
-                        </div>                    
+                            <div class="alert alert-light" role="alert">
+                                <h6>@ViewBag.ResultadoCantidad<a href="/Home/RegistroViajero" class="alert-link"> Reg&iacute;strate</a>!</h6>
+                            </div>
                         }
                     </div>
                 </div>
