@@ -1,7 +1,10 @@
-﻿
+﻿@using Genericas;
+
 @{
     ViewBag.Title = "IndexAgencia";
 }
+
+@model Usuario
 
 <head>
     <link href="~/Content/css/agencyUsu.css" rel="stylesheet">
@@ -37,12 +40,9 @@
     </nav>
     <!-- Header-->
     <header class="masthead">
-
         <div class="container">
             <div class="intro-text">
-
                 <div class="row">
-
                     <div class="col-lg-4">
                         <div class="text-center">
                             <h4> AGENCIA  </h4>
@@ -52,26 +52,20 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <h4>Nombre</h4><br><br>
-                        <h4>Apellido</h4><br><br>
-                        <h4>Sobre mi..</h4><br><br>
+                        <h4>Nombre</h4>@Model.Nombre<br><br>
+                        <h4>Apellido</h4>@Model.Apellido<br><br>
+                        <h4>Sobre mi..</h4>@Model.Descripcion<br><br>
                     </div>
                     <div class="col-lg-4">
-                        <h4>Email</h4><br><br>
-                        <h4>Password</h4><br><br>
-                        <h4>Calificacion</h4>
+                        <h4>Email</h4>@Model.Email<br><br>
+                        <h4>Password</h4>@Model.Password<br><br>
+                        <h4>Calificacion</h4>Proximamente
                     </div>
-
-
                 </div>
                 <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Editar Perfil</button>
-
             </div>
-
         </div>
-
     </header>
-
 
     <!-- Bootstrap core JavaScript -->
     <script src="~/Content/vendor/jquery/jquery.min.js"></script>

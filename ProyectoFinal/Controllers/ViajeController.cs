@@ -9,20 +9,20 @@ namespace ProyectoFinal.Controllers
 {
     public class ViajeController : Controller
     {
-        //genero el contexto
-
+        //Servicios
         private ViajeService srvViaje = new ViajeService();
-
-        // GET: Viaje
-        public ActionResult Index()
-        {
-            return RedirectToAction("Home", "BusquedaPorDestino");
-        }
-
+        
         //GET: Busqueda Destino
         [HttpGet]
         public ActionResult BusquedaDestino()
         {
+            if (Session["Usuario"] == null && TempData["ResultadoBusqueda"] != null)
+            {
+                int.TryParse(TempData["ResultadoBusqueda"].ToString(), out int num);
+
+                ViewBag.ResultadoCantidad = srvViaje.CargarResultadoSinLogin(num, "Destino");                             
+            }
+
             return View();
         }
 
@@ -30,6 +30,12 @@ namespace ProyectoFinal.Controllers
         [HttpPost]
         public ActionResult BusquedaDestino(params string[] buscarDestino)
         {
+            if (Session["Usuario"] == null)
+            {
+                TempData["ResultadoBusqueda"] = srvViaje.BuscarDestino(buscarDestino).Count();
+                return RedirectToAction("BusquedaDestino", "Viaje");
+            }
+
             TempData["ResultadoBusqueda"] = srvViaje.BuscarDestino(buscarDestino);
 
             return RedirectToAction("ResultadoBusqueda");
@@ -39,6 +45,13 @@ namespace ProyectoFinal.Controllers
         [HttpGet]
         public ActionResult BusquedaVuelo()
         {
+            if (Session["Usuario"] == null && TempData["ResultadoBusqueda"] != null)
+            {
+                int.TryParse(TempData["ResultadoBusqueda"].ToString(), out int num);
+
+                ViewBag.ResultadoCantidad = srvViaje.CargarResultadoSinLogin(num, "Vuelo");
+            }
+
             return View();
         }
 
@@ -46,6 +59,12 @@ namespace ProyectoFinal.Controllers
         [HttpPost]
         public ActionResult BusquedaVuelo(params string[] buscarVuelo)
         {
+            if (Session["Usuario"] == null)
+            {
+                TempData["ResultadoBusqueda"] = srvViaje.BuscarVuelo(buscarVuelo).Count();
+                return RedirectToAction("BusquedaVuelo", "Viaje");
+            }
+
             TempData["ResultadoBusqueda"] = srvViaje.BuscarVuelo(buscarVuelo);
 
             return RedirectToAction("ResultadoBusqueda");

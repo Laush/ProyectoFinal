@@ -9,14 +9,14 @@ namespace Genericas
 {
     public class ViajeService
     {
-        private Context Context = new Context();
+        private Context contexto = new Context();
 
         public bool registrarViaje(Viaje ViajeNuevo)
         {
             try
             {
-                Context.Viaje.Add(ViajeNuevo);
-                Context.SaveChanges();
+                contexto.Viaje.Add(ViajeNuevo);
+                contexto.SaveChanges();
 
                 return true;
             }
@@ -28,7 +28,7 @@ namespace Genericas
 
         public List<Viaje> Listar()
         {
-            return Context.Viaje.ToList();
+            return contexto.Viaje.ToList();
         }
 
         //Metodo para buscar por destinos, devuelve una lista de viajes
@@ -46,7 +46,7 @@ namespace Genericas
                                         );
             }
 
-            return Context.Viaje.AsExpandable().Where(predicate).ToList();
+            return contexto.Viaje.AsExpandable().Where(predicate).ToList();
         }
 
         //Metodo para buscar por vuelos, devuelve una lista de viajes
@@ -63,7 +63,25 @@ namespace Genericas
                                         );
             }
 
-            return Context.Viaje.AsExpandable().Where(predicate).ToList();
+            return contexto.Viaje.AsExpandable().Where(predicate).ToList();
+        }
+
+        //Metodo para cargar el texto que muestro en la busqueda sin usuario logeado
+        public string CargarResultadoSinLogin(int numero, string tipo)
+        {
+            string rtdo =   "Encontraste " + numero + " resultados en el " + tipo + " indicado. ¡Segui buscando y ";
+
+            if (numero == 1)
+            {
+                rtdo = "Encontraste " + numero + " resultado en el " + tipo + " indicado. ¡Para conocerlo ";
+            }
+
+            if (numero > 1)
+            {
+                rtdo = "Se encontraron " + numero + " resultados en el " + tipo + " indicado. ¡Para conocerlos ";
+            }
+
+            return rtdo;
         }
     }
 }
