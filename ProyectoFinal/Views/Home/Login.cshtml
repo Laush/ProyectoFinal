@@ -19,7 +19,9 @@
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="/Home/Registracion">Registrate</a>
                     </li>
-                   
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="/Home/Buscador">BUSCA</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -35,29 +37,27 @@
                     <div class="col-lg-4">
                         <form method="post" action="/Home/Login">
                             <div class="form-group">
-                                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Ingresa email">
+                                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Ingresa tu Email">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa Password">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa tu Password">
                             </div>
                             <div class="form-group">
-                                <input type="submit" class="btn btn-block btn-lg btn-primary" value="INGRESAR" />
+                                <input type="submit" class="btn btn-block btn-lg btn-primary" value="INGRESA" />
                             </div>
                             <br />
                         </form>
                         <div class="form-group">
-
-                        <input type="submit" class="btn btn-block btn-lg btn-primary" value="Ingresar con Facebook"/>
-                      
-
+                            <input type="submit" class="btn btn-block btn-lg btn-info" value="Ingresa con Facebook" />
                         </div>
-
+                        <div class="form-group">
+                            <h5>@ViewBag.ErrorLogin</h5>                      
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
 
     <!-- Bootstrap core JavaScript -->
     <script src="~/Content/vendor/jquery/jquery.min.js"></script>
