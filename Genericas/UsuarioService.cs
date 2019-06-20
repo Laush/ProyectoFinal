@@ -77,5 +77,23 @@ namespace Genericas
         {
             return contexto.Viaje.Where(v => v.Usuario.FirstOrDefault().IdUsuario == id).ToList();
         }
+
+        //abm usuario viajero
+        public void Agregar(Usuario u)
+        {
+            Usuario nuevoUsuario = u;
+            nuevoUsuario.IdRol = 3;
+            contexto.Usuario.Add(nuevoUsuario);
+            contexto.SaveChanges();
+
+        }
+
+        public void Eliminar(long id)
+        {
+            Usuario usuarioEliminar = contexto.Usuario.FirstOrDefault(u => u.IdUsuario == id);
+            contexto.Usuario.Remove(usuarioEliminar);
+            contexto.SaveChanges();
+        }
+        //fin abm usuario
     }
 }

@@ -104,20 +104,32 @@ namespace ProyectoFinal.Controllers
         {
             return View();
         }
+        //ABM viajero WEB
+        [HttpGet]
         public ActionResult RegistroViajero()
         {
-            return View();
+            Usuario usu = new Usuario();
+            usu.IdRol = 3;
+            // usu.Password = srvUsuario.HashPassword(usu.Password);
+            return View(usu);
+        }
+        [HttpPost]
+        public ActionResult RegistroViajero(Usuario u)
+        {
+
+            srvUsuario.Agregar(u);
+            // return View(u);
+            return RedirectToAction("Login", u);
         }
 
-      /*  public ActionResult BusquedaPorDestino()
+        public ActionResult Eliminar(long id)
         {
-            return View();
-        }
+            var sj = new UsuarioService();
+            sj.Eliminar(id);
+            return RedirectToAction("IndexAdmin", "Usuario");
 
-        public ActionResult BusquedaPorVuelo()
-        {
-            return View();
-        }*/
+        }
+        //FIN abm
 
         public ActionResult Buscador()
         {

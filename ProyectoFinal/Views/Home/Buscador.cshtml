@@ -17,19 +17,33 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#">@ViewBag.Rol.Nombre (perfil)</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#">Buscar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#">Viajes</a>
-                    </li>
+                    @if (Session["Usuario"] == null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/Registracion">Registrate</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/Login">Login</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/Buscador">Buscar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#">Viajes</a>
+                        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion">Salir</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion">Salir</a>
+                        </li>
+                    }
+
+
 
                 </ul>
             </div>
