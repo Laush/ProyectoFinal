@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using API.Models;
 using API.Services;
 using Genericas;
 
@@ -73,6 +74,49 @@ namespace API.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Viaje no encontrado");
             else
             return Request.CreateResponse(HttpStatusCode.OK, Viaje);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage BuscarViajes(BusquedaRequestModel RequestModel)
+        {
+            List<BusquedaResponseModel> Viajes = new List<BusquedaResponseModel>();
+
+            if (RequestModel.Destino != null)
+            {
+                foreach( Viaje Viaje in ViajeService.BuscarDestino(RequestModel.Destino))
+                {
+                    BusquedaResponseModel ViajeEncontrado = new BusquedaResponseModel();
+
+                    ViajeEncontrado.Origen = Viaje.Ciudad.Nombre;
+                    ViajeEncontrado.Destino = Viaje.Ciudad1.Nombre;
+                    ViajeEncontrado.Aerolinea = Viaje.Aerolinea;
+                    ViajeEncontrado.NumeroVuelo = Viaje.NumeroVuelo;
+                    ViajeEncontrado.InteresActividades = Viaje.InteresActividades;
+                    ViajeEncontrado.InteresAlojamiento = Viaje.InteresAlojamiento;
+                    ViajeEncontrado.InteresAmistades = Viaje.InteresAmistades;
+                    ViajeEncontrado.InteresExcursiones = Viaje.InteresExcursiones;
+                    ViajeEncontrado.InteresOtros= Viaje.InteresOtros;
+                    ViajeEncontrado.InteresTraslados = Viaje.InteresTraslados;
+
+                    Viajes.Add(ViajeEncontrado);
+                }
+                 //Viajes = ViajeService.BuscarDestino(RequestModel.Destino);
+            }
+
+            if(RequestModel.Vuelo != null)
+            {
+                foreach (Viaje Viaje in ViajeService.BuscarVuelo(RequestModel.Vuelo))
+                {
+                    BusquedaResponseModel ViajeEncontrado = new BusquedaResponseModel();
+
+                    ViajeEncontrado.Origen = Viaje.Ciudad.Nombre;
+                    ViajeEncontrado.Destino = Viaje.Ciudad1.Nombre;
+
+                    Viajes.Add(ViajeEncontrado);
+                }
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, Viajes);
         }
     }
 }
