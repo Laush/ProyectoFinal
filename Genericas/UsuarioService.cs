@@ -34,6 +34,24 @@ namespace Genericas
             }
         }
 
+        public bool registrarGuia(Usuario Guia)
+        {
+            try
+            {
+                if (contexto.Usuario.First(u => u.MatriculaGuia == Guia.MatriculaGuia) == null)
+                    return false;
+
+                contexto.Usuario.Add(Guia);
+                contexto.SaveChanges();
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
         public bool existeUsuario(Usuario Usuario) // verifica la existencia de un usuario, ya sea por nombre de usuario o por e-mail
         {
             Usuario UsuarioExistente = contexto.Usuario.FirstOrDefault(u => u.NombreUsuario == Usuario.NombreUsuario || u.Email == Usuario.Email);

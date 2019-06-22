@@ -21,8 +21,8 @@ namespace API.Controllers
         [AllowAnonymous]
         public HttpResponseMessage registroViajero(Usuario Viajero)
         {
-            Viajero.IdRol = 1;
-            Viajero.Descripcion = ""; // el rol se setea en blanco porque el campo es obligatorio
+            Viajero.IdRol = 3;
+            Viajero.Descripcion = ""; 
             Viajero.Password = usuarioService.HashPassword(Viajero.Password);
 
             if(!ModelState.IsValid)
@@ -35,6 +35,26 @@ namespace API.Controllers
                 return new HttpResponseMessage(HttpStatusCode.OK);
             else
                 return Request.CreateResponse(HttpStatusCode.InternalServerError,"Ha ocurrido un error en el servidor. Por favor intente más tarde.");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public HttpResponseMessage registroGuia(Usuario Guia)
+        {
+            Guia.IdRol = 4;
+            Guia.Descripcion = "";
+            Guia.Password = usuarioService.HashPassword(Guia.Password);
+
+            if (!ModelState.IsValid)
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+
+            if (usuarioService.existeUsuario(Guia))
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "El nombre de usuario o el e-mail ya están registrados.");
+
+            if (usuarioService.registrarViajero(Guia))
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            else
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Ha ocurrido un error en el servidor. Por favor intente más tarde.");
         }
 
         [HttpPost]
