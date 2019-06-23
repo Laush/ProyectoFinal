@@ -19,5 +19,10 @@ namespace Genericas
         {
             return Context.Ciudad.FirstOrDefault(c => c.IdCiudad == IdCiudad);
         }
+
+        public List<Pais> ListarPaises()
+        {
+            return Context.Pais.ToList();
+        }
     }
 }

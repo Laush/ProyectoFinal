@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="DestinoService.cs" />
     <Compile Include="LoginRequestModel.cs" />
+    <Compile Include="NacionalidadModel.cs" />
     <Compile Include="Pais.cs">
       <DependentUpon>DB_Model.tt</DependentUpon>
     </Compile>

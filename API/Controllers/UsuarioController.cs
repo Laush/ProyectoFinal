@@ -15,7 +15,7 @@ namespace API.Controllers
     public class UsuarioController : ApiController
     {
         private UsuarioService usuarioService = new UsuarioService();
-        
+        private DestinoService destinoService = new DestinoService();
 
         [HttpPost]
         [AllowAnonymous]
@@ -74,7 +74,25 @@ namespace API.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, LoginResponse);
         }
 
-        
+        [HttpGet]
+        public HttpResponseMessage Nacionalidades()
+        {
+            List<Pais> Paises = destinoService.ListarPaises();
+
+            List<NacionalidadModel> Nacionalidades = new List<NacionalidadModel>();
+
+            foreach(Pais Pais in Paises)
+            {
+                NacionalidadModel Nacionalidad = new NacionalidadModel();
+
+                Nacionalidad.Id = Pais.IdPais;
+                Nacionalidad.Pais = Pais.Nombre;
+
+                Nacionalidades.Add(Nacionalidad);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, Nacionalidades);
+        }
 
         //falta el metodo para eliminar perfil, que requiere la anotaacion [Authorize]
     }
