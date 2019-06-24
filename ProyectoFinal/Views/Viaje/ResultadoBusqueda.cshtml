@@ -59,21 +59,26 @@
                 <h2 class="section-heading text-uppercase">Resultado B&uacute;squeda</h2>
                 <br>
 
-
-              
-                <!-- inicio tabla nueva-->
                 @foreach (Viaje v in Model)
                 {
                     <div class="card" style="color:black;">
                         <div class="gaadiex-list" style="padding: 0 22px;">
                             <div class="gaadiex-list-item">
                                 <img class="gaadiex-list-item-img" style="float: left;width: 70px; height: 70px; margin-top: 20px;
-                                        margin-bottom: 8px; margin-right: 60px; border-radius: 50%;" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="List user">
+                                        margin-bottom: 8px; margin-right: 60px; border-radius: 50%;" 
+                                     src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="List user" >
+
                                 <div class="gaadiex-list-item-text">
-                                    <h3><a href="#">@v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).NombreUsuario</a> @v.Ciudad1.Nombre - @v.Ciudad.Nombre</h3>
+                                    <h3>
+                                        <a href="#">
+                                            @v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).NombreUsuario ,
+                                            @v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Edad
+                                        </a> Años
 
+                                        @v.Ciudad1.Nombre - @v.Ciudad.Nombre
+                                    </h3>
 
-                                    <h4> Vuelo: @v.Aerolinea ,@v.NumeroVuelo</h4>
+                                    <h5> Vuelo: @v.Aerolinea ,@v.NumeroVuelo</h5>
                                     <h5>
                                         Intereses:
                                         @if (v.InteresActividades == true)
@@ -101,12 +106,13 @@
                                             @: Otros
                                         }
                                     </h5>
+                                    <a href="#" class="btn btn-primary"><i class="fa fa-plus"></i> Seguir </a>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                          </div>
+                      </div>
                 }
-                <!-- fin tabla nueva-->
+          
                 <br>
                 @Html.ActionLink("Buscar por Destino", "BusquedaDestino", "Viaje")
                 |

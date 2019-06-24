@@ -1928,6 +1928,7 @@
     <Content Include="Views\Viaje\BusquedaDestino.cshtml" />
     <Content Include="Views\Viaje\BusquedaVuelo.cshtml" />
     <Content Include="Views\Viaje\ResultadoBusqueda.cshtml" />
+    <Content Include="Views\Viaje\AgregarViaje.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

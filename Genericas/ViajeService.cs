@@ -215,5 +215,31 @@ namespace Genericas
 
             return (Viaje == null)? null : TransformarDatos(Viaje);
         }
+
+        public void AgregarViaje(Viaje p, Usuario id)
+        {
+            Viaje nuevoViaje = p;
+            nuevoViaje.IdUsuario = id.IdUsuario;
+            nuevoViaje.FechaDesde = DateTime.Now;
+
+            Context.Viaje.Add(nuevoViaje);
+            Context.SaveChanges();
+        }
+
+        public void Eliminar(long id)
+        {
+            Viaje viajeEliminar = Context.Viaje.FirstOrDefault(u => u.IdViaje == id);
+            Context.Viaje.Remove(viajeEliminar);
+            Context.SaveChanges();
+        }
+
+        public List<Ciudad> ObtenerCiudades()
+        {
+            return Context.Ciudad.ToList();
+        }
+        public List<Pais> ObtenerPaises()
+        {
+            return Context.Pais.ToList();
+        }
     }
 }

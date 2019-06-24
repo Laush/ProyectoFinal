@@ -84,7 +84,7 @@ namespace Genericas
             return contexto.Usuario.FirstOrDefault(x => x.IdUsuario == id);
         }
 
-        //prueba
+
         public Usuario GetUsuario(Usuario u)
         {
             return contexto.Usuario.FirstOrDefault(x => x.IdUsuario.Equals(u));
@@ -93,8 +93,10 @@ namespace Genericas
 
         public List<Viaje> ObtenerViajesUsuario(long id)
         {
-            return contexto.Viaje.Where(v => v.Usuario.FirstOrDefault().IdUsuario == id).ToList();
+
+            return contexto.Viaje.Where(v => v.IdUsuario == id).ToList();
         }
+
 
         //abm usuario viajero
         public void Agregar(Usuario u)

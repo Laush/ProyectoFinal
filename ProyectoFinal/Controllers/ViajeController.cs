@@ -17,6 +17,7 @@ namespace ProyectoFinal.Controllers
         public ActionResult BusquedaDestino()
         {
             ViewBag.Rol = Session["Usuario"] as Usuario;
+            ViewBag.ListaCiudades = srvViaje.ObtenerCiudades();
             if (Session["Usuario"] == null && TempData["ResultadoBusqueda"] != null)
             {
                 int.TryParse(TempData["ResultadoBusqueda"].ToString(), out int num);
@@ -90,5 +91,29 @@ namespace ProyectoFinal.Controllers
             //devuelvo una lista vacia si no ingresa a la condicion
             return View(ds);
         }
+
+        // ABM viaje
+        [HttpGet]
+        public ActionResult AgregarViaje()
+        {
+            Viaje v = new Viaje();
+            return View(v);
+        }
+        [HttpPost]
+        public ActionResult AgregarViaje(Viaje v)
+        {
+            var usuarioLogueado = Session["Usuario"] as Usuario;
+            srvViaje.AgregarViaje(v, usuarioLogueado);
+
+            return RedirectToAction("IndexViajero", "Usuario", v);
+        }
+        public ActionResult Eliminar(long id)
+        {
+            var sj = new ViajeService();
+            sj.Eliminar(id);
+            return RedirectToAction("IndexViajero", "Usuario");
+
+        }
+
     }
 }

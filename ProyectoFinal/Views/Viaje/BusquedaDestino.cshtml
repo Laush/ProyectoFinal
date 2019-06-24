@@ -58,6 +58,12 @@
                         <form method="post" action="/Viaje/BusquedaDestino">
                             <div class="form-group">
                                 <input type="text" class="form-control" id="buscarDestino" name="buscarDestino" placeholder="Pa&iacute;s, Provincia, Ciudad">
+                                <datalist id="buscarDestino">
+                                    @foreach (var c in ViewBag.ListaCiudades)
+                                    {
+                                        <option value="@c.IdCiudad ">@c.Nombre</option>
+                                    }
+                                </datalist>
                             </div>
                             <br>
                             <div class="form-group">
@@ -68,7 +74,8 @@
                         @if (Session["Usuario"] == null && ViewBag.ResultadoCantidad != null)
                         {
                             <div class="alert alert-light" role="alert">
-                                <h6>@ViewBag.ResultadoCantidad<a href="/Home/RegistroViajero" class="alert-link"> Reg&iacute;strate</a>!</h6>
+                                <h6>@ViewBag.ResultadoCantidad
+                                <a href="/Home/Login" class="alert-link"> Ingres&aacute;</a> o <a href="/Home/RegistroViajero" class="alert-link"> Reg&iacute;strate</a>!</h6>
                             </div>
                         }
                     </div>

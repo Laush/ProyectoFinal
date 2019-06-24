@@ -31,7 +31,7 @@
                             Nombre: @Html.TextBoxFor(p => p.Nombre, new { @class = "form-control" })
                             Apellido: @Html.TextBoxFor(p => p.Apellido, new { @class = "form-control" })
                             Nombre Usuario: @Html.TextBoxFor(p => p.NombreUsuario, new { @class = "form-control" })
-                            Nacionalidad: @Html.TextBoxFor(p => p.Nacionalidad, new { @class = "form-control" })
+                            Nacionalidad:  <br> @Html.DropDownListFor(p => p.Nacionalidad, new SelectList(ViewBag.ListaPaises, "IdPais", "Nombre"), new { @class = "form-control" })
 
                         </div>
                         <div class="col-md-6">

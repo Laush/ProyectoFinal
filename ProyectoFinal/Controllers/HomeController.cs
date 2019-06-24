@@ -108,6 +108,7 @@ namespace ProyectoFinal.Controllers
         [HttpGet]
         public ActionResult RegistroViajero()
         {
+            ViewBag.ListaPaises = srvViaje.ObtenerPaises();
             Usuario usu = new Usuario();
             usu.IdRol = 3;
             // usu.Password = srvUsuario.HashPassword(usu.Password);
@@ -116,9 +117,7 @@ namespace ProyectoFinal.Controllers
         [HttpPost]
         public ActionResult RegistroViajero(Usuario u)
         {
-
             srvUsuario.Agregar(u);
-            // return View(u);
             return RedirectToAction("Login", u);
         }
 
@@ -129,7 +128,6 @@ namespace ProyectoFinal.Controllers
             return RedirectToAction("IndexAdmin", "Usuario");
 
         }
-        //FIN abm
 
         public ActionResult Buscador()
         {

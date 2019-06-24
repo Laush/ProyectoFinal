@@ -70,9 +70,12 @@
                         @if (Session["Usuario"] == null && ViewBag.ResultadoCantidad != null)
                         {
                             <div class="alert alert-light" role="alert">
-                                <h6>@ViewBag.ResultadoCantidad<a href="/Home/RegistroViajero" class="alert-link"> Reg&iacute;strate</a>!</h6>
-                            </div>
-                        }
+                                <h6>
+                                    @ViewBag.ResultadoCantidad
+                                <a href="/Home/Login" class="alert-link"> Ingres&aacute;</a> o <a href="/Home/RegistroViajero" class="alert-link"> Reg&iacute;strate</a>!
+                            </h6>
+                        </div>
+                    }
                     </div>
                 </div>
             </div>
