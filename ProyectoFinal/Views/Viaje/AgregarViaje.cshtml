@@ -28,7 +28,9 @@
                             FechaDesde: @Html.TextBoxFor(p => p.FechaDesde, new { @class = "form-control" })
                             FechaHasta: @Html.TextBoxFor(p => p.FechaHasta, new { @class = "form-control" })
                             Origen: @Html.TextBoxFor(p => p.IdOrigen, new { @class = "form-control" })
-                            Destino: @Html.TextBoxFor(p => p.IdDestino, new { @class = "form-control" })
+                         
+
+                        Destino:  <br> @Html.DropDownListFor(p => p.IdDestino , new SelectList(ViewBag.ListaCiudades, "IdCiudad", "Nombre"), new { @class = "form-control" })
                         </div>
                         <div class="col-md-6">
                             Aerolinea: @Html.TextBoxFor(p => p.Aerolinea, new { @class = "form-control" })

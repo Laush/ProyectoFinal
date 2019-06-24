@@ -96,6 +96,8 @@ namespace ProyectoFinal.Controllers
         [HttpGet]
         public ActionResult AgregarViaje()
         {
+            ViewBag.ListaPaises = srvViaje.ObtenerPaises();
+            ViewBag.ListaCiudades = srvViaje.ObtenerCiudades();
             Viaje v = new Viaje();
             return View(v);
         }

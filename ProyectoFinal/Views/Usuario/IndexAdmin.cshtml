@@ -109,7 +109,7 @@
                             <th>Edad</th>
                             <th>Rol</th>
                             <th> </th>
-                            <th> x</th>
+                            <th> </th>
 
                         </tr>
                     </thead>
@@ -118,24 +118,33 @@
                         {
                             if (u.IdRol == 3)
                             {
-                                <tr>
-                                    <td>
-                                        <img style="float: left;width: 50px; height: 50px; margin-top: 10px;
+                        <tr>
+                            <td>
+                                <img style="float: left;width: 50px; height: 50px; margin-top: 10px;
                                         margin-bottom: 8px; margin-right: -10px; border-radius: 50%;" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="gaadiex-list-item-img" alt="Avatar">
-                                    </td>
+                            </td>
 
-                                    <td>@u.IdUsuario</td>
-                                    <td>@u.NombreUsuario</td>
-                                    <td>@u.Email</td>
-                                    <td>@u.Edad</td>
-                                    <td>@u.IdRol</td>
-                                    <td>
-                                        <a href="#"><i class="fa fa-edit fa-lg"></i></a>
-                                    </td>
-                                    <td>
-                                        <a style="color:firebrick;" href="/Home/Eliminar/@u.IdUsuario"><i class="fa fa-window-close fa-lg"></i></a>
-                                    </td>
-                                </tr>
+                            <td>@u.IdUsuario</td>
+                            <td>@u.NombreUsuario</td>
+                            <td>@u.Email</td>
+                            <td>@u.Edad</td>
+                            @if (u.IdRol == 1)
+                            {
+                                <td>Agencia</td>}
+                            @if (u.IdRol == 2)
+                            {
+                                <td>Admin</td>}
+                            @if (u.IdRol == 3)
+                            {
+                                <td>Viajero</td>}
+
+                            <td>
+                                <a href="#"><i class="fa fa-edit fa-lg"></i></a>
+                            </td>
+                            <td>
+                                <a style="color:firebrick;" href="/Home/Eliminar/@u.IdUsuario"><i class="fa fa-window-close fa-lg"></i></a>
+                            </td>
+                        </tr>
                             }
                         }
 

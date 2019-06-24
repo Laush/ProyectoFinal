@@ -11,6 +11,11 @@
 
 <head>
     <link href="~/Content/Viaje/ResultadoBusqueda.css" rel="stylesheet" />
+
+    <style>
+     
+
+        </style>
 </head>
 
 <body id="page-top">
@@ -63,17 +68,17 @@
                 {
                     <div class="card" style="color:black;">
                         <div class="gaadiex-list" style="padding: 0 22px;">
-                            <div class="gaadiex-list-item">
+                            <div class="row">
                                 <img class="gaadiex-list-item-img" style="float: left;width: 70px; height: 70px; margin-top: 20px;
-                                        margin-bottom: 8px; margin-right: 60px; border-radius: 50%;" 
-                                     src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="List user" >
+                                        margin-bottom: 8px; margin-right: 60px; border-radius: 50%; margin-left: 20px;"
+                                     src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="List user">
 
-                                <div class="gaadiex-list-item-text">
+                                <div class="col-sm-8">
                                     <h3>
                                         <a href="#">
-                                            @v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).NombreUsuario ,
-                                            @v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Edad
-                                        </a> Años
+                                            @v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).NombreUsuario,
+                                            @v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Edad Años
+                                        </a>
 
                                         @v.Ciudad1.Nombre - @v.Ciudad.Nombre
                                     </h3>
@@ -106,23 +111,35 @@
                                             @: Otros
                                         }
                                     </h5>
-                                    <a href="#" class="btn btn-primary"><i class="fa fa-plus"></i> Seguir </a>
+
+                                </div>
+                                <div class="col-sm-2">
+                                    <a href="#" class="btn btn-primary" style="margin-top:25%;"><i class="fa fa-plus"></i> Seguir </a>
                                 </div>
                             </div>
-                          </div>
-                      </div>
+
+
+
+                        </div>
+
+                    </div>
+
                 }
-          
+
                 <br>
                 @Html.ActionLink("Buscar por Destino", "BusquedaDestino", "Viaje")
                 |
                 @Html.ActionLink("Buscar por Vuelo", "BusquedaVuelo", "Viaje")
                 <h1>@ViewBag.Error</h1>
 
-            </div>
+            </div>  <!--fin intro text-->
 
-        </div>
+        </div> <!-- fin container-->
     </header>
+
+    <!-- filtro-->
+
+
     <!-- Bootstrap core JavaScript -->
     <script src="~/Content/vendor/jquery/jquery.min.js"></script>
     <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
