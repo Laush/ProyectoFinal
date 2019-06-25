@@ -13,13 +13,19 @@ namespace ProyectoFinal.Controllers
         private UsuarioService srvUsuario = new UsuarioService();
 
         private ViajeService srvViaje = new ViajeService();
-        //Landing Page
+
         public ActionResult Logout()
         {
+            ViewBag.Rol = Session["Usuario"] as Usuario;
+
+            if (Session["Usuario"] is Usuario usuarioLogueado)
+            {
+                return View(usuarioLogueado);
+            }
             return View();
+
         }
 
-        //formulario de login
         public ActionResult Login()
         {
             if (Request.Cookies.AllKeys.Contains("usuarioSesion") && Request.Cookies["usuarioSesion"].Values.Count > 0)

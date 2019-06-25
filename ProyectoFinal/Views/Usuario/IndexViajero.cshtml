@@ -13,7 +13,7 @@
 <body id="page-top">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#"><img src="~/Content/img/logos/logoblanco.png" alt="logo"></a>
+            <a class="navbar-brand js-scroll-trigger" href="/Home/Logout"><img src="~/Content/img/logos/logoblanco.png" alt="logo"></a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
@@ -59,7 +59,7 @@
                     <div class="col-lg-4">
                         <h4>Email</h4>@Model.Email<br><br>
                         <h4>Password</h4>@Model.Password<br><br>
-                        <h4>Calificacion</h4>Proximamente
+                        <h4>Calificacion</h4><i class="fa fa-thumbs-up fa-1x"></i> Proximamente  <i class="fa fa-thumbs-down fa-1x"></i>
                     </div>
                 </div>
                 <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Editar Perfil</button>
@@ -114,7 +114,7 @@
                                 <td>@v.Ciudad.Nombre</td>
                                 <td>@v.FechaDesde</td>
                                 <td>
-                                    <a href="#"><i class="fa fa-edit fa-lg"></i></a>
+                                    <a href="/Viaje/EditarViaje/@v.IdViaje"><i class="fa fa-edit fa-lg"></i></a>
                                 </td>
                                 <td>
                                 <td>

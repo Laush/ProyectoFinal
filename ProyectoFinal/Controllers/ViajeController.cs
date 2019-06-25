@@ -116,6 +116,27 @@ namespace ProyectoFinal.Controllers
             return RedirectToAction("IndexViajero", "Usuario");
 
         }
+       
+        public ActionResult EditarViaje(int id)
+        {
+            var usuarioLogueado = Session["Usuario"] as Usuario;
+            Viaje viaje = srvViaje.ObtenerPorId(id);
+            return View(viaje);
+        }
+
+        [HttpPost]
+        public ActionResult EditarViaje(Viaje viaje)
+        {
+            if (ModelState.IsValid)
+            {
+                srvViaje.EditarViaje(viaje);
+                return RedirectToAction("IndexViajero", "Usuario");
+            }
+            else
+            {
+                return View(viaje);
+            }
+        }
 
     }
 }

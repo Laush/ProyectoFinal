@@ -1,0 +1,75 @@
+﻿@using Genericas
+@{
+    ViewBag.Title = "EditarViaje";
+}
+@model Viaje
+<head>
+
+</head>
+
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="/Home/Logout"><img src="~/Content/img/logos/logoblanco.png" alt="logo"></a>
+
+        </div>
+    </nav>
+    <!-- Header-->
+    <header class="masthead">
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in">Editar viaje</div>
+                <form action="/Viaje/EditarViaje" method="Post">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.HiddenFor(p => p.IdViaje, new { @class = "form-control" })
+                            @Html.HiddenFor(p => p.IdUsuario, new { @class = "form-control" })
+                            FechaDesde: @Html.TextBoxFor(p => p.FechaDesde, new { @class = "form-control" })
+                            FechaHasta: @Html.TextBoxFor(p => p.FechaHasta, new { @class = "form-control" })
+                            Origen: @Html.TextBoxFor(p => p.IdOrigen, new { @class = "form-control" })
+                            Destino: @Html.TextBoxFor(p => p.IdDestino, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6">
+                            Aerolinea: @Html.TextBoxFor(p => p.Aerolinea, new { @class = "form-control" })
+                            Numero Vuelo:@Html.TextBoxFor(p => p.NumeroVuelo, new { @class = "form-control" })
+                            Alojamiento:@Html.TextBoxFor(p => p.Alojamiento, new { @class = "form-control" })
+                            Intereses:<br>
+                            @Html.CheckBox("InteresActividades") Actividades
+                            @Html.CheckBox("InteresExcursiones") Excursiones
+                            @Html.CheckBox("InteresTraslados") Traslados
+                            @Html.CheckBox("InteresAmistades") Amistades
+                            @Html.CheckBox("InteresAlojamiento") Alojamiento
+                            @Html.CheckBox("InteresOtros") Otros
+
+                        </div>
+                        <div class="col-md-12">
+                            <br>
+                            <input class="btn btn-primary my-2 my-sm-0" type="submit" value="Guardar Viaje" />
+                            <a href="/Usuario/IndexViajero" class="btn btn-primary my-2 my-sm-0"><i class="fa fa-times fa-lg"></i> <span>Cancelar</span></a>
+
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </header>
+
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Contact form JavaScript -->
+    <script src="~/Content/js/jqBootstrapValidation.js"></script>
+    <script src="~/Content/js/contact_me.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="~/Content/js/agency.min.js"></script>
+</body>
+
+
+

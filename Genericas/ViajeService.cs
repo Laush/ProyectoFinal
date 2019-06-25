@@ -241,5 +241,24 @@ namespace Genericas
         {
             return Context.Pais.ToList();
         }
+        public void EditarViaje(Viaje v)
+        {
+            Viaje p = Context.Viaje.Find(v.IdViaje);
+            p.Aerolinea = v.Aerolinea;
+            p.Alojamiento = v.Alojamiento;
+            p.IdDestino = v.IdDestino;
+            p.IdOrigen = v.IdOrigen;
+            p.Ciudad = p.Ciudad;
+            p.Ciudad1 = p.Ciudad1;
+            p.NumeroVuelo = p.NumeroVuelo;
+
+            p.FechaDesde = DateTime.Now;
+            Context.SaveChanges();
+        }
+
+        public Viaje ObtenerPorId(int id)
+        {
+            return Context.Viaje.FirstOrDefault(p => p.IdViaje == id);
+        }
     }
 }

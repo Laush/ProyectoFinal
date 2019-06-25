@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Genericas;
+@{
     ViewBag.Title = "Logout";
 }
 
@@ -17,6 +18,27 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
+
+                    @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 1)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexAdmin">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+
+                    }
+                    @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 2)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexAgencia">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+                    }
+                    @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 3)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexViajero">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+
+                    }
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#portfolio">Busca</a>
                     </li>
@@ -27,12 +49,21 @@
                         <a class="nav-link js-scroll-trigger" href="#contact">Contacto</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/Home/Registracion">Registrate</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/Home/Login">Login</a>
-                    </li>
+                    @if (Session["Usuario"] == null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/Registracion">Registrate</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/Login">Login</a>
+                        </li>
+                    }
+                    @if (Session["Usuario"] != null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion">Salir</a>
+                        </li>
+                    }
 
                 </ul>
             </div>
@@ -61,7 +92,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6 portfolio-item">
-                    <a class="portfolio-link"  href="/Viaje/BusquedaDestino">
+                    <a class="portfolio-link" href="/Viaje/BusquedaDestino">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                                 <i class="fas fa-globe-americas fa-3x"></i>
@@ -71,11 +102,10 @@
                     </a>
                     <div class="portfolio-caption">
                         <h4>Busca por Destino</h4>
-                        
                     </div>
                 </div>
                 <div class="col-md-6 portfolio-item">
-                    <a class="portfolio-link"  href="/Viaje/BusquedaVuelo">
+                    <a class="portfolio-link" href="/Viaje/BusquedaVuelo">
                         <div class="portfolio-hover">
                             <div class="portfolio-hover-content">
                                 <i class="fas fa-plane fa-3x"></i>
@@ -85,10 +115,8 @@
                     </a>
                     <div class="portfolio-caption">
                         <h4>Busca por Vuelo</h4>
-                        
                     </div>
-                </div>  
-               
+                </div>
             </div>
         </div>
     </section>
@@ -99,7 +127,12 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading text-uppercase">Explora el mundo</h2>
-                    <h3 class="section-subheading text-muted">Conoce los lugares m&aacute;s incre&iacute;bles de cada ciudad con compa&ntilde;eros de viaje como t&uacute;</h3>
+                    <h3 class="section-subheading text-muted">
+                        ¿Les encanta viajar y tus amigos no pueden acompañarte? <br>
+                        A muchas de personas les pasa que se limitan en hacer ciertas actividades por viajar solos o por no conocer que hacer en el destino al que van.
+                        FriendsTRIP te permite encontrar coincidencias con otros viajeros y compartir todo tipo de actividades turisticas. <br>
+                        La experiencia no termina solo en el viaje, tambien podras armar grupos de amigos compartiendo consejos y fotos.
+                    </h3>
                 </div>
             </div>
             <div class="row text-center">
@@ -126,6 +159,105 @@
                     </span>
                     <h4 class="service-heading">Ahorr&aacute;</h4>
                     <p class="text-muted">Conectate con otros viajeros, ahorr&aacute; dinero y tiempo compartiendo actividades</p>
+                </div>
+            </div>
+            <br> <br>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading text-uppercase">FriendsTRIP Team</h2>
+                    <h3 class="section-subheading text-muted">Somos apasionados por el mundo de los viajes y por eso queremos que cuando  planees o realices el tuyo, tu experiencia sea inolvidable.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="~/Content/img/team/1.jpg" alt="">
+                        <h4>Laura Ramos</h4>
+                        <p class="text-muted">Developer</p>
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="~/Content/img/team/2.jpg" alt="">
+                        <h4>Luis Cabrebra</h4>
+                        <p class="text-muted">Developer</p>
+                        <ul class="list-inline social-buttons">
+
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="~/Content/img/team/4.jpg" alt="">
+                        <h4>Nicolas Cardoso</h4>
+                        <p class="text-muted">Developer </p>
+                        <ul class="list-inline social-buttons">
+
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="~/Content/img/team/3.jpg" alt="">
+                        <h4>Gaston D'Adamo</h4>
+                        <p class="text-muted">Developer</p>
+                        <ul class="list-inline social-buttons">
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading text-uppercase">Video institucional</h2>
+                    <h3 class="section-subheading text-muted">
+                        Encuentra compañero de viaje con nuestra aplicacion y página web. Sera fabuloso!
+                    </h3>
+                    <div>
+                        <iframe src="https://www.youtube.com/embed/Vj8KnYYBg1I" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 </div>
             </div>
         </div>

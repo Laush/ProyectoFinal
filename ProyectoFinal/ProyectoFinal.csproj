@@ -198,6 +198,7 @@
     <Content Include="Content\img\team\1.jpg" />
     <Content Include="Content\img\team\2.jpg" />
     <Content Include="Content\img\team\3.jpg" />
+    <Content Include="Content\img\team\4.jpg" />
     <Content Include="Content\js\agency.js" />
     <Content Include="Content\js\agency.min.js" />
     <Content Include="Content\js\contact_me.js" />
@@ -1929,6 +1930,7 @@
     <Content Include="Views\Viaje\BusquedaVuelo.cshtml" />
     <Content Include="Views\Viaje\ResultadoBusqueda.cshtml" />
     <Content Include="Views\Viaje\AgregarViaje.cshtml" />
+    <Content Include="Views\Viaje\EditarViaje.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
