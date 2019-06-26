@@ -79,7 +79,12 @@ namespace Genericas
         }
 
 
-        public Usuario GetById(int id)
+        public Usuario GetById(long id)
+        {
+            return contexto.Usuario.FirstOrDefault(x => x.IdUsuario == id);
+        }
+
+        public Usuario GetById(long? id)
         {
             return contexto.Usuario.FirstOrDefault(x => x.IdUsuario == id);
         }

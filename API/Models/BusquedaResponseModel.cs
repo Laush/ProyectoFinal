@@ -17,5 +17,12 @@ namespace API.Models
         public bool? InteresAmistades { get; set; }
         public bool? InteresAlojamiento { get; set; }
         public bool? InteresOtros { get; set; }
+
+        // datos de usuario
+        public long IdUsuario { get; set; }
+        public string NombreUsuario { get; set; }
+        public string Email { get; set; }
+
+        // falta foto de usuario
     }
 }

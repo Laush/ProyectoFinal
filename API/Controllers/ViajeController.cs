@@ -15,7 +15,7 @@ namespace API.Controllers
     {
         private TokenManager TokenManager = new TokenManager();
         private ViajeService ViajeService = new ViajeService();
-        //private UsuarioService UsuarioService = new UsuarioService();
+        private UsuarioService UsuarioService = new UsuarioService();
         private DestinoService DestinoService = new DestinoService();
 
         [HttpPost]
@@ -80,12 +80,14 @@ namespace API.Controllers
         public HttpResponseMessage BuscarViajes(BusquedaRequestModel RequestModel)
         {
             List<BusquedaResponseModel> Viajes = new List<BusquedaResponseModel>();
-
+                       
             if (RequestModel.Destino != null)
             {
                 foreach( Viaje Viaje in ViajeService.BuscarDestino(RequestModel.Destino))
                 {
                     BusquedaResponseModel ViajeEncontrado = new BusquedaResponseModel();
+
+                    Usuario Usuario = UsuarioService.GetById(Viaje.IdUsuario);
 
                     ViajeEncontrado.Origen = Viaje.Ciudad.Nombre;
                     ViajeEncontrado.Destino = Viaje.Ciudad1.Nombre;
@@ -97,10 +99,12 @@ namespace API.Controllers
                     ViajeEncontrado.InteresExcursiones = Viaje.InteresExcursiones;
                     ViajeEncontrado.InteresOtros= Viaje.InteresOtros;
                     ViajeEncontrado.InteresTraslados = Viaje.InteresTraslados;
+                    ViajeEncontrado.IdUsuario = Usuario.IdUsuario;
+                    ViajeEncontrado.Email =Usuario.Email;
+                    ViajeEncontrado.NombreUsuario = Usuario.NombreUsuario;
 
                     Viajes.Add(ViajeEncontrado);
                 }
-                 //Viajes = ViajeService.BuscarDestino(RequestModel.Destino);
             }
 
             if(RequestModel.Vuelo != null)
