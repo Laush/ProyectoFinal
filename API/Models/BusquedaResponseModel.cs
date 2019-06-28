@@ -11,6 +11,9 @@ namespace API.Models
         public string Origen { get; set; }
         public string Aerolinea { get; set; }
         public string NumeroVuelo { get; set; }
+        public DateTime FechaDesde { get; set; }
+        public DateTime? FechaHasta { get; set; }
+        public string Alojamiento { get; set; }
         public bool? InteresActividades { get; set; }
         public bool? InteresExcursiones { get; set; }
         public bool? InteresTraslados { get; set; }

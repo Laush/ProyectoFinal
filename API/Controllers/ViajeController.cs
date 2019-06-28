@@ -99,6 +99,9 @@ namespace API.Controllers
                     ViajeEncontrado.InteresExcursiones = Viaje.InteresExcursiones;
                     ViajeEncontrado.InteresOtros= Viaje.InteresOtros;
                     ViajeEncontrado.InteresTraslados = Viaje.InteresTraslados;
+                    ViajeEncontrado.FechaDesde = Viaje.FechaDesde;
+                    ViajeEncontrado.FechaHasta = Viaje.FechaHasta;
+                    ViajeEncontrado.Alojamiento = Viaje.Alojamiento;
                     ViajeEncontrado.IdUsuario = Usuario.IdUsuario;
                     ViajeEncontrado.Email =Usuario.Email;
                     ViajeEncontrado.NombreUsuario = Usuario.NombreUsuario;
