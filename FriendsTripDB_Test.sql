@@ -32,9 +32,10 @@ CREATE TABLE [dbo].[Usuario](
 	[Password] [nvarchar](256) NOT NULL,
 	[Email] [nvarchar](300) NOT NULL,
 	[IdRol] [bigint] NOT NULL,
-	[MatriculaGuia] nvarchar(100),
+	[MatriculaGuia] [nvarchar](100) NULL,
 	[Descripcion] [nvarchar](300) NULL,
 	[Nacionalidad] [bigint] NOT NULL,
+	[UrlFotoPerfil] [nvarchar](200) NOT NULL,
  CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED 
 (
 	[IdUsuario] ASC
@@ -53,12 +54,12 @@ CREATE TABLE [dbo].[Viaje](
 	[IdUsuario] [bigint] NULL,
 	[IdOrigen] [bigint] NOT NULL,
 	[IdDestino] [bigint] NOT NULL,
-	[InteresActividades] bit,
-	[InteresExcursiones] bit null,
-	[InteresTraslados] bit null,
-	[InteresAmistades] bit null,
-	[InteresAlojamiento] bit null,
-	[InteresOtros] bit null,
+	[InteresActividades] [bit] NULL,
+	[InteresExcursiones] [bit] null,
+	[InteresTraslados] [bit] NULL,
+	[InteresAmistades] [bit] NULL,
+	[InteresAlojamiento] [bit] NULL,
+	[InteresOtros] [bit] NULL,
  CONSTRAINT [PK_Viaje] PRIMARY KEY CLUSTERED 
 (
 	[IdViaje] ASC
@@ -73,7 +74,6 @@ CREATE TABLE [dbo].[Publicacion](
 	[Titulo] [nvarchar](100) NOT NULL,
 	[Descripcion] [nvarchar](300) NOT NULL,
 	[UrlFoto] [nvarchar](200) NOT NULL,
-	[IdRol] [bigint] NOT NULL,
 	[FechaDesde] [datetime] NOT NULL,
 	[FechaHasta] [datetime] NULL,
 	[IdUsuario] [bigint] NOT NULL,
@@ -121,14 +121,14 @@ GO
 
 /*Tabla usuario usuario, donde se guardaran las coincidencias*/
 CREATE TABLE [dbo].[AmistadUsuario](
-	[IdUsuarioUno] [bigint] NOT NULL,
-	[IdUsuarioDos] [bigint] NOT NULL,
+	[IdResponsable] [bigint] NOT NULL,
+	[IdSeguido] [bigint] NOT NULL,
 	[Estado] [nvarchar](200) NOT NULL,
 	[FechaCoincidencia] [datetime] NOT NULL,
  CONSTRAINT [PK_AmistadUsuario] PRIMARY KEY CLUSTERED 
 (
-	[IdUsuarioUno] ASC,
-	[IdUsuarioDos] ASC
+	[IdResponsable] ASC,
+	[IdSeguido] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -148,11 +148,11 @@ GO
 /*RELACIONES*/
 
 /*Creo la relacion n a n usuario usuaro*/
-ALTER TABLE [dbo].[AmistadUsuario]  WITH CHECK ADD  CONSTRAINT [FK_Amistad_UsuarioUno] FOREIGN KEY([IdUsuarioUno])
+ALTER TABLE [dbo].[AmistadUsuario]  WITH CHECK ADD  CONSTRAINT [FK_Amistad_UsuarioUno] FOREIGN KEY([IdResponsable])
 REFERENCES [dbo].[Usuario] ([IdUsuario])
 GO
 
-ALTER TABLE [dbo].[AmistadUsuario]  WITH CHECK ADD  CONSTRAINT [FK_Amistad_UsuarioDos] FOREIGN KEY([IdUsuarioDos])
+ALTER TABLE [dbo].[AmistadUsuario]  WITH CHECK ADD  CONSTRAINT [FK_Amistad_UsuarioDos] FOREIGN KEY([IdSeguido])
 REFERENCES [dbo].[Usuario] ([IdUsuario])
 GO
 
