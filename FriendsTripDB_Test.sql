@@ -35,7 +35,7 @@ CREATE TABLE [dbo].[Usuario](
 	[MatriculaGuia] [nvarchar](100) NULL,
 	[Descripcion] [nvarchar](300) NULL,
 	[Nacionalidad] [bigint] NOT NULL,
-	[UrlFotoPerfil] [nvarchar](200) NOT NULL,
+	[UrlFotoPerfil] [nvarchar](200) NULL,
  CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED 
 (
 	[IdUsuario] ASC
@@ -73,7 +73,7 @@ CREATE TABLE [dbo].[Publicacion](
 	[IdPublicacion] [bigint] IDENTITY(1,1) NOT NULL,
 	[Titulo] [nvarchar](100) NOT NULL,
 	[Descripcion] [nvarchar](300) NOT NULL,
-	[UrlFoto] [nvarchar](200) NOT NULL,
+	[UrlFoto] [nvarchar](200) NULL,
 	[FechaDesde] [datetime] NOT NULL,
 	[FechaHasta] [datetime] NULL,
 	[IdUsuario] [bigint] NOT NULL,
