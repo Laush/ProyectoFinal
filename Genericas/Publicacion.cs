@@ -12,18 +12,16 @@ namespace Genericas
     using System;
     using System.Collections.Generic;
     
-    public partial class Pais
+    public partial class Publicacion
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Pais()
-        {
-            this.Provincia = new HashSet<Provincia>();
-        }
+        public long IdPublicacion { get; set; }
+        public string Titulo { get; set; }
+        public string Descripcion { get; set; }
+        public string UrlFoto { get; set; }
+        public System.DateTime FechaDesde { get; set; }
+        public Nullable<System.DateTime> FechaHasta { get; set; }
+        public long IdUsuario { get; set; }
     
-        public long IdPais { get; set; }
-        public string Nombre { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Provincia> Provincia { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

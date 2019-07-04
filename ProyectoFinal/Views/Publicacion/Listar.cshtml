@@ -1,0 +1,118 @@
+﻿@using Genericas;
+@{
+    ViewBag.Title = "Listar";
+}
+
+<head>
+    <link href="~/Content/css/agencyUsu.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="/Home/Logout"><img src="~/Content/img/logos/logoblanco.png" alt="logo"></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
+
+                    @if (Session["Usuario"] == null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/Registracion">Registrate</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/Login">Login</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/Buscador">Buscar</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion">Salir</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Header-->
+    <header class="masthead">
+        <div class="container">
+            <div class="intro-text">
+                <h2 class="section-heading text-uppercase">Lista de publicaciones</h2>
+                <div class="row">
+                    <div class="table-wrapper">
+                        <div class="table-title">
+                            <div class="row">
+                            </div>
+                        </div>
+                        <table class="table table-striped table-hover" style="background-color:white;">
+                            <thead>
+                                <tr>
+                                    <th> </th>
+                                    <th>Id</th>
+                                    <th>Titulo</th>
+                                    <th>Descripcion</th>
+                                    <th>Fecha Desde</th>
+                                    <th>Fecha Hasta</th>
+                                    <th>Ver</th>
+                                    <th>Contactar </th>
+                                </tr>
+                            </thead>
+                            @foreach (Publicacion p in ViewBag.ListaPublicaciones)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img style="float: left;width: 50px; height: 50px; margin-top: 10px;
+                                        margin-bottom: 8px; margin-right: -10px; border-radius: 50%;" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="gaadiex-list-item-img" alt="Avatar">
+                                        </td>
+
+
+                                        <td>@p.IdPublicacion</td>
+                                        <td>@p.Titulo</td>
+                                        <td>@p.Descripcion</td>
+                                        <td>@p.FechaDesde</td>
+                                        <td>@p.FechaHasta</td>
+                                        <td>
+                                            <a  href="#"><i class="fa fa-eye fa-lg"></i></a>
+                                            @*aca se veria mas grande la foto y los detalles*@
+                                        </td>
+                                        <td>
+                                            <a style="color:dimgrey;" href="#"><i class="fa fa-envelope fa-lg"></i></a>
+                                            @*aca se mostraria el email para que se contacten*@
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+                            }
+                        </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Bootstrap core JavaScript -->
+        <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+        <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Plugin JavaScript -->
+        <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Contact form JavaScript -->
+        <script src="~/Content/js/jqBootstrapValidation.js"></script>
+        <script src="~/Content/js/contact_me.js"></script>
+        <!-- Custom scripts for this template -->
+        <script src="~/Content/js/agency.min.js"></script>
+    </body>
+

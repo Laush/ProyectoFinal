@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Logout";
 }
-
+@model List<Usuario>
 <head>
 
 </head>
@@ -44,6 +44,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#nosotros">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#agencias">Agencias</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#contact">Contacto</a>
@@ -262,6 +265,41 @@
             </div>
         </div>
     </section>
+
+    <!-- Agencias Grid -->
+    <section class="bg-light" id="portfolio" name="agencias">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading text-uppercase">Agencias</h2>
+                    <h3 class="section-subheading text-muted">Descubrí los mejores servicios</h3>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (Usuario u in Model)
+                {
+
+                    <div class="col-md-4 col-sm-6 portfolio-item">
+                        <a class="portfolio-link" href="/Publicacion/Listar/@u.IdUsuario">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content">
+                                    <i class="fas fa-plus fa-3x">Ver</i>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="~/Content/img/portfolio/06-thumbnail.jpg" alt="">
+                        </a>
+                        <div class="portfolio-caption">
+                            <h4>@u.NombreUsuario</h4>
+                            <p class="text-muted">
+                            </p>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </section>
+
     <!-- Contact -->
     <section id="contact">
         <div class="container">

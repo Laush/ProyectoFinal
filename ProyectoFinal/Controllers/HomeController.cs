@@ -18,11 +18,10 @@ namespace ProyectoFinal.Controllers
         {
             ViewBag.Rol = Session["Usuario"] as Usuario;
 
-            if (Session["Usuario"] is Usuario usuarioLogueado)
-            {
-                return View(usuarioLogueado);
-            }
-            return View();
+            List<Usuario> usus = new List<Usuario>();
+            usus = srvUsuario.ListarAgencias();
+            return View(usus);
+
 
         }
 

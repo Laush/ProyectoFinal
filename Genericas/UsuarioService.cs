@@ -77,6 +77,14 @@ namespace Genericas
 
             return user;
         }
+        public List<Usuario> ListarAgencias()
+        {
+            var query = from a in contexto.Usuario
+                        where a.IdRol == 2
+                        select a;
+
+            return query.ToList();
+        }
 
 
         public Usuario GetById(long id)
@@ -102,6 +110,11 @@ namespace Genericas
             return contexto.Viaje.Where(v => v.IdUsuario == id).ToList();
         }
 
+        //listar publicaciones de una agencia
+        public List<Publicacion> ObtenerPublicacionesByUsuario(long idAgencia)
+        {
+            return contexto.Publicacion.Where(x => x.IdUsuario == idAgencia).ToList();   
+        }
 
         //abm usuario viajero
         public void Agregar(Usuario u)

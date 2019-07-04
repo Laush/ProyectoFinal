@@ -154,6 +154,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PublicacionController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\ViajeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1931,6 +1932,7 @@
     <Content Include="Views\Viaje\ResultadoBusqueda.cshtml" />
     <Content Include="Views\Viaje\AgregarViaje.cshtml" />
     <Content Include="Views\Viaje\EditarViaje.cshtml" />
+    <Content Include="Views\Publicacion\Listar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

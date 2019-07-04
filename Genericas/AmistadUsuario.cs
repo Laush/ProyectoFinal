@@ -12,18 +12,14 @@ namespace Genericas
     using System;
     using System.Collections.Generic;
     
-    public partial class Pais
+    public partial class AmistadUsuario
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Pais()
-        {
-            this.Provincia = new HashSet<Provincia>();
-        }
+        public long IdResponsable { get; set; }
+        public long IdSeguido { get; set; }
+        public string Estado { get; set; }
+        public System.DateTime FechaCoincidencia { get; set; }
     
-        public long IdPais { get; set; }
-        public string Nombre { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Provincia> Provincia { get; set; }
+        public virtual Usuario Usuario { get; set; }
+        public virtual Usuario Usuario1 { get; set; }
     }
 }

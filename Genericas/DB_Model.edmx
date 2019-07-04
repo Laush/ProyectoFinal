@@ -4,14 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="FriendsTripDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DB_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AmistadUsuario">
           <Key>
-            <PropertyRef Name="IdUsuarioUno" />
-            <PropertyRef Name="IdUsuarioDos" />
+            <PropertyRef Name="IdResponsable" />
+            <PropertyRef Name="IdSeguido" />
           </Key>
-          <Property Name="IdUsuarioUno" Type="bigint" Nullable="false" />
-          <Property Name="IdUsuarioDos" Type="bigint" Nullable="false" />
+          <Property Name="IdResponsable" Type="bigint" Nullable="false" />
+          <Property Name="IdSeguido" Type="bigint" Nullable="false" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="FechaCoincidencia" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Ciudad">
           <Key>
@@ -36,6 +38,18 @@
           <Property Name="Nombre" Type="nvarchar" MaxLength="200" />
           <Property Name="IdPais" Type="bigint" Nullable="false" />
         </EntityType>
+        <EntityType Name="Publicacion">
+          <Key>
+            <PropertyRef Name="IdPublicacion" />
+          </Key>
+          <Property Name="IdPublicacion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="UrlFoto" Type="nvarchar" MaxLength="200" />
+          <Property Name="FechaDesde" Type="datetime" Nullable="false" />
+          <Property Name="FechaHasta" Type="datetime" />
+          <Property Name="IdUsuario" Type="bigint" Nullable="false" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="IdUsuario" />
@@ -51,6 +65,7 @@
           <Property Name="MatriculaGuia" Type="nvarchar" MaxLength="100" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="300" />
           <Property Name="Nacionalidad" Type="bigint" Nullable="false" />
+          <Property Name="UrlFotoPerfil" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="UsuarioViaje">
           <Key>
@@ -88,7 +103,7 @@
               <PropertyRef Name="IdUsuario" />
             </Principal>
             <Dependent Role="AmistadUsuario">
-              <PropertyRef Name="IdUsuarioDos" />
+              <PropertyRef Name="IdSeguido" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -100,7 +115,7 @@
               <PropertyRef Name="IdUsuario" />
             </Principal>
             <Dependent Role="AmistadUsuario">
-              <PropertyRef Name="IdUsuarioUno" />
+              <PropertyRef Name="IdResponsable" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -125,6 +140,18 @@
             </Principal>
             <Dependent Role="Provincia">
               <PropertyRef Name="IdPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Publicacion_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Publicacion">
+              <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -188,11 +215,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FriendsTripDBModelStoreContainer">
+        <EntityContainer Name="DB_ModelStoreContainer">
           <EntitySet Name="AmistadUsuario" EntityType="Self.AmistadUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Publicacion" EntityType="Self.Publicacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsuarioViaje" EntityType="Self.UsuarioViaje" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Viaje" EntityType="Self.Viaje" Schema="dbo" store:Type="Tables" />
@@ -211,6 +239,10 @@
           <AssociationSet Name="FK_Provincia_Pais" Association="Self.FK_Provincia_Pais">
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Provincia" EntitySet="Provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Publicacion_Usuario" Association="Self.FK_Publicacion_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Publicacion" EntitySet="Publicacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Nacionalidad" Association="Self.FK_Usuario_Nacionalidad">
             <End Role="Ciudad" EntitySet="Ciudad" />
@@ -233,10 +265,23 @@
             <End Role="UsuarioViaje" EntitySet="UsuarioViaje" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="FriendsTripDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DB_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AmistadUsuario">
+          <Key>
+            <PropertyRef Name="IdResponsable" />
+            <PropertyRef Name="IdSeguido" />
+          </Key>
+          <Property Name="IdResponsable" Type="Int64" Nullable="false" />
+          <Property Name="IdSeguido" Type="Int64" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaCoincidencia" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Amistad_UsuarioDos" FromRole="AmistadUsuario" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="Self.FK_Amistad_UsuarioUno" FromRole="AmistadUsuario" ToRole="Usuario" />
+        </EntityType>
         <EntityType Name="Ciudad">
           <Key>
             <PropertyRef Name="IdCiudad" />
@@ -267,6 +312,19 @@
           <NavigationProperty Name="Ciudad" Relationship="Self.FK_Ciudad_Provincia" FromRole="Provincia" ToRole="Ciudad" />
           <NavigationProperty Name="Pais" Relationship="Self.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
         </EntityType>
+        <EntityType Name="Publicacion">
+          <Key>
+            <PropertyRef Name="IdPublicacion" />
+          </Key>
+          <Property Name="IdPublicacion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UrlFoto" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaHasta" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Publicacion_Usuario" FromRole="Publicacion" ToRole="Usuario" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="IdUsuario" />
@@ -282,9 +340,11 @@
           <Property Name="MatriculaGuia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="Nacionalidad" Type="Int64" Nullable="false" />
+          <Property Name="UrlFotoPerfil" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AmistadUsuario" Relationship="Self.FK_Amistad_UsuarioDos" FromRole="Usuario" ToRole="AmistadUsuario" />
+          <NavigationProperty Name="AmistadUsuario1" Relationship="Self.FK_Amistad_UsuarioUno" FromRole="Usuario" ToRole="AmistadUsuario" />
           <NavigationProperty Name="Ciudad" Relationship="Self.FK_Usuario_Nacionalidad" FromRole="Usuario" ToRole="Ciudad" />
-          <NavigationProperty Name="Usuario1" Relationship="Self.AmistadUsuario" FromRole="Usuario" ToRole="Usuario1" />
-          <NavigationProperty Name="Usuario2" Relationship="Self.AmistadUsuario" FromRole="Usuario1" ToRole="Usuario" />
+          <NavigationProperty Name="Publicacion" Relationship="Self.FK_Publicacion_Usuario" FromRole="Usuario" ToRole="Publicacion" />
           <NavigationProperty Name="Viaje" Relationship="Self.UsuarioViaje" FromRole="Usuario" ToRole="Viaje" />
         </EntityType>
         <EntityType Name="Viaje">
@@ -310,6 +370,30 @@
           <NavigationProperty Name="Ciudad1" Relationship="Self.FK_Viaje_Origen" FromRole="Viaje" ToRole="Ciudad" />
           <NavigationProperty Name="Usuario" Relationship="Self.UsuarioViaje" FromRole="Viaje" ToRole="Usuario" />
         </EntityType>
+        <Association Name="FK_Amistad_UsuarioDos">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="AmistadUsuario" Type="Self.AmistadUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AmistadUsuario">
+              <PropertyRef Name="IdSeguido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Amistad_UsuarioUno">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="AmistadUsuario" Type="Self.AmistadUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="AmistadUsuario">
+              <PropertyRef Name="IdResponsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Ciudad_Provincia">
           <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
           <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
@@ -370,20 +454,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="AmistadUsuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-          <End Role="Usuario1" Type="Self.Usuario" Multiplicity="*" />
+        <Association Name="FK_Publicacion_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Publicacion" Type="Self.Publicacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Publicacion">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <Association Name="UsuarioViaje">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <End Role="Viaje" Type="Self.Viaje" Multiplicity="*" />
         </Association>
         <EntityContainer Name="Context" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AmistadUsuario" EntityType="Self.AmistadUsuario" />
           <EntitySet Name="Ciudad" EntityType="Self.Ciudad" />
           <EntitySet Name="Pais" EntityType="Self.Pais" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" />
+          <EntitySet Name="Publicacion" EntityType="Self.Publicacion" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="Viaje" EntityType="Self.Viaje" />
+          <AssociationSet Name="FK_Amistad_UsuarioDos" Association="Self.FK_Amistad_UsuarioDos">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AmistadUsuario" EntitySet="AmistadUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Amistad_UsuarioUno" Association="Self.FK_Amistad_UsuarioUno">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="AmistadUsuario" EntitySet="AmistadUsuario" />
+          </AssociationSet>
           <AssociationSet Name="FK_Ciudad_Provincia" Association="Self.FK_Ciudad_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Ciudad" EntitySet="Ciudad" />
@@ -404,9 +506,9 @@
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Provincia" EntitySet="Provincia" />
           </AssociationSet>
-          <AssociationSet Name="AmistadUsuario" Association="Self.AmistadUsuario">
+          <AssociationSet Name="FK_Publicacion_Usuario" Association="Self.FK_Publicacion_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Usuario1" EntitySet="Usuario" />
+            <End Role="Publicacion" EntitySet="Publicacion" />
           </AssociationSet>
           <AssociationSet Name="UsuarioViaje" Association="Self.UsuarioViaje">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -418,9 +520,19 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FriendsTripDBModelStoreContainer" CdmEntityContainer="Context">
+        <EntityContainerMapping StorageEntityContainer="DB_ModelStoreContainer" CdmEntityContainer="Context">
+          <EntitySetMapping Name="AmistadUsuario">
+            <EntityTypeMapping TypeName="DB_Model.AmistadUsuario">
+              <MappingFragment StoreEntitySet="AmistadUsuario">
+                <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
+                <ScalarProperty Name="IdSeguido" ColumnName="IdSeguido" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaCoincidencia" ColumnName="FechaCoincidencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Ciudad">
-            <EntityTypeMapping TypeName="FriendsTripDBModel.Ciudad">
+            <EntityTypeMapping TypeName="DB_Model.Ciudad">
               <MappingFragment StoreEntitySet="Ciudad">
                 <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -429,7 +541,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pais">
-            <EntityTypeMapping TypeName="FriendsTripDBModel.Pais">
+            <EntityTypeMapping TypeName="DB_Model.Pais">
               <MappingFragment StoreEntitySet="Pais">
                 <ScalarProperty Name="IdPais" ColumnName="IdPais" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -437,7 +549,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Provincia">
-            <EntityTypeMapping TypeName="FriendsTripDBModel.Provincia">
+            <EntityTypeMapping TypeName="DB_Model.Provincia">
               <MappingFragment StoreEntitySet="Provincia">
                 <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
@@ -445,8 +557,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Publicacion">
+            <EntityTypeMapping TypeName="DB_Model.Publicacion">
+              <MappingFragment StoreEntitySet="Publicacion">
+                <ScalarProperty Name="IdPublicacion" ColumnName="IdPublicacion" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="UrlFoto" ColumnName="UrlFoto" />
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="FriendsTripDBModel.Usuario">
+            <EntityTypeMapping TypeName="DB_Model.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
@@ -459,11 +584,12 @@
                 <ScalarProperty Name="MatriculaGuia" ColumnName="MatriculaGuia" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+                <ScalarProperty Name="UrlFotoPerfil" ColumnName="UrlFotoPerfil" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Viaje">
-            <EntityTypeMapping TypeName="FriendsTripDBModel.Viaje">
+            <EntityTypeMapping TypeName="DB_Model.Viaje">
               <MappingFragment StoreEntitySet="Viaje">
                 <ScalarProperty Name="IdViaje" ColumnName="IdViaje" />
                 <ScalarProperty Name="Alojamiento" ColumnName="Alojamiento" />
@@ -483,15 +609,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AmistadUsuario" TypeName="FriendsTripDBModel.AmistadUsuario" StoreEntitySet="AmistadUsuario">
-            <EndProperty Name="Usuario">
-              <ScalarProperty Name="IdUsuario" ColumnName="IdUsuarioDos" />
-            </EndProperty>
-            <EndProperty Name="Usuario1">
-              <ScalarProperty Name="IdUsuario" ColumnName="IdUsuarioUno" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="UsuarioViaje" TypeName="FriendsTripDBModel.UsuarioViaje" StoreEntitySet="UsuarioViaje">
+          <AssociationSetMapping Name="UsuarioViaje" TypeName="DB_Model.UsuarioViaje" StoreEntitySet="UsuarioViaje">
             <EndProperty Name="Usuario">
               <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
             </EndProperty>
@@ -515,7 +633,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
