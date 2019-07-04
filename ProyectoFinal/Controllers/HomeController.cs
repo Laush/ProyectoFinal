@@ -113,11 +113,15 @@ namespace ProyectoFinal.Controllers
         [HttpGet]
         public ActionResult RegistroViajero()
         {
-            ViewBag.ListaPaises = srvViaje.ObtenerPaises();
-            Usuario usu = new Usuario();
-            usu.IdRol = 3;
-            // usu.Password = srvUsuario.HashPassword(usu.Password);
-            return View(usu);
+            var usuarioLogueado = Session["Usuario"] as Usuario;
+            if (usuarioLogueado != null)
+            {
+                ViewBag.ListaPaises = srvViaje.ObtenerPaises();
+                Usuario usu = new Usuario();
+                usu.IdRol = 3;
+                return View(usu);
+            }
+            return RedirectToAction("Login", "Home");
         }
         [HttpPost]
         public ActionResult RegistroViajero(Usuario u)

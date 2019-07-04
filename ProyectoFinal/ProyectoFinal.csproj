@@ -1933,6 +1933,7 @@
     <Content Include="Views\Viaje\AgregarViaje.cshtml" />
     <Content Include="Views\Viaje\EditarViaje.cshtml" />
     <Content Include="Views\Publicacion\Listar.cshtml" />
+    <Content Include="Views\Publicacion\AgregarPublicacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

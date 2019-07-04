@@ -96,14 +96,20 @@ namespace ProyectoFinal.Controllers
         [HttpGet]
         public ActionResult AgregarViaje()
         {
-            ViewBag.ListaPaises = srvViaje.ObtenerPaises();
-            ViewBag.ListaCiudades = srvViaje.ObtenerCiudades();
-            Viaje v = new Viaje();
-            return View(v);
+            var usuarioLogueado = Session["Usuario"] as Usuario;
+            if (usuarioLogueado != null) {
+                 ViewBag.ListaPaises = srvViaje.ObtenerPaises();
+                 ViewBag.ListaCiudades = srvViaje.ObtenerCiudades();
+                 Viaje v = new Viaje();
+                 return View(v);
+                 }
+
+            return RedirectToAction("Login", "Home");
         }
         [HttpPost]
         public ActionResult AgregarViaje(Viaje v)
         {
+
             var usuarioLogueado = Session["Usuario"] as Usuario;
             srvViaje.AgregarViaje(v, usuarioLogueado);
 

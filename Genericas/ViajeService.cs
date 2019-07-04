@@ -260,5 +260,23 @@ namespace Genericas
         {
             return Context.Viaje.FirstOrDefault(p => p.IdViaje == id);
         }
+
+        //ABM publicaciones-- pasarlo a un servicio aparte
+        public void AgregarPublicacion(Publicacion p, Usuario id)
+        {
+            Publicacion nuevaPublicacion = p;
+            nuevaPublicacion.IdUsuario = id.IdUsuario;
+            nuevaPublicacion.FechaDesde = DateTime.Now;
+
+            Context.Publicacion.Add(nuevaPublicacion);
+            Context.SaveChanges();
+        }
+
+        public void EliminarPublicacion(long id)
+        {
+            Publicacion pubEliminar = Context.Publicacion.FirstOrDefault(u => u.IdPublicacion == id);
+            Context.Publicacion.Remove(pubEliminar);
+            Context.SaveChanges();
+        }
     }
 }

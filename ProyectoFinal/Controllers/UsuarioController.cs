@@ -15,7 +15,8 @@ namespace ProyectoFinal.Controllers
         [HttpGet]
         public ActionResult IndexAdmin()
         {
-            if (Session["Usuario"] != null)
+            var usuarioLogueado = Session["Usuario"] as Usuario;
+            if (usuarioLogueado != null && usuarioLogueado.IdRol==1)
             {
                 //listas
                 ViewBag.UsuarioAdmin = Session["Usuario"] as Usuario;
@@ -53,10 +54,11 @@ namespace ProyectoFinal.Controllers
         {
             if (Session["Usuario"] is Usuario usuarioLogueado)
             {
+                ViewBag.ListaPublicaciones = srvUsuario.ObtenerPublicacionesByUsuario(usuarioLogueado.IdUsuario);
                 return View(usuarioLogueado);
             }
 
-            Session["RedireccionLogin"] = "Usuario/IndexViajero";
+            Session["RedireccionLogin"] = "Usuario/IndexAgencia";
             return RedirectToAction("Login", "Home");
         }
     }

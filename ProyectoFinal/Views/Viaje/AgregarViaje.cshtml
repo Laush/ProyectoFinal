@@ -25,17 +25,19 @@
                         <div class="col-md-6">
                             @Html.HiddenFor(p => p.IdViaje, new { @class = "form-control" })
                             @Html.HiddenFor(p => p.IdUsuario, new { @class = "form-control" })
-                            FechaDesde: @Html.TextBoxFor(p => p.FechaDesde, new { @class = "form-control" })
-                            FechaHasta: @Html.TextBoxFor(p => p.FechaHasta, new { @class = "form-control" })
-                            Origen: @Html.TextBoxFor(p => p.IdOrigen, new { @class = "form-control" })
-                         
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            Origen  @Html.TextBoxFor(p => p.IdOrigen, new { @class = "form-control" })
+                            @*@Html.DropDownListFor(p => p.IdOrigen, new SelectList(ViewBag.ListaCiudades, "IdCiudad", "Nombre"), new { @class = "form-control" })*@
+                            Destino *  <br> @Html.DropDownListFor(p => p.IdDestino, new SelectList(ViewBag.ListaCiudades, "IdCiudad", "Nombre"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(p => p.IdDestino, "", new { @class = "text-danger" })
 
-                        Destino:  <br> @Html.DropDownListFor(p => p.IdDestino , new SelectList(ViewBag.ListaCiudades, "IdCiudad", "Nombre"), new { @class = "form-control" })
+                            FechaDesde * @Html.TextBoxFor(p => p.FechaDesde, new { @class = "form-control" })
+                            FechaHasta @Html.TextBoxFor(p => p.FechaHasta, new { @class = "form-control" })
                         </div>
                         <div class="col-md-6">
-                            Aerolinea: @Html.TextBoxFor(p => p.Aerolinea, new { @class = "form-control" })
-                            Numero Vuelo:@Html.TextBoxFor(p => p.NumeroVuelo, new { @class = "form-control" })
-                            Alojamiento:@Html.TextBoxFor(p => p.Alojamiento, new { @class = "form-control" })
+                            Aerolinea @Html.TextBoxFor(p => p.Aerolinea, new { @class = "form-control" })
+                            Numero Vuelo @Html.TextBoxFor(p => p.NumeroVuelo, new { @class = "form-control" })
+                            Alojamiento @Html.TextBoxFor(p => p.Alojamiento, new { @class = "form-control" })
                             Intereses:<br>
                             @Html.CheckBox("InteresActividades") Actividades
                             @Html.CheckBox("InteresExcursiones") Excursiones
