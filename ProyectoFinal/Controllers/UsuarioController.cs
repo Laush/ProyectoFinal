@@ -61,5 +61,27 @@ namespace ProyectoFinal.Controllers
             Session["RedireccionLogin"] = "Usuario/IndexAgencia";
             return RedirectToAction("Login", "Home");
         }
+
+        //lo usa admin
+        public ActionResult EditarUsuario(int id)
+        {
+            var usuarioLogueado = Session["Usuario"] as Usuario;
+            Usuario usu = srvUsuario.GetById(id);
+            return View(usu);
+        }
+
+        [HttpPost]
+        public ActionResult EditarUsuario(Usuario u)
+        {
+            if (ModelState.IsValid)
+            {
+                srvUsuario.Editar(u);
+                 return RedirectToAction("IndexAdmin", "Usuario");
+            }
+            else
+            {
+                return View(u);
+            }
+        }
     }
 }

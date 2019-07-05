@@ -97,7 +97,6 @@ namespace Genericas
             return contexto.Usuario.FirstOrDefault(x => x.IdUsuario == id);
         }
 
-
         public Usuario GetUsuario(Usuario u)
         {
             return contexto.Usuario.FirstOrDefault(x => x.IdUsuario.Equals(u));
@@ -115,6 +114,12 @@ namespace Genericas
         {
             return contexto.Publicacion.Where(x => x.IdUsuario == idAgencia).ToList();   
         }
+        //obtener info de una publicacion
+        public Publicacion ObtenerDetallePublicacion(long idPublicacion)
+        {
+            return contexto.Publicacion.FirstOrDefault(x => x.IdPublicacion == idPublicacion);
+        }
+
 
         //abm usuario viajero
         public void Agregar(Usuario u)
@@ -124,6 +129,22 @@ namespace Genericas
             contexto.Usuario.Add(nuevoUsuario);
             contexto.SaveChanges();
 
+        }
+
+        public void Editar(Usuario v)
+        {
+            Usuario p = contexto.Usuario.Find(v.IdUsuario);
+            p.Nombre = v.Nombre;
+            p.NombreUsuario = v.NombreUsuario;
+            p.Apellido = v.Apellido;
+            p.Nacionalidad = v.Nacionalidad;
+            p.Edad = v.Edad;
+            p.Email = v.Email;
+            p.UrlFotoPerfil = v.UrlFotoPerfil;
+            p.Password = v.Password;
+            p.MatriculaGuia = v.MatriculaGuia;
+
+            contexto.SaveChanges();
         }
 
         public void Eliminar(long id)

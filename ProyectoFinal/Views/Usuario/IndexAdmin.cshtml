@@ -56,14 +56,14 @@
 
                     <div class="col-lg-4">
                         <div class="text-center">
-                            <h4> ADMIN </h4>
+                            <h4> ADMIN:  @ViewBag.UsuarioAdmin.NombreUsuario </h4>
                             <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
                             <input type="file" class="text-center center-block file-upload">
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <h4>Nombre</h4>@ViewBag.UsuarioAdmin.Nombre<br> <br>
-                        <h4>Apellido</h4>@ViewBag.UsuarioAdmin.Apellido<br><br>
+                        <h4>Nombre y Apellido </h4>@ViewBag.UsuarioAdmin.Nombre , @ViewBag.UsuarioAdmin.Apellido<br> <br>
+                        <h4>Edad</h4>@ViewBag.UsuarioAdmin.Edad <br><br>
                         <h4>Sobre mi..</h4>@ViewBag.UsuarioAdmin.Descripcion<br><br>
 
                     </div>
@@ -74,7 +74,7 @@
                     </div>
 
                 </div>
-                <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Editar Perfil</button>
+                @*<button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Editar Perfil</button>*@
 
             </div>
 
@@ -139,7 +139,7 @@
                                 <td>Viajero</td>}
 
                             <td>
-                                <a href="#"><i class="fa fa-edit fa-lg"></i></a>
+                                <a href="/Usuario/EditarUsuario/@u.IdUsuario"><i class="fa fa-edit fa-lg"></i></a>
                             </td>
                             <td>
                                 <a style="color:firebrick;" href="/Home/Eliminar/@u.IdUsuario"><i class="fa fa-window-close fa-lg"></i></a>
@@ -188,7 +188,7 @@
                                     <td>@u.Edad</td>
                                     <td>@u.IdRol</td>
                                     <td>
-                                        <a href="#"><i class="fa fa-edit fa-lg"></i></a>
+                                        <a href="/Usuario/EditarUsuario/@u.IdUsuario"><i class="fa fa-edit fa-lg"></i></a>
                                     </td>
                                     <td>
                                         <a style="color:firebrick;" href="#"><i class="fa fa-window-close fa-lg"></i></a>

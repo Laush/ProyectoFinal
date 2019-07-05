@@ -45,24 +45,26 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="text-center">
-                            <h4> AGENCIA  </h4>
+                            <h4> AGENCIA: @Model.NombreUsuario </h4>
                             <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
-                            <h6>Upload a different photo...</h6>
                             <input type="file" class="text-center center-block file-upload">
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <h4>Nombre</h4>@Model.Nombre<br><br>
-                        <h4>Apellido</h4>@Model.Apellido<br><br>
+                        <h4>Nombre y Apellido </h4>@Model.Nombre , @Model.Apellido <br><br>
+                        <h4>Edad</h4>@Model.Edad <br><br>
                         <h4>Sobre mi..</h4>@Model.Descripcion<br><br>
                     </div>
                     <div class="col-lg-4">
                         <h4>Email</h4>@Model.Email<br><br>
                         <h4>Password</h4>@Model.Password<br><br>
-                        <h4>Calificacion</h4>Proximamente
+                        <h4>Nacionalidad</h4>@Model.Nacionalidad<br><br>
+
                     </div>
                 </div>
-                <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Editar Perfil</button>
+                @*<a href="/Usuario/EditarUsuario/@Model.IdUsuario"><i class="fa fa-edit fa-lg"></i>Editar Perfil</a>*@
+
+                @*<button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Editar Perfil</button>*@
             </div>
         </div>
     </header>
@@ -110,7 +112,7 @@
                                 <td>@p.FechaDesde</td>
                                 <td>@p.FechaHasta</td>
                                 <td>
-                                    <a href="#"><i class="fa fa-edit fa-lg"></i></a>
+                                    <a href="/Publicacion/EditarPublicacion/@p.IdPublicacion"><i class="fa fa-edit fa-lg"></i></a>
                                 </td>
                                 <td>
                                     <a style="color:firebrick;" href="/Publicacion/Eliminar/@p.IdPublicacion"><i class="fa fa-window-close fa-lg"></i></a>

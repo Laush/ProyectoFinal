@@ -1934,6 +1934,9 @@
     <Content Include="Views\Viaje\EditarViaje.cshtml" />
     <Content Include="Views\Publicacion\Listar.cshtml" />
     <Content Include="Views\Publicacion\AgregarPublicacion.cshtml" />
+    <Content Include="Views\Publicacion\EditarPublicacion.cshtml" />
+    <Content Include="Views\Usuario\EditarUsuario.cshtml" />
+    <Content Include="Views\Publicacion\Detalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

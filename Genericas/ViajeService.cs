@@ -261,7 +261,7 @@ namespace Genericas
             return Context.Viaje.FirstOrDefault(p => p.IdViaje == id);
         }
 
-        //ABM publicaciones-- pasarlo a un servicio aparte
+        //ABM publicaciones-- pasarlo a un servicio aparte??
         public void AgregarPublicacion(Publicacion p, Usuario id)
         {
             Publicacion nuevaPublicacion = p;
@@ -272,11 +272,26 @@ namespace Genericas
             Context.SaveChanges();
         }
 
+        public void EditarPublicacion(Publicacion v)
+        {
+            Publicacion p = Context.Publicacion.Find(v.IdPublicacion);
+            p.Titulo = v.Titulo;
+            p.Descripcion = v.Descripcion;
+            p.FechaDesde = DateTime.Now;
+            p.FechaHasta = v.FechaHasta;
+            p.UrlFoto = p.UrlFoto;
+            Context.SaveChanges();
+        }
         public void EliminarPublicacion(long id)
         {
             Publicacion pubEliminar = Context.Publicacion.FirstOrDefault(u => u.IdPublicacion == id);
             Context.Publicacion.Remove(pubEliminar);
             Context.SaveChanges();
+        }
+
+        public Publicacion ObtenerPublicacionPorId(int id)
+        {
+            return Context.Publicacion.FirstOrDefault(p => p.IdPublicacion == id);
         }
     }
 }

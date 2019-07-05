@@ -11,11 +11,16 @@ namespace ProyectoFinal.Controllers
     {
         private UsuarioService srvUsuario = new UsuarioService();
         private ViajeService srvViaje = new ViajeService();
-  // lista de publicaciones de una agencia
+
+        // lista de publicaciones de una agencia
         public ActionResult Listar(long id)
         {
             ViewBag.Rol = Session["Usuario"] as Usuario;
             ViewBag.ListaPublicaciones = srvUsuario.ObtenerPublicacionesByUsuario(id);
+            // ViewBag.Detalle = srvUsuario.ObtenerDetallePublicacion(id);
+
+            ViewBag.Agencia = srvUsuario.GetById(id);
+
             return View();         
         }
 
@@ -43,6 +48,35 @@ namespace ProyectoFinal.Controllers
             var sj = new ViajeService();
             sj.EliminarPublicacion(id);
             return RedirectToAction("IndexAgencia", "Usuario");
+
+        }
+        public ActionResult EditarPublicacion(int id)
+        {
+            var usuarioLogueado = Session["Usuario"] as Usuario;
+            Publicacion pu = srvViaje.ObtenerPublicacionPorId(id);
+            return View(pu);
+        }
+
+        [HttpPost]
+        public ActionResult EditarPublicacion(Publicacion publ)
+        {
+            if (ModelState.IsValid)
+            {
+                srvViaje.EditarPublicacion(publ);
+                return RedirectToAction("IndexAgencia", "Usuario");
+            }
+            else
+            {
+                return View(publ);
+            }
+        }
+
+        public ActionResult Detalle(int id)
+        {
+            ViewBag.Rol = Session["Usuario"] as Usuario;
+
+            return View(srvUsuario.ObtenerDetallePublicacion(id));
+           
 
         }
     }

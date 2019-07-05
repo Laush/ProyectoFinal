@@ -1,6 +1,6 @@
 ﻿@using Genericas
 @{
-    ViewBag.Title = "AgregarPublicacion";
+    ViewBag.Title = "EditarPublicacion";
 }
 @model Publicacion
 <head>
@@ -18,15 +18,15 @@
     <header class="masthead">
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in">Agregar publicacion</div>
-                <form action="/Publicacion/AgregarPublicacion" method="Post">
+                <div class="intro-lead-in">Editar publicacion</div>
+                <form action="/Publicacion/EditarPublicacion" method="Post">
 
                     <div class="row">
                         <div class="col-md-6">
                             @Html.HiddenFor(p => p.IdPublicacion, new { @class = "form-control" })
                             @Html.HiddenFor(p => p.IdUsuario, new { @class = "form-control" })
                             Titulo * @Html.TextBoxFor(p => p.Titulo, new { @class = "form-control" })
-                            Descripcion * @Html.TextArea("Descripcion", "Maximo 200 caracteres", new { @class = "form-control" })
+                            Descripcion * @Html.TextArea("Descripcion", new { @class = "form-control" })
                         </div>
                         <div class="col-md-6">
                             FechaDesde * @Html.TextBoxFor(p => p.FechaDesde, new { @class = "form-control" })
@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-md-12">
                             <br>
-                            <input class="btn btn-primary my-2 my-sm-0" type="submit" value="Agregar Publicacion" />
+                            <input class="btn btn-primary my-2 my-sm-0" type="submit" value="Editar Publicacion" />
                         </div>
                     </div>
                 </form>
@@ -55,6 +55,7 @@
     <!-- Custom scripts for this template -->
     <script src="~/Content/js/agency.min.js"></script>
 </body>
+
 
 
 

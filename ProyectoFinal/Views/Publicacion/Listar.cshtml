@@ -5,6 +5,8 @@
 
 <head>
     <link href="~/Content/css/agencyUsu.css" rel="stylesheet">
+
+
 </head>
 
 <body id="page-top">
@@ -21,7 +23,7 @@
 
                     @if (Session["Usuario"] == null)
                     {
-                         <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="/Home/Buscador">Buscar</a>
                         </li>
                         <li class="nav-item">
@@ -53,57 +55,80 @@
         <div class="container">
             <div class="intro-text">
                 <h2 class="section-heading text-uppercase">Lista de publicaciones</h2>
-               
-                    <div class="table-wrapper">
-                        
-                        <table class="table table-striped table-hover" style="background-color:white;">
-                            <thead>
+
+                <div class="table-wrapper">
+
+                    <table class="table table-striped table-hover" style="background-color:white;">
+                        <thead>
+                            <tr>
+                                <th> </th>
+                                <th>Id</th>
+                                <th>Titulo</th>
+                                <th>Descripcion</th>
+                                <th>Fecha Desde</th>
+                                <th>Fecha Hasta</th>
+                                <th>Ver</th>
+                                <th>Contactar </th>
+                            </tr>
+                        </thead>
+                        @foreach (Publicacion p in ViewBag.ListaPublicaciones)
+                        {
+                            <tbody>
                                 <tr>
-                                    <th> </th>
-                                    <th>Id</th>
-                                    <th>Titulo</th>
-                                    <th>Descripcion</th>
-                                    <th>Fecha Desde</th>
-                                    <th>Fecha Hasta</th>
-                                    <th>Ver</th>
-                                    <th>Contactar </th>
-                                </tr>
-                            </thead>
-                            @foreach (Publicacion p in ViewBag.ListaPublicaciones)
-                            {
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <img style="float: left;width: 50px; height: 50px; margin-top: 5px;
+                                    <td>
+                                        <img style="float: left;width: 50px; height: 50px; margin-top: 5px;
                                         margin-bottom: 5px; margin-right: -10px; border-radius: 50%;" src="~/Content/img/portfolio/06-thumbnail.jpg" class="gaadiex-list-item-img" alt="Avatar">
-                                        </td>
+                                    </td>
 
 
-                                        <td>@p.IdPublicacion</td>
-                                        <td>@p.Titulo</td>
-                                        <td>@p.Descripcion</td>
-                                        <td>@p.FechaDesde</td>
-                                        <td>@p.FechaHasta</td>
-                                        <td>
-                                            <a  href="#"><i class="fa fa-eye fa-lg"></i></a>
-                                            @*aca se veria mas grande la foto y los detalles*@
-                                        </td>
-                                        <td>
-                                            <a style="color:dimgrey;" href="#"><i class="fa fa-envelope fa-lg"></i></a>
-                                            @*aca se mostraria el email para que se contacten*@
-                                        </td>
+                                    <td>@p.IdPublicacion</td>
+                                    <td>@p.Titulo</td>
+                                    <td>@p.Descripcion</td>
+                                    <td>@p.FechaDesde</td>
+                                    <td>@p.FechaHasta</td>
+                                    <td>
+                                        @*aca se podria mostrar la publicacion mas grande y con mas detalles*@
+                                        <a href="/Publicacion/Detalle/@p.IdPublicacion"><i class="fa fa-eye fa-lg"></i></a>
+                                    </td>
+                                    <td>
+                                        <a style="color:dimgrey;" data-toggle="modal"  href="#contacto"><i class="fa fa-envelope fa-lg"></i></a>
+                                        @*aca se mostraria el email para que se contacten*@
+                                    </td>
 
-                                    </tr>
+                                </tr>
 
-                                </tbody>
-                            }
-                        </table>
+                            </tbody>
+                        }
+                    </table>
 
-                        </div>
-                    
                 </div>
+
             </div>
-        </header>
+        </div>
+    </header>
+
+    <!-- Modal Contacto -->
+
+        <div id="contacto" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+             
+                    <!-- Modal content-->
+                    <div class="modal-content" style="text-align:center;">                      
+                        <div class="modal-header">
+                         <h4 class="modal-title"> @ViewBag.Agencia.Nombre</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p> Envianos un mensaje:</p>
+                            <h2> @ViewBag.Agencia.Email</h2>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+ 
         <!-- Bootstrap core JavaScript -->
         <script src="~/Content/vendor/jquery/jquery.min.js"></script>
         <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
