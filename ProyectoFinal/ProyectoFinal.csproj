@@ -172,17 +172,31 @@
     <Content Include="Content\css\agency.css" />
     <Content Include="Content\css\agency.min.css" />
     <Content Include="Content\css\agencyUsu.css" />
+    <Content Include="Content\css\logout.css" />
     <Content Include="Content\img\about\1.jpg" />
     <Content Include="Content\img\about\2.jpg" />
     <Content Include="Content\img\about\3.jpg" />
     <Content Include="Content\img\about\4.jpg" />
+    <Content Include="Content\img\avatar\altus.jpg" />
+    <Content Include="Content\img\avatar\ana.jpg" />
+    <Content Include="Content\img\avatar\bsas.jpg" />
+    <Content Include="Content\img\avatar\cataratas.jpg" />
+    <Content Include="Content\img\avatar\juan.jpg" />
+    <Content Include="Content\img\avatar\laboca.jpg" />
+    <Content Include="Content\img\avatar\maria.jpg" />
+    <Content Include="Content\img\avatar\minaclavero.jpg" />
+    <Content Include="Content\img\avatar\pedro.jpg" />
+    <Content Include="Content\img\avatar\sunway.jpg" />
+    <Content Include="Content\img\avatar\termascolon.jpg" />
+    <Content Include="Content\img\avatar\terramar.jpg" />
     <Content Include="Content\img\header-bg.jpg" />
     <Content Include="Content\img\logos\creative-market.jpg" />
     <Content Include="Content\img\logos\designmodo.jpg" />
     <Content Include="Content\img\logos\envato.jpg" />
     <Content Include="Content\img\logos\logo.png" />
-    <Content Include="Content\img\logos\logo2.png" />
+    <Content Include="Content\img\logos\logo3.png" />
     <Content Include="Content\img\logos\logoblanco.png" />
+    <Content Include="Content\img\logos\logo2.png" />
     <Content Include="Content\img\logos\themeforest.jpg" />
     <Content Include="Content\img\map-image.png" />
     <Content Include="Content\img\portfolio\01-thumbnail.jpg" />
@@ -1937,6 +1951,8 @@
     <Content Include="Views\Publicacion\EditarPublicacion.cshtml" />
     <Content Include="Views\Usuario\EditarUsuario.cshtml" />
     <Content Include="Views\Publicacion\Detalle.cshtml" />
+    <Content Include="Views\Usuario\IndexPerfil.cshtml" />
+    <Content Include="Views\Usuario\IndexGuia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

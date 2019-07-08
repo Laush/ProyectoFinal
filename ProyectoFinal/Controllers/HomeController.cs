@@ -78,7 +78,9 @@ namespace ProyectoFinal.Controllers
                        
                     case 3:
                         return RedirectToAction("IndexViajero", "Usuario");
-                      
+                    case 4:
+                        return RedirectToAction("IndexGuia", "Usuario");
+
                 }
                 return RedirectToAction("Error", "Usuario");
 

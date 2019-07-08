@@ -1,7 +1,10 @@
 ﻿
+@using Genericas;
+
 @{
-    ViewBag.Title = "Buscador";
+    ViewBag.Title = "IndexPerfil";
 }
+@model Usuario
 
 <head>
     <link href="~/Content/css/agencyUsu.css" rel="stylesheet">
@@ -17,6 +20,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
+
                     @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 1)
                     {
                         <li class="nav-item">
@@ -44,13 +48,6 @@
                         </li>
 
                     }
-                    @if (Session["Usuario"] != null)
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion">Salir</a>
-                        </li>
-                    }
-
                     @if (Session["Usuario"] == null)
                     {
                         <li class="nav-item">
@@ -61,59 +58,46 @@
                         </li>
                     }
 
+                    @if (Session["Usuario"] != null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/Buscador">Buscar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion">Salir</a>
+                        </li>
+                    }
 
                 </ul>
             </div>
         </div>
     </nav>
-
-    <!-- BUSCAR
-
-        style="background-image:url(../img/portfolio/fondoceleste.jpeg)";
-        style="background-color:royalblue;"-->
-
-    <section style="background-image:url(/Content/img/portfolio/fondoceleste.jpeg);" id="portfolio">
-
+    <!-- Header-->
+    <header class="masthead">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading text-uppercase" style="color:white;">Busca a tu compañero/a</h2>
-                    <br>  <br>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 portfolio-item">
-                    <a class="portfolio-link" href="/Viaje/BusquedaDestino">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fas fa-globe-americas fa-3x"></i>
-                            </div>
+            <div class="intro-text">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="text-center">
+                            <h4> VIAJERO: @Model.NombreUsuario </h4>
+                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
                         </div>
-                        <img class="img-fluid" src="~/Content/img/portfolio/destino_icon.jpg" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Busca por Destino</h4>
-
+                    </div>
+                    <div class="col-lg-4">
+                        <h4>Nombre y Apellido </h4>@Model.Nombre , @Model.Apellido <br><br>
+                        <h4>Edad</h4>@Model.Edad <br><br>
+                        <h4>Sobre mi..</h4>@Model.Descripcion<br><br>
+                    </div>
+                    <div class="col-lg-4">
+                        @*<<Aca preguntar si son amigos se muestra el email sino se oculta>>*@
+                        <h4>Email</h4>@Model.Email<br><br>
+                        <h4>Estado de amistad</h4>Siguiendo o Seguir<br><br>
+                        <h4>Calificar</h4> <br><i class="fa fa-thumbs-up fa-1x"></i> <br><br> <i class="fa fa-thumbs-down fa-1x"></i>
                     </div>
                 </div>
-                <div class="col-md-6 portfolio-item">
-                    <a class="portfolio-link" href="/Viaje/BusquedaVuelo">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fas fa-plane fa-3x"></i>
-                            </div>
-                        </div>
-                        <img class="img-fluid" src="~/Content/img/portfolio/vuelo_icon.jpg" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Busca por Vuelo</h4>
-
-                    </div>
-                </div>
-
             </div>
         </div>
-    </section>
+    </header>
 
     <!-- Bootstrap core JavaScript -->
     <script src="~/Content/vendor/jquery/jquery.min.js"></script>
@@ -126,3 +110,7 @@
     <!-- Custom scripts for this template -->
     <script src="~/Content/js/agency.min.js"></script>
 </body>
+
+
+
+

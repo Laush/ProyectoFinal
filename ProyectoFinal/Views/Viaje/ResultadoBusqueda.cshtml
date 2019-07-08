@@ -50,6 +50,12 @@
                             <a class="nav-link js-scroll-trigger" href="/Usuario/IndexViajero">@ViewBag.Rol.Nombre (perfil)</a>
                         </li>
                     }
+                    @if (ViewBag.Rol.IdRol == 4)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexGuia">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+                    }
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion">Salir</a>
                     </li>
@@ -114,7 +120,8 @@
 
                                 </div>
                                 <div class="col-sm-2">
-                                    <a href="#" class="btn btn-primary" style="margin-top:25%;"><i class="fa fa-plus"></i> Seguir </a>
+                                    <a href="#" class="btn btn-primary" style="margin-top:25%;"><i class="fa fa-heart"></i>  </a>
+                                    <a href="/Usuario/IndexPerfil/@v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).IdUsuario" class="btn btn-primary" style="margin-top:25%;"><i class="fa fa-eye"></i> </a>
                                 </div>
                             </div>
 
