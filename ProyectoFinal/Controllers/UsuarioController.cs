@@ -62,12 +62,34 @@ namespace ProyectoFinal.Controllers
             return RedirectToAction("Login", "Home");
         }
 
+        public ActionResult IndexPerfil(long id)
+        {
+            ViewBag.Rol = Session["Usuario"] as Usuario;
+
+            Usuario usuario = srvUsuario.GetById(id);
+            return View(usuario);
+
+        }
+
         //lo usa admin
         public ActionResult EditarUsuario(int id)
         {
             var usuarioLogueado = Session["Usuario"] as Usuario;
             Usuario usu = srvUsuario.GetById(id);
             return View(usu);
+        }
+
+        [HttpGet]
+        public ActionResult IndexGuia()
+        {
+            if (Session["Usuario"] is Usuario usuarioLogueado)
+            {
+                ViewBag.ListaPublicaciones = srvUsuario.ObtenerPublicacionesByUsuario(usuarioLogueado.IdUsuario);
+                return View(usuarioLogueado);
+            }
+
+            Session["RedireccionLogin"] = "Usuario/IndexGuia";
+            return RedirectToAction("Login", "Home");
         }
 
         [HttpPost]

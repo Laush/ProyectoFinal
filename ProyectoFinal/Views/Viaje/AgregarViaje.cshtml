@@ -26,12 +26,12 @@
                             @Html.HiddenFor(p => p.IdViaje, new { @class = "form-control" })
                             @Html.HiddenFor(p => p.IdUsuario, new { @class = "form-control" })
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            Origen  @Html.TextBoxFor(p => p.IdOrigen, new { @class = "form-control" })
+                            Origen  @Html.TextBoxFor(p => p.IdOrigen, new { @class = "form-control", @required = "required" })
                             @*@Html.DropDownListFor(p => p.IdOrigen, new SelectList(ViewBag.ListaCiudades, "IdCiudad", "Nombre"), new { @class = "form-control" })*@
-                            Destino *  <br> @Html.DropDownListFor(p => p.IdDestino, new SelectList(ViewBag.ListaCiudades, "IdCiudad", "Nombre"), new { @class = "form-control" })
+                            Destino *  <br> @Html.DropDownListFor(p => p.IdDestino, new SelectList(ViewBag.ListaCiudades, "IdCiudad", "Nombre"), new { @class = "form-control", @required = "required" })
                             @Html.ValidationMessageFor(p => p.IdDestino, "", new { @class = "text-danger" })
 
-                            FechaDesde * @Html.TextBoxFor(p => p.FechaDesde, new { @class = "form-control" })
+                            FechaDesde * @Html.TextBoxFor(p => p.FechaDesde, new { @class = "form-control", @required = "required" })
                             FechaHasta @Html.TextBoxFor(p => p.FechaHasta, new { @class = "form-control" })
                         </div>
                         <div class="col-md-6">

@@ -62,13 +62,12 @@
                         <thead>
                             <tr>
                                 <th> </th>
-                                <th>Id</th>
                                 <th>Titulo</th>
                                 <th>Descripcion</th>
                                 <th>Fecha Desde</th>
                                 <th>Fecha Hasta</th>
-                                <th>Ver</th>
-                                <th>Contactar </th>
+                                <th>Detalle</th>
+
                             </tr>
                         </thead>
                         @foreach (Publicacion p in ViewBag.ListaPublicaciones)
@@ -77,23 +76,20 @@
                                 <tr>
                                     <td>
                                         <img style="float: left;width: 50px; height: 50px; margin-top: 5px;
-                                        margin-bottom: 5px; margin-right: -10px; border-radius: 50%;" src="~/Content/img/portfolio/06-thumbnail.jpg" class="gaadiex-list-item-img" alt="Avatar">
+                                        margin-bottom: 5px; margin-right: -10px; border-radius: 50%;" src="~/Content/img/avatar/@p.UrlFoto" class="gaadiex-list-item-img" alt="Avatar">
                                     </td>
-
-
-                                    <td>@p.IdPublicacion</td>
                                     <td>@p.Titulo</td>
                                     <td>@p.Descripcion</td>
                                     <td>@p.FechaDesde</td>
                                     <td>@p.FechaHasta</td>
                                     <td>
-                                        @*aca se podria mostrar la publicacion mas grande y con mas detalles*@
+                                       
                                         <a href="/Publicacion/Detalle/@p.IdPublicacion"><i class="fa fa-eye fa-lg"></i></a>
                                     </td>
-                                    <td>
+                                    @*<td>
                                         <a style="color:dimgrey;" data-toggle="modal"  href="#contacto"><i class="fa fa-envelope fa-lg"></i></a>
-                                        @*aca se mostraria el email para que se contacten*@
-                                    </td>
+                                        
+                                    </td>*@
 
                                 </tr>
 

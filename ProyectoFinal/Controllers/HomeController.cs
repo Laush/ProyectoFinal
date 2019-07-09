@@ -78,7 +78,9 @@ namespace ProyectoFinal.Controllers
                        
                     case 3:
                         return RedirectToAction("IndexViajero", "Usuario");
-                      
+                    case 4:
+                        return RedirectToAction("IndexGuia", "Usuario");
+
                 }
                 return RedirectToAction("Error", "Usuario");
 
@@ -109,19 +111,15 @@ namespace ProyectoFinal.Controllers
         {
             return View();
         }
-        //ABM viajero WEB
+
         [HttpGet]
         public ActionResult RegistroViajero()
-        {
-            var usuarioLogueado = Session["Usuario"] as Usuario;
-            if (usuarioLogueado != null)
-            {
+        {          
                 ViewBag.ListaPaises = srvViaje.ObtenerPaises();
                 Usuario usu = new Usuario();
                 usu.IdRol = 3;
                 return View(usu);
-            }
-            return RedirectToAction("Login", "Home");
+           
         }
         [HttpPost]
         public ActionResult RegistroViajero(Usuario u)
