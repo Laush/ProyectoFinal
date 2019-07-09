@@ -76,7 +76,19 @@ namespace API.Controllers
         [Route("api/Amistad/ExisteAmistad/{IdResponsable}/{IdInvitado}")]
         public HttpResponseMessage ExisteAmistad(long IdResponsable, long IdInvitado)
         {
-            return Request.CreateResponse(HttpStatusCode.OK, amistadService.BuscarAmistad(IdResponsable, IdInvitado));
+            AmistadUsuario Amistad = amistadService.BuscarAmistad(IdResponsable, IdInvitado);
+
+            InvitacionResponse Response = new InvitacionResponse();
+
+            Response.IdResponsable = Amistad.IdResponsable;
+            Response.Estado = Amistad.Estado;
+            Response.FechaCoincidencia = Amistad.FechaCoincidencia;
+            Response.Descripcion = Amistad.Usuario1.Descripcion;
+            Response.NombreUsuario = Amistad.Usuario1.NombreUsuario;
+            Response.MatriculaGuia = Amistad.Usuario1.MatriculaGuia;
+            Response.UrlFotoPerfil = Amistad.Usuario1.UrlFotoPerfil;
+
+            return Request.CreateResponse(HttpStatusCode.OK, Response);
         }
     }
 }

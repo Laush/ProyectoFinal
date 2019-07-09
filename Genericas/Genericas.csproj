@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AmistadService.cs" />
     <Compile Include="AmistadUsuario.cs">
       <DependentUpon>DB_Model.tt</DependentUpon>
     </Compile>
