@@ -111,19 +111,15 @@ namespace ProyectoFinal.Controllers
         {
             return View();
         }
-        //ABM viajero WEB
+
         [HttpGet]
         public ActionResult RegistroViajero()
-        {
-            var usuarioLogueado = Session["Usuario"] as Usuario;
-            if (usuarioLogueado != null)
-            {
+        {          
                 ViewBag.ListaPaises = srvViaje.ObtenerPaises();
                 Usuario usu = new Usuario();
                 usu.IdRol = 3;
                 return View(usu);
-            }
-            return RedirectToAction("Login", "Home");
+           
         }
         [HttpPost]
         public ActionResult RegistroViajero(Usuario u)

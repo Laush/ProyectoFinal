@@ -27,6 +27,7 @@ namespace ProyectoFinal.Controllers
         [HttpGet]
         public ActionResult AgregarPublicacion()
         {
+            ViewBag.Rol = Session["Usuario"] as Usuario;
             var usuarioLogueado = Session["Usuario"] as Usuario;
             if (usuarioLogueado != null)
             {       

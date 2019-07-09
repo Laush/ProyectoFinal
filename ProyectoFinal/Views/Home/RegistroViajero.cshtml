@@ -30,13 +30,13 @@
                             @Html.HiddenFor(p => p.IdUsuario, new { @class = "form-control" })
                             Nombre: @Html.TextBoxFor(p => p.Nombre, new { @class = "form-control" })
                             Apellido: @Html.TextBoxFor(p => p.Apellido, new { @class = "form-control" })
-                            Nombre Usuario: @Html.TextBoxFor(p => p.NombreUsuario, new { @class = "form-control" })
-                            Nacionalidad:  <br> @Html.DropDownListFor(p => p.Nacionalidad, new SelectList(ViewBag.ListaPaises, "IdPais", "Nombre"), new { @class = "form-control" })
+                            Nombre Usuario * @Html.TextBoxFor(p => p.NombreUsuario, new { @class = "form-control", @required = "required" })
+                            Nacionalidad *  <br> @Html.DropDownListFor(p => p.Nacionalidad, new SelectList(ViewBag.ListaPaises, "IdPais", "Nombre"), new { @class = "form-control", @required = "required" })
 
                         </div>
                         <div class="col-md-6">
-                            Password: @Html.TextBoxFor(p => p.Password, new { @class = "form-control" })
-                            Email: @Html.TextBoxFor(p => p.Email, new { @class = "form-control" })
+                            Password * @Html.TextBoxFor(p => p.Password, new { @class = "form-control", @required = "required" })
+                            Email * @Html.TextBoxFor(p => p.Email, new { @class = "form-control", @required = "required" })
                             Edad: @Html.TextBoxFor(p => p.Edad, new { @class = "form-control" })
                             Descripcion:@Html.TextBoxFor(p => p.Descripcion, new { @class = "form-control" })
                         </div>
@@ -53,7 +53,7 @@
 
                 <br>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-block btn-lg btn-primary" value="Ingresar con Facebook" />
+                    <input type="submit" class="btn btn-primary my-2 my-sm-0" value="Ingresar con Facebook" />
                 </div>
 
                 <a class="nav-link js-scroll-trigger" href="/Home/Registracion">Ingresa como otro tipo de usuario</a>
