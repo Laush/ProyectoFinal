@@ -154,5 +154,12 @@ namespace Genericas
             contexto.SaveChanges();
         }
         //fin abm usuario
+
+        public AmistadUsuario EstadoSeguimiento(long IdResponsable, long IdSeguido)
+        {
+            var Amistad = contexto.AmistadUsuario.Where(a => a.IdResponsable == IdResponsable && a.IdSeguido == IdSeguido);
+
+            return (Amistad.Count() == 0)? null : Amistad.First();
+        }
     }
 }

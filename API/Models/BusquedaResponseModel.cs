@@ -25,7 +25,6 @@ namespace API.Models
         public long IdUsuario { get; set; }
         public string NombreUsuario { get; set; }
         public string Email { get; set; }
-
-        // falta foto de usuario
+        public string UrlFotoPerfil { get; set; }
     }
 }

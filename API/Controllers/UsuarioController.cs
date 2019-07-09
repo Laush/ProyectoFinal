@@ -95,5 +95,6 @@ namespace API.Controllers
         }
 
         //falta el metodo para eliminar perfil, que requiere la anotaacion [Authorize]
+        
     }
 }
