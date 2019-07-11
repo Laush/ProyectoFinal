@@ -65,7 +65,12 @@ namespace Genericas
 
         public AmistadUsuario BuscarAmistad(long IdResponsable, long IdInvitado)
         {
-            return contexto.AmistadUsuario.Where(a => (a.IdResponsable == IdResponsable && a.IdSeguido == IdInvitado) || (a.IdResponsable == IdInvitado && a.IdSeguido == IdResponsable)).First();
+            return contexto.AmistadUsuario.Where(a => (a.IdResponsable == IdResponsable && a.IdSeguido == IdInvitado) || (a.IdResponsable == IdInvitado && a.IdSeguido == IdResponsable)).FirstOrDefault();
+        }
+
+        public List<AmistadUsuario> ListarAmistades(long IdUsuario)
+        {
+            return contexto.AmistadUsuario.Where(a => (a.IdSeguido == IdUsuario || a.IdResponsable == IdUsuario) && a.Estado == "ACEPTADO").ToList();
         }
     }
 }

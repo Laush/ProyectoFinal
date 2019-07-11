@@ -155,11 +155,17 @@ namespace Genericas
         }
         //fin abm usuario
 
+            // Verificar si tiene uso
         public AmistadUsuario EstadoSeguimiento(long IdResponsable, long IdSeguido)
         {
             var Amistad = contexto.AmistadUsuario.Where(a => a.IdResponsable == IdResponsable && a.IdSeguido == IdSeguido);
 
             return (Amistad.Count() == 0)? null : Amistad.First();
+        }
+
+        public Pais ObtenerNacionalidad(long IdPais)
+        {
+            return contexto.Pais.Find(IdPais);
         }
     }
 }

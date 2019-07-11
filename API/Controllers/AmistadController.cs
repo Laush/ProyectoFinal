@@ -80,15 +80,65 @@ namespace API.Controllers
 
             InvitacionResponse Response = new InvitacionResponse();
 
-            Response.IdResponsable = Amistad.IdResponsable;
-            Response.Estado = Amistad.Estado;
-            Response.FechaCoincidencia = Amistad.FechaCoincidencia;
-            Response.Descripcion = Amistad.Usuario1.Descripcion;
-            Response.NombreUsuario = Amistad.Usuario1.NombreUsuario;
-            Response.MatriculaGuia = Amistad.Usuario1.MatriculaGuia;
-            Response.UrlFotoPerfil = Amistad.Usuario1.UrlFotoPerfil;
+            if (Amistad != null)
+            {
+                Response.IdResponsable = Amistad.IdResponsable;
+                Response.Estado = Amistad.Estado;
+                Response.FechaCoincidencia = Amistad.FechaCoincidencia;
+                Response.Descripcion = Amistad.Usuario1.Descripcion;
+                Response.NombreUsuario = Amistad.Usuario1.NombreUsuario;
+                Response.MatriculaGuia = Amistad.Usuario1.MatriculaGuia;
+                Response.UrlFotoPerfil = Amistad.Usuario1.UrlFotoPerfil;
+            }
 
             return Request.CreateResponse(HttpStatusCode.OK, Response);
+        }
+
+        [HttpGet]
+        [Route("api/Amistad/BuscarAmigos/{IdUsuario}")]
+        public HttpResponseMessage BuscarAmigos(long IdUsuario)
+        {
+            List<AmistadUsuario> Amistades = amistadService.ListarAmistades(IdUsuario);
+
+            List<AmigoResponse> Amigos = new List<AmigoResponse>();
+
+            foreach(AmistadUsuario Amistad in Amistades)
+            {
+                AmigoResponse Amigo = new AmigoResponse();
+
+                if(Amistad.Usuario.IdUsuario == IdUsuario)
+                {
+                    Amigo.IdUsuario = Amistad.Usuario1.IdUsuario;
+                    Amigo.NombreUsuario = Amistad.Usuario1.NombreUsuario;
+                    Amigo.Nombre = Amistad.Usuario1.Nombre;
+                    Amigo.Apellido = Amistad.Usuario1.Apellido;
+                    Amigo.Edad = Amistad.Usuario1.Edad;
+                    Amigo.Email = Amistad.Usuario1.Email;
+                    Amigo.MatriculaGuia= Amistad.Usuario1.MatriculaGuia;
+                    Amigo.Descripcion = Amistad.Usuario1.Descripcion;
+                    Amigo.UrlFotoPerfil = Amistad.Usuario1.UrlFotoPerfil;
+                    Amigo.Nacionalidad = usuarioService.ObtenerNacionalidad(Amistad.Usuario1.Nacionalidad).Nombre;
+
+                    Amigos.Add(Amigo);
+                }
+                else if(Amistad.Usuario1.IdUsuario == IdUsuario)
+                {
+                    Amigo.IdUsuario = Amistad.Usuario.IdUsuario;
+                    Amigo.NombreUsuario = Amistad.Usuario.NombreUsuario;
+                    Amigo.Nombre = Amistad.Usuario.Nombre;
+                    Amigo.Apellido = Amistad.Usuario.Apellido;
+                    Amigo.Edad = Amistad.Usuario.Edad;
+                    Amigo.Email = Amistad.Usuario.Email;
+                    Amigo.MatriculaGuia = Amistad.Usuario.MatriculaGuia;
+                    Amigo.Descripcion = Amistad.Usuario.Descripcion;
+                    Amigo.UrlFotoPerfil = Amistad.Usuario.UrlFotoPerfil;
+                    Amigo.Nacionalidad = usuarioService.ObtenerNacionalidad(Amistad.Usuario.Nacionalidad).Nombre;
+
+                    Amigos.Add(Amigo);
+                }
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, Amigos);
         }
     }
 }
