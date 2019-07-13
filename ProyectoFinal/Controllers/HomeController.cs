@@ -21,6 +21,9 @@ namespace ProyectoFinal.Controllers
 
             List<Usuario> usus = new List<Usuario>();
             usus = srvUsuario.ListarAgencias();
+
+            ViewBag.Guias = srvUsuario.ListarGuias();
+            // usus = srvUsuario.Listar();
             return View(usus);
 
 

@@ -1959,6 +1959,8 @@
     <Content Include="Views\Publicacion\Detalle.cshtml" />
     <Content Include="Views\Usuario\IndexPerfil.cshtml" />
     <Content Include="Views\Usuario\IndexGuia.cshtml" />
+    <Content Include="Views\Usuario\Notificaciones.cshtml" />
+    <Content Include="Views\Usuario\ListaAmigos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

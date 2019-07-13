@@ -10,6 +10,7 @@ namespace ProyectoFinal.Controllers
     public class UsuarioController : Controller
     {
         private UsuarioService srvUsuario = new UsuarioService();
+        private AmistadService srvAmistad = new AmistadService();
 
         // GET: Usuario Admin
         [HttpGet]
@@ -104,6 +105,33 @@ namespace ProyectoFinal.Controllers
             {
                 return View(u);
             }
+        }
+
+        public ActionResult Notificaciones()
+        {
+            if (Session["Usuario"] is Usuario usuarioLogueado)
+            {
+                ViewBag.ListaNotificaciones = srvAmistad.BuscarInvitaciones(usuarioLogueado.IdUsuario);
+                return View(usuarioLogueado);
+            }
+
+            Session["RedireccionLogin"] = "Usuario/Notificaciones";
+            return RedirectToAction("Login", "Home");
+        }
+
+
+        public ActionResult ListaAmigos()
+        {
+            if (Session["Usuario"] is Usuario usuarioLogueado)
+            {
+                ViewBag.Usu = Session["Usuario"] as Usuario;
+                ViewBag.ListaAmigos = srvAmistad.ListarAmistades(usuarioLogueado.IdUsuario);
+                
+                return View(usuarioLogueado);
+            }
+
+            Session["RedireccionLogin"] = "Usuario/ListaAmigos";
+            return RedirectToAction("Login", "Home");
         }
     }
 }

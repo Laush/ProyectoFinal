@@ -85,7 +85,14 @@ namespace Genericas
 
             return query.ToList();
         }
+        public List<Usuario> ListarGuias()
+        {
+            var query = from a in contexto.Usuario
+                        where a.IdRol == 4
+                        select a;
 
+            return query.ToList();
+        }
 
         public Usuario GetById(long id)
         {
