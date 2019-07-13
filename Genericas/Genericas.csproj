@@ -60,6 +60,7 @@
     <Compile Include="Ciudad.cs">
       <DependentUpon>DB_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="CiudadModel.cs" />
     <Compile Include="DB_Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -76,6 +77,7 @@
       <DependentUpon>DB_Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="DestinoService.cs" />
+    <Compile Include="Enums\Roles.cs" />
     <Compile Include="LoginRequestModel.cs" />
     <Compile Include="NacionalidadModel.cs" />
     <Compile Include="Pais.cs">

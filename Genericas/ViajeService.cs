@@ -216,14 +216,34 @@ namespace Genericas
             return (Viaje == null)? null : TransformarDatos(Viaje);
         }
 
-        public void AgregarViaje(Viaje p, Usuario id)
+        public void AgregarViaje(Viaje v, Usuario usuarioLogeado)
         {
-            Viaje nuevoViaje = p;
-            nuevoViaje.IdUsuario = id.IdUsuario;
-            nuevoViaje.FechaDesde = DateTime.Now;
+            // Seteamos que el usuario es un viajero
+            usuarioLogeado.IdRol = (int)Roles.Viajero;
+            v.IdUsuario = usuarioLogeado.IdUsuario;
 
-            Context.Viaje.Add(nuevoViaje);
-            Context.SaveChanges();
+            // Ciudad hace referencia a Destino
+            Ciudad ciudadDestino = Context.Ciudad.FirstOrDefault(ci => ci.IdCiudad == v.IdDestino);
+            v.Ciudad = ciudadDestino;
+
+            // Ciudad1 hace referencia a Origen
+            Ciudad ciudadOrigen = Context.Ciudad.FirstOrDefault(ci => ci.IdCiudad == v.IdOrigen);
+            v.Ciudad1 = ciudadOrigen;
+
+            Usuario u = Context.Usuario.Find(usuarioLogeado.IdUsuario);
+            v.Usuario.Add(u);
+
+            try
+            {
+                // Agrego el viaje al contexto y guardo todo
+                Context.Viaje.Add(v);
+                Context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                //Console.WriteLine(ex + " El Viaje no pudo ser cargado, revisar el metodo en ViajeService -> AgregarViaje().");
+            }
         }
 
         public void Eliminar(long id)
@@ -237,6 +257,22 @@ namespace Genericas
         {
             return Context.Ciudad.ToList();
         }
+
+        public IQueryable<Ciudad> CiudadCompleto()
+        {
+            return Context.Ciudad
+                .Include("Ciudad.Provincia")
+                .Include("Ciudad.Provincia.Pais");
+        }
+
+        public Ciudad CiudadByIdCompleto(int idCiudad)
+        {
+            return Context.Ciudad
+                .Include("Ciudad.Provincia")
+                .Include("Ciudad.Provincia.Pais")
+                .FirstOrDefault(c => c.IdCiudad == idCiudad);
+        }
+
         public List<Pais> ObtenerPaises()
         {
             return Context.Pais.ToList();
