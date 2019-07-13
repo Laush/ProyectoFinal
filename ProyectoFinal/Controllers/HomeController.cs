@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using API;
 
 namespace ProyectoFinal.Controllers
 {
@@ -124,6 +125,16 @@ namespace ProyectoFinal.Controllers
         [HttpPost]
         public ActionResult RegistroViajero(Usuario u)
         {
+            if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
+            {
+                //TODO: Agregar validacion para confirmar que el archivo es una imagen
+                //creo un nombre significativo en este caso apellidonombre pero solo un caracter del nombre, ejemplo BatistutaG
+                string nombreSignificativo = u.Email;
+                //Guardar Imagen
+                string pathRelativoImagen = ImagenesUtility.Guardar(Request.Files[0], nombreSignificativo);
+                u.UrlFotoPerfil = pathRelativoImagen;
+            }
+
             srvUsuario.Agregar(u);
             return RedirectToAction("Login", u);
         }

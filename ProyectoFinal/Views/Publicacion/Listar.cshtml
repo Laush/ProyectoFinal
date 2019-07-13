@@ -72,6 +72,14 @@
                         </thead>
                         @foreach (Publicacion p in ViewBag.ListaPublicaciones)
                         {
+                            <div class="card" style="width: 18rem;">
+                                <img src="~/Content/img/avatar/@p.UrlFoto" class="card-img-top" alt="Avatar">
+                                <div class="card-body">
+                                    <h5 class="card-title">@p.Titulo</h5>
+                                    <p class="card-text">@p.Descripcion</p>
+                                    <a href="/Publicacion/Detalle/@p.IdPublicacion" class="btn btn-primary"><i class="fa fa-eye fa-lg"></i></a>
+                                </div>
+                            </div>
                             <tbody>
                                 <tr>
                                     <td>
@@ -80,16 +88,24 @@
                                     </td>
                                     <td>@p.Titulo</td>
                                     <td>@p.Descripcion</td>
-                                    <td>@p.FechaDesde</td>
-                                    <td>@p.FechaHasta</td>
+                                    <td>@p.FechaDesde.ToString("dd/MM/yyyy")</td>
+                                    @if (p.FechaHasta != null)
+                                    {
+
+                                        <td>@p.FechaHasta</td>
+                                    }
+                                    else
+                                    {
+                                        <td>No especifica</td>
+                                    }
                                     <td>
-                                       
+
                                         <a href="/Publicacion/Detalle/@p.IdPublicacion"><i class="fa fa-eye fa-lg"></i></a>
                                     </td>
                                     @*<td>
-                                        <a style="color:dimgrey;" data-toggle="modal"  href="#contacto"><i class="fa fa-envelope fa-lg"></i></a>
-                                        
-                                    </td>*@
+                                            <a style="color:dimgrey;" data-toggle="modal"  href="#contacto"><i class="fa fa-envelope fa-lg"></i></a>
+
+                                        </td>*@
 
                                 </tr>
 
@@ -105,35 +121,35 @@
 
     <!-- Modal Contacto -->
 
-        <div id="contacto" class="modal fade" role="dialog">
-            <div class="modal-dialog modal-lg">
-             
-                    <!-- Modal content-->
-                    <div class="modal-content" style="text-align:center;">                      
-                        <div class="modal-header">
-                         <h4 class="modal-title"> @ViewBag.Agencia.Nombre</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p> Envianos un mensaje:</p>
-                            <h2> @ViewBag.Agencia.Email</h2>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="close" data-dismiss="modal">Cerrar</button>
-                        </div>
-                    </div>
+    <div id="contacto" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
 
+            <!-- Modal content-->
+            <div class="modal-content" style="text-align:center;">
+                <div class="modal-header">
+                    <h4 class="modal-title"> @ViewBag.Agencia.Nombre</h4>
                 </div>
+                <div class="modal-body">
+                    <p> Envianos un mensaje:</p>
+                    <h2> @ViewBag.Agencia.Email</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="close" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
         </div>
- 
-        <!-- Bootstrap core JavaScript -->
-        <script src="~/Content/vendor/jquery/jquery.min.js"></script>
-        <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- Plugin JavaScript -->
-        <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
-        <!-- Contact form JavaScript -->
-        <script src="~/Content/js/jqBootstrapValidation.js"></script>
-        <script src="~/Content/js/contact_me.js"></script>
-        <!-- Custom scripts for this template -->
-        <script src="~/Content/js/agency.min.js"></script>
-    </body>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Contact form JavaScript -->
+    <script src="~/Content/js/jqBootstrapValidation.js"></script>
+    <script src="~/Content/js/contact_me.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="~/Content/js/agency.min.js"></script>
+</body>
 

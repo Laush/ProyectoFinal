@@ -100,9 +100,10 @@ namespace ProyectoFinal.Controllers
             if (usuarioLogueado != null) {
                  ViewBag.ListaPaises = srvViaje.ObtenerPaises();
                  ViewBag.ListaCiudades = srvViaje.ObtenerCiudades();
-                 Viaje v = new Viaje();
-                 return View(v);
-                 }
+                // Viaje v = new Viaje();
+                //return View(v);
+                return View();
+            }
 
             return RedirectToAction("Login", "Home");
         }
@@ -113,8 +114,10 @@ namespace ProyectoFinal.Controllers
             var usuarioLogueado = Session["Usuario"] as Usuario;
             srvViaje.AgregarViaje(v, usuarioLogueado);
 
-            return RedirectToAction("IndexViajero", "Usuario", v);
+            //return RedirectToAction("IndexViajero", "Usuario", v);
+            return RedirectToAction("IndexViajero", "Usuario");
         }
+
         public ActionResult Eliminar(long id)
         {
             var sj = new ViajeService();
@@ -142,6 +145,25 @@ namespace ProyectoFinal.Controllers
             {
                 return View(viaje);
             }
+        }
+
+        /// <summary>
+        /// Recibe un parametro de tipo string que utiliza para ir autompletando en base a lo que haya encontrado
+        /// en la tabla Ciudad, por ahora funciona en esa tabla, falta agregarle las tablas Provincia y Pais
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns> Resultados del tipo Json </returns>
+        public JsonResult AutocompleteCiudades(string search)
+        {
+            List<CiudadModel> result = srvViaje.CiudadCompleto()
+                                        .Where(x => x.Nombre.ToLower().Contains(search.ToLower()))
+                                        .Select(x => new CiudadModel
+                                        {
+                                            IdCiudad = x.IdCiudad,
+                                            Nombre = x.Nombre
+                                        }).ToList();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
     }

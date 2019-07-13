@@ -3,9 +3,80 @@
     ViewBag.Title = "AgregarViaje";
 }
 @model Viaje
-<head>
 
-</head>
+@section scripts{
+    <link href="~/Content/jqueryui/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jqueryui/jquery.js" type="text/javascript"></script>
+    <script src="~/Scripts/jqueryui/jquery-ui.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '< Ant',
+            nextText: 'Sig >',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['es']);
+
+        $(function () {
+            $("#FechaDesde").datepicker();
+        });
+
+        $(function () {
+            $("#FechaHasta").datepicker();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $("#CiudadesOrigen").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '@Url.Action("AutocompleteCiudades", "Viaje")',
+                dataType: "json",
+                data: { search: $("#CiudadesOrigen").val() },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        $("#IdOrigen").val(item.IdCiudad);
+                        return { label: item.Nombre, value: item.Nombre };
+                    }));
+                },
+                error: function (xhr, status, error) {
+                    alert("Error");
+                }
+            });
+        }
+        });
+
+        $("#CiudadesDestino").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '@Url.Action("AutocompleteCiudades", "Viaje")',
+                dataType: "json",
+                data: { search: $("#CiudadesDestino").val() },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        $("#IdDestino").val(item.IdCiudad);
+                        return { label: item.Nombre, value: item.Nombre };
+                    }));
+                },
+                error: function (xhr, status, error) {
+                    alert("Error");
+                }
+            });
+        }
+    });
+    </script>
+}
 
 <body id="page-top">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -26,13 +97,24 @@
                             @Html.HiddenFor(p => p.IdViaje, new { @class = "form-control" })
                             @Html.HiddenFor(p => p.IdUsuario, new { @class = "form-control" })
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            Origen  @Html.TextBoxFor(p => p.IdOrigen, new { @class = "form-control", @required = "required" })
-                            @*@Html.DropDownListFor(p => p.IdOrigen, new SelectList(ViewBag.ListaCiudades, "IdCiudad", "Nombre"), new { @class = "form-control" })*@
-                            Destino *  <br> @Html.DropDownListFor(p => p.IdDestino, new SelectList(ViewBag.ListaCiudades, "IdCiudad", "Nombre"), new { @class = "form-control", @required = "required" })
-                            @Html.ValidationMessageFor(p => p.IdDestino, "", new { @class = "text-danger" })
 
-                            FechaDesde * @Html.TextBoxFor(p => p.FechaDesde, new { @class = "form-control", @required = "required" })
-                            FechaHasta @Html.TextBoxFor(p => p.FechaHasta, new { @class = "form-control" })
+                            <!-- INICIO - Carga y validacion de Origen (Ciudad)-->
+                            @Html.HiddenFor(p => p.IdOrigen, new { Id = "IdOrigen" })
+                            Origen *
+                            @Html.TextBoxFor(p => p.Ciudad.Nombre, new { @class = "form-control", Id = "CiudadesOrigen" })
+                            @*@Html.ValidationMessageFor(p => p.Ciudad.Nombre, "El campo Origen es obligatorio", new { @class = "text-danger" })*@
+                            <!-- FIN - Cargar y validacion de Origen-->
+
+                            <!-- INICIO - Carga y validacion de Destino (Ciudad1)-->
+                            @Html.HiddenFor(p => p.IdDestino, new { Id = "IdDestino" })
+                            Destino *
+                            @Html.TextBoxFor(p => p.Ciudad1.Nombre, new { @class = "form-control", Id = "CiudadesDestino" })
+                            @*@Html.ValidationMessageFor(p => p.Ciudad1.Nombre, "El campo Destino es obligatorio", new { @class = "text-danger" })*@
+                            <!-- FIN - Cargar y validacion de Destino-->
+
+                            FechaDesde * @Html.TextBoxFor(p => p.FechaDesde, new { @class = "form-control", Id = "FechaDesde" })
+
+                            FechaHasta @Html.TextBoxFor(p => p.FechaHasta, new { @class = "form-control", Id = "FechaHasta" })
                         </div>
                         <div class="col-md-6">
                             Aerolinea @Html.TextBoxFor(p => p.Aerolinea, new { @class = "form-control" })
@@ -42,9 +124,9 @@
                             @Html.CheckBox("InteresActividades") Actividades
                             @Html.CheckBox("InteresExcursiones") Excursiones
                             @Html.CheckBox("InteresTraslados") Traslados
-                             @Html.CheckBox("InteresAmistades") Amistades
-                             @Html.CheckBox("InteresAlojamiento") Alojamiento
-                             @Html.CheckBox("InteresOtros") Otros
+                            @Html.CheckBox("InteresAmistades") Amistades
+                            @Html.CheckBox("InteresAlojamiento") Alojamiento
+                            @Html.CheckBox("InteresOtros") Otros
 
                         </div>
                         <div class="col-md-12">
