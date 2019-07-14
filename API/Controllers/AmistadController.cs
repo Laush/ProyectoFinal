@@ -15,16 +15,25 @@ namespace API.Controllers
         private UsuarioService usuarioService = new UsuarioService();
         private DestinoService destinoService = new DestinoService();
         private AmistadService amistadService = new AmistadService();
+        private EmailService emailService = new EmailService();
 
         [HttpPost]
         [Route("api/Amistad/Invitar/{IdResponsable}/{IdSeguido}")]
         public HttpResponseMessage Seguir(long IdResponsable, long IdSeguido)
         {
-            if (usuarioService.GetById(IdSeguido) == null)
+            Usuario UsuarioResponsable = usuarioService.GetById(IdResponsable);
+            Usuario UsuarioInvitado = usuarioService.GetById(IdSeguido);
+
+            // parametros para el mail
+            string asunto = UsuarioResponsable.NombreUsuario + " te ha enviado una invitación";
+            string cuerpoMensaje = "Hola " + UsuarioInvitado.NombreUsuario + ", " + asunto + " para conectar. Puedes aceptar la misma entrando en la aplicación.";
+
+            if (UsuarioInvitado == null)
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, "Usuario a seguir no encontrado");
 
             if (amistadService.SeguirUsuario(IdResponsable, IdSeguido) == true)
             {
+                emailService.enviarMensaje(UsuarioInvitado.Email, UsuarioInvitado.NombreUsuario, asunto, cuerpoMensaje);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             else
@@ -67,6 +76,19 @@ namespace API.Controllers
         public HttpResponseMessage AceptarInvitacion(long IdResponsable, long IdInvitado, char EsAceptado)
         {
             // EsAceptado = Y|N
+
+            if(EsAceptado == 'Y')
+            {
+                Usuario UsuarioResponsable = usuarioService.GetById(IdResponsable);
+                Usuario UsuarioInvitado = usuarioService.GetById(IdInvitado);
+
+                // parametros para el mail
+                string asunto = UsuarioInvitado.NombreUsuario + " ha aceptado tu invitación";
+                string cuerpoMensaje = "Hola " + UsuarioResponsable.NombreUsuario + ", te informamos que el usuario " + asunto + " para conectar. Puedes ver su perfil para podder ponerte en contacto con el.";
+
+                emailService.enviarMensaje(UsuarioResponsable.Email, UsuarioResponsable.NombreUsuario, asunto, cuerpoMensaje);
+            }
+
             amistadService.actualizarInvitacion(IdResponsable, IdInvitado, EsAceptado);
 
             return Request.CreateResponse(HttpStatusCode.OK);
