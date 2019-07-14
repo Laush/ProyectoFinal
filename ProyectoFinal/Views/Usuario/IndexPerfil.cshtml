@@ -92,21 +92,26 @@
                         <h4>Sobre mi..</h4>@Model.Descripcion<br><br>
                     </div>
                     <div class="col-lg-4">
-                        @*<<Aca preguntar si son amigos se muestra el email sino se oculta>>*@
-                        <h4>Email</h4>@Model.Email<br><br>
-                        <h4>Estado de amistad</h4>Siguiendo o Seguir<br><br>
-                        <h4>Calificar</h4> 
+
+                        @if (ViewBag.CheckeaAmistad != null)
+                        {
+                            <h4>Email</h4>@Model.Email <br><br>
+                            <h4>Amistad</h4> <a href="#" class="btn btn-primary"><i class="fa fa-check"></i> Dejar de seguir </a><br><br>
+                        }
+                        else
+                        {
+                        <a href="#" class="btn btn-primary"><i class="fa fa-plus"></i> Invitar </a>
+                        <br><br>
+                        }
+
+
+                        <h4>Calificar</h4>
                         <form>
                             <p class="clasificacion">
-
                                 <label for="radio1">&#9733;</label>
-
                                 <label for="radio2">&#9733;</label>
-
                                 <label for="radio3">&#9733;</label>
-
                                 <label for="radio4">&#9733;</label>
-
                                 <label for="radio5">&#9733;</label>
                             </p>
                         </form>

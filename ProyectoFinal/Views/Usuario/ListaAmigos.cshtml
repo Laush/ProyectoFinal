@@ -6,7 +6,7 @@
 
 <head>
     <link href="~/Content/css/agencyUsu.css" rel="stylesheet">
-</head>
+ </head>
 
 <body id="page-top">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -42,64 +42,72 @@
             </div>
         </div>
     </nav>
+
     <!-- Header-->
     <header class="masthead">
         <div class="container">
             <div class="intro-text">
                 <h2 class="section-heading text-uppercase">Lista de amigos</h2>
                 <br>
-                <div class="row">
+                @foreach (AmistadUsuario u in ViewBag.ListaAmigos)
+                {
+                    
+                    <div class="card" style="color:black;">
+                        <div class="gaadiex-list" style="padding: 0 22px;">
+                            <div class="row">
 
-                    <table class="table-responsive">
-                        <thead>
-                            <tr>
-                                <th> </th>
+                                @if (u.IdResponsable == ViewBag.Usu.IdUsuario)
+                                {
+                                    <img class="gaadiex-list-item-img" style="float: left;width: 70px; height: 70px; margin-top: 20px;
+                                        margin-bottom: 8px; margin-right: 60px; border-radius: 50%; margin-left: 20px;"
+                                         src="~/Content/img/avatar/@u.Usuario.UrlFotoPerfil" alt="">
+                                }
+                               else
+                                {
+                                    <img class="gaadiex-list-item-img" style="float: left;width: 70px; height: 70px; margin-top: 20px;
+                                        margin-bottom: 8px; margin-right: 60px; border-radius: 50%; margin-left: 20px;"
+                                         src="~/Content/img/avatar/@u.Usuario1.UrlFotoPerfil" alt="avatar">
+                                }     
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (AmistadUsuario u in ViewBag.ListaAmigos)
-                            {
+                                <div class="col-sm-8" >
+                                    <h3> <br></h3>
+                                    <h5 style="color:dimgrey;">
+                                        <a href="#">
+                                            @if (u.IdResponsable == ViewBag.Usu.IdUsuario)
+                                            {
+                                                @:    @u.Usuario.NombreUsuario
+                                            }
+                                            else
+                                            {
+                                                @:    @u.Usuario1.NombreUsuario
+                                            }
+                                        </a>
 
-                                <tr>
-                                    @if (u.IdResponsable == ViewBag.Usu.IdUsuario)
-                                    {
-                                        <td>
-                                            Invitaste a @u.Usuario.NombreUsuario el @u.FechaCoincidencia
-                                        </td>
+                                        Amigos desde  @u.FechaCoincidencia.ToString("dd/MM/yyyy")
+                                    </h5>
 
+</div>
+                                <div class="col-sm-2">
+                                    <a href="#" class="btn btn-primary" style="margin-top:25%;"><i class="fa fa-user-times"></i>  </a>
 
-                                    }
-                                    else
-                                    {
-                                        <td>
-
-                                            @u.Usuario1.NombreUsuario te invito el @u.FechaCoincidencia
-                                        </td>
-
-                                    }
-
-
-                                    @*<td>@u.Usuario1.NombreUsuario</td>
-                            <td>@u.Usuario.NombreUsuario</td>
-                               <td>@u.Estado</td>*@
-                                </tr>
-
-                            }
-
-                        </tbody>
-                    </table>
+                                </div>
+                            </div>
 
 
-                </div>
+
+                        </div>
+
+                    </div>
+
+                }
+
+                
 
 
-             
+
             </div>
         </div>
     </header>
-
-
     <!-- Bootstrap core JavaScript -->
     <script src="~/Content/vendor/jquery/jquery.min.js"></script>
     <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

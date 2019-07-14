@@ -65,8 +65,12 @@ namespace ProyectoFinal.Controllers
 
         public ActionResult IndexPerfil(long id)
         {
-            ViewBag.Rol = Session["Usuario"] as Usuario;
 
+            if (Session["Usuario"] is Usuario usuarioLogueado)
+            {
+                ViewBag.CheckeaAmistad = srvAmistad.BuscarAmistad(usuarioLogueado.IdUsuario, id);
+            }
+            ViewBag.Rol = Session["Usuario"] as Usuario;         
             Usuario usuario = srvUsuario.GetById(id);
             return View(usuario);
 
@@ -86,6 +90,7 @@ namespace ProyectoFinal.Controllers
             if (Session["Usuario"] is Usuario usuarioLogueado)
             {
                 ViewBag.ListaPublicaciones = srvUsuario.ObtenerPublicacionesByUsuario(usuarioLogueado.IdUsuario);
+           
                 return View(usuarioLogueado);
             }
 
@@ -125,6 +130,7 @@ namespace ProyectoFinal.Controllers
             if (Session["Usuario"] is Usuario usuarioLogueado)
             {
                 ViewBag.Usu = Session["Usuario"] as Usuario;
+                
                 ViewBag.ListaAmigos = srvAmistad.ListarAmistades(usuarioLogueado.IdUsuario);
                 
                 return View(usuarioLogueado);

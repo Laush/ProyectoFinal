@@ -53,7 +53,7 @@
                         <a class="nav-link js-scroll-trigger" href="#nosotros">Nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#agencias">Agencias</a>
+                        <a class="nav-link js-scroll-trigger" href="#agencias">Servicios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#contact">Contacto</a>
@@ -294,6 +294,7 @@
                     <div class="row">
                         @foreach (Usuario u in Model)
                         {
+
                             <div class="col-md-4 col-sm-6 portfolio-item">
                                 <a class="portfolio-link" href="/Publicacion/Listar/@u.IdUsuario">
                                     <div class="portfolio-hover">
@@ -301,7 +302,13 @@
                                             <i class="fas fa-plus fa-3x">Ver</i>
                                         </div>
                                     </div>
-                                    <img class="img-fluid" style="width: 350px; height:200px;" src="~/Content/img/avatar/@u.UrlFotoPerfil" alt="">
+                                    @if (u.UrlFotoPerfil == null) 
+                                    {
+                                        <img class="img-fluid" style="width: 350px; height:200px;" src = "~/Content/img/avatar/avatar_2x.png" alt="">
+                                    }
+                                    else {
+                                        <img class="img-fluid" style="width: 350px; height:200px;" src="~/Content/img/avatar/@u.UrlFotoPerfil" alt="">
+                                }
                                 </a>
                                 <div class="portfolio-caption">
                                     <h4>@u.NombreUsuario</h4>

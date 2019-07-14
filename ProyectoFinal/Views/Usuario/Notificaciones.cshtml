@@ -47,41 +47,45 @@
         <div class="container">
             <div class="intro-text">
                 <h2 class="section-heading text-uppercase">Notificaciones</h2>
-
+                <br>
+                @foreach (AmistadUsuario u in ViewBag.ListaNotificaciones)
+                {
                     <div class="card" style="color:black;">
                         <div class="gaadiex-list" style="padding: 0 22px;">
                             <div class="row">
-                                @foreach (AmistadUsuario u in ViewBag.ListaNotificaciones)
+
+
+                                @if (u.Usuario.UrlFotoPerfil == null || u.Usuario1.UrlFotoPerfil == null)
                                 {
-
-                                    if (Model.UrlFotoPerfil == null)
-                                    {
-                                        <img class="gaadiex-list-item-img" style="float: left;width: 5%; height: 5%;  margin-top: 20px;
+                                    <img class="gaadiex-list-item-img" style="float: left;width: 5%; height: 5%;  margin-top: 20px;
                                         margin-bottom: 8px; margin-right: 60px;  border-radius: 50%; margin-left: 20px;"
-                                             src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="List user"> }
-                                    else
-                                    {
-                                        <img class="gaadiex-list-item-img" style="float: left;width: 5%; height: 5%;  margin-top: 20px;
-                                        margin-bottom: 8px; margin-right: 60px;  border-radius: 50%; margin-left: 20px;" src="~/Content/img/avatar/@u.Usuario1.UrlFotoPerfil" class="avatar img-circle img-thumbnail" alt=" ">
-
-                                    }
-
-                                    <div class="col-sm-8">
-                                        <h3> @u.Usuario1.NombreUsuario te envi&oacute; una invitaci&oacute;n  </h3>
-                                        <h5> Estado de la invitacion: @u.Estado </h5>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <a href="#" class="btn btn-primary" style="margin-top:15%;"><i class="fa fa-check"></i></a>
-                                        <a href="#" class="btn btn-danger" style="margin-top:15%;"><i class="fa fa-window-close"></i></a>
-                                    </div>
+                                         src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="user">
                                 }
+                                else
+                                {
+                            <img class="gaadiex-list-item-img" style="float: left;width: 5%; height: 5%;  margin-top: 20px;
+                                        margin-bottom: 8px; margin-right: 60px;  border-radius: 50%; margin-left: 20px;" src="~/Content/img/avatar/@u.Usuario.UrlFotoPerfil" alt=" ">
+                        }
+
+
+
+                                <div class="col-sm-8">
+                                    <h3 style="color:dimgrey;"> @u.Usuario1.NombreUsuario te envi&oacute; una invitaci&oacute;n  </h3>
+                                    <h5 style="color:dimgrey;"> Estado de la invitacion: @u.Estado </h5>
+                                </div>
+                                <div class="col-sm-2">
+                                    <a href="#" class="btn btn-primary" style="margin-top:15%;"><i class="fa fa-check"></i></a>
+                                    <a href="#" class="btn btn-danger" style="margin-top:15%;"><i class="fa fa-window-close"></i></a>
+                                </div>
+
+
                             </div>
 
                         </div>
 
                     </div>
-
-                </div>
+                }
+            </div>
             </div>
 
     </header>

@@ -150,7 +150,8 @@ namespace Genericas
             p.UrlFotoPerfil = v.UrlFotoPerfil;
             p.Password = v.Password;
             p.MatriculaGuia = v.MatriculaGuia;
-
+            p.UrlFotoPerfil = v.UrlFotoPerfil;
+            p.Descripcion = v.Descripcion;
             contexto.SaveChanges();
         }
 
