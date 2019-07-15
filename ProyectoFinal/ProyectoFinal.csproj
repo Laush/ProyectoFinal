@@ -193,6 +193,7 @@
     <Content Include="Content\img\logos\logo.png" />
     <Content Include="Content\img\logos\logo3.png" />
     <Content Include="Content\img\logos\logoblanco.png" />
+    <Content Include="Content\img\logos\logoviejo.png" />
     <Content Include="Content\img\logos\logo2.png" />
     <Content Include="Content\img\logos\themeforest.jpg" />
     <Content Include="Content\img\map-image.png" />
@@ -1962,6 +1963,7 @@
     <Content Include="Views\Usuario\IndexGuia.cshtml" />
     <Content Include="Views\Usuario\Notificaciones.cshtml" />
     <Content Include="Views\Usuario\ListaAmigos.cshtml" />
+    <Content Include="Views\Usuario\PostCalificacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

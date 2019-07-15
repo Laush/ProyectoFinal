@@ -7,6 +7,12 @@
 @model List<Usuario>
 <head>
     <link href="~/Content/css/agencyUsu.css" rel="stylesheet">
+    <style>
+        label {
+            color: orange;
+            font-size: 40px;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -67,16 +73,28 @@
                     </div>
                     <div class="col-lg-4">
                         <h4>Email</h4>@ViewBag.UsuarioAdmin.Email<br><br>
-                        <h4>Password</h4>@ViewBag.UsuarioAdmin.Password<br><br>
-                        <h4>Calificacion</h4>  <form>
-                            <p class="clasificacion">
-                                <label for="radio1">&#9733;</label>
-                                <label for="radio2">&#9733;</label>
-                                <label for="radio3">&#9733;</label>
-                                <label for="radio4">&#9733;</label>
-                                <label for="radio5">&#9733;</label>
-                            </p>
-                        </form>
+                        <h4>Calificaci&oacute;n: @ViewBag.UsuarioAdmin.Calificacion</h4>  <br>
+                        @if (ViewBag.UsuarioAdmin.Calificacion > 10)
+                        {<label for="radio1">&#9733;</label>
+                            <label for="radio2">&#9733;</label>
+                            <label for="radio3">&#9733;</label>
+                            <label for="radio4">&#9733;</label>}
+
+                        @if (ViewBag.UsuarioAdmin.Calificacion < 10 && ViewBag.UsuarioAdmin.Calificacion > 5)
+                        {<label for="radio1">&#9733;</label>
+                            <label for="radio2">&#9733;</label>
+                            <label for="radio3">&#9733;</label>
+                        }
+
+                        @if (ViewBag.UsuarioAdmin.Calificacion < 5)
+                        {<label for="radio1">&#9733;</label>
+                            <label for="radio2">&#9733;</label>
+
+                        }
+                        @if (ViewBag.UsuarioAdmin.Calificacion < 2)
+                        {<label for="radio1">&#9733;</label>
+                        }
+
                     </div>
 
                 </div>

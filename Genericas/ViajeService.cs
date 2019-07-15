@@ -302,7 +302,7 @@ namespace Genericas
         {
             Publicacion nuevaPublicacion = p;
             nuevaPublicacion.IdUsuario = id.IdUsuario;
-            nuevaPublicacion.FechaDesde = DateTime.Now;
+           // nuevaPublicacion.FechaDesde = DateTime.Now;
 
             Context.Publicacion.Add(nuevaPublicacion);
             Context.SaveChanges();
@@ -313,7 +313,7 @@ namespace Genericas
             Publicacion p = Context.Publicacion.Find(v.IdPublicacion);
             p.Titulo = v.Titulo;
             p.Descripcion = v.Descripcion;
-            p.FechaDesde = DateTime.Now;
+            p.FechaDesde = v.FechaDesde;
             p.FechaHasta = v.FechaHasta;
             p.UrlFoto = p.UrlFoto;
             Context.SaveChanges();

@@ -8,6 +8,11 @@
 
 <head>
     <link href="~/Content/css/agencyUsu.css" rel="stylesheet">
+    <style>        label {
+            color: orange;
+            font-size: 40px;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -71,25 +76,31 @@
                     </div>
                     <div class="col-lg-4">
                         <h4>Email</h4>@Model.Email<br><br>
+                        <h4>Calificaci&oacute;n: @Model.Calificacion</h4>  <br>
+                        @if (Model.Calificacion > 10)
+                        {<label for="radio1">&#9733;</label>
+                            <label for="radio2">&#9733;</label>
+                            <label for="radio3">&#9733;</label>
+                            <label for="radio4">&#9733;</label>            }
 
-                        <h4>Calificar</h4>
-                        <form>
-                            <p class="clasificacion">
+                        @if (Model.Calificacion < 10 && Model.Calificacion > 5)
+                        {<label for="radio1">&#9733;</label>
+                            <label for="radio2">&#9733;</label>
+                            <label for="radio3">&#9733;</label>
+                        }
 
-                                <label for="radio1">&#9733;</label>
+                        @if (Model.Calificacion < 5)
+                        {<label for="radio1">&#9733;</label>
+                            <label for="radio2">&#9733;</label>
 
-                                <label for="radio2">&#9733;</label>
+                        }
+                        @if (Model.Calificacion < 2)
+                        {<label for="radio1">&#9733;</label>
+                        }
 
-                                <label for="radio3">&#9733;</label>
 
-                                <label for="radio4">&#9733;</label>
-
-                                <label for="radio5">&#9733;</label>
-                            </p>
-                        </form>
                     </div>
                 </div>
-                @*<button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Editar Perfil</button>*@
             </div>
         </div>
     </header>

@@ -11,11 +11,12 @@
 
 <head>
     <link href="~/Content/Viaje/ResultadoBusqueda.css" rel="stylesheet" />
-
     <style>
-     
-
-        </style>
+        label {
+            color: orange;
+            font-size: 40px;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -29,8 +30,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-
-
 
                     @if (ViewBag.Rol.IdRol == 1)
                     {
@@ -55,9 +54,9 @@
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="/Usuario/IndexGuia">@ViewBag.Rol.Nombre (perfil)</a>
                         </li>
-                    }
+                    }           
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion">Salir</a>
+                        <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion"><i class="fa fa-power-off"></i></a>
                     </li>
                 </ul>
             </div>
@@ -69,7 +68,6 @@
             <div class="intro-text">
                 <h2 class="section-heading text-uppercase">Resultado B&uacute;squeda</h2>
                 <br>
-
                 @foreach (Viaje v in Model)
                 {
                     <div class="card" style="color:black;">
@@ -85,7 +83,24 @@
                                             @v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).NombreUsuario,
                                             @v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Edad Años
                                         </a>
+                                        @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion > 10)
+                                        {<label for="radio1">&#9733;</label>
+                                            <label for="radio2">&#9733;</label>
+                                            <label for="radio3">&#9733;</label>
+                                            <label for="radio4">&#9733;</label>}
 
+                                        @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion < 10 && v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion > 5)
+                                        {<label for="radio1">&#9733;</label>
+                                            <label for="radio2">&#9733;</label>
+                                            <label for="radio3">&#9733;</label>}
+
+                                        @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion < 5)
+                                        {<label for="radio1">&#9733;</label>
+                                            <label for="radio2">&#9733;</label>}
+
+
+                                        @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion == null)
+                                        {<label for="radio1">&#9733;</label>}
                                         @v.Ciudad1.Nombre - @v.Ciudad.Nombre
                                     </h3>
 

@@ -12,13 +12,10 @@ namespace ProyectoFinal.Controllers
         private UsuarioService srvUsuario = new UsuarioService();
         private ViajeService srvViaje = new ViajeService();
 
-        // lista de publicaciones de una agencia
         public ActionResult Listar(long id)
         {
             ViewBag.Rol = Session["Usuario"] as Usuario;
             ViewBag.ListaPublicaciones = srvUsuario.ObtenerPublicacionesByUsuario(id);
-            // ViewBag.Detalle = srvUsuario.ObtenerDetallePublicacion(id);
-
             ViewBag.Agencia = srvUsuario.GetById(id);
 
             return View();         

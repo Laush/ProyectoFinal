@@ -18,10 +18,30 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/Usuario/IndexViajero">Perfil</a>
-                    </li>
+                    @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 1)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexAdmin">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+                    }
+                    @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 2)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexAgencia">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+                    }
+                    @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 3)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexViajero">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+                    }
+                    @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 4)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexGuia">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+                    }
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="/Home/Buscador">Buscar</a>
                     </li>
@@ -69,10 +89,9 @@
 
 
 
-                                <div class="col-sm-8">
-                                    <h3 style="color:dimgrey;"> @u.Usuario1.NombreUsuario te envi&oacute; una invitaci&oacute;n  </h3>
-                                    <h5 style="color:dimgrey;"> Estado de la invitacion: @u.Estado </h5>
-                                </div>
+                            <div class="col-sm-8">
+                                <h3 style="color:dimgrey;"> @u.Usuario1.NombreUsuario te invit&oacute; a conectarte.  </h3>                                    <h5 style="color:dimgrey;"> Estado de la invitacion: @u.Estado </h5>
+                            </div>
                                 <div class="col-sm-2">
                                     <a href="#" class="btn btn-primary" style="margin-top:15%;"><i class="fa fa-check"></i></a>
                                     <a href="#" class="btn btn-danger" style="margin-top:15%;"><i class="fa fa-window-close"></i></a>

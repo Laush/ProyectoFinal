@@ -8,6 +8,26 @@
 
 <head>
     <link href="~/Content/css/agencyUsu.css" rel="stylesheet">
+    <style>
+        input[type = "radio"] {
+            display: none; /*position: absolute;top: -1000em;*/
+        }
+        label {
+            color: grey;
+            font-size:40px;
+        }
+        .clasificacion {
+            direction: rtl;
+            unicode-bidi: bidi-override;
+        }
+        label:hover,
+        label:hover ~ label {
+            color: orange;
+        }
+        input[type = "radio"]:checked ~ label {
+            color: orange;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -26,7 +46,6 @@
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="/Usuario/IndexAdmin">@ViewBag.Rol.Nombre (perfil)</a>
                         </li>
-
                     }
                     @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 2)
                     {
@@ -39,14 +58,12 @@
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="/Usuario/IndexViajero">@ViewBag.Rol.Nombre (perfil)</a>
                         </li>
-
                     }
                     @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 4)
                     {
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="/Usuario/IndexGuia">@ViewBag.Rol.Nombre (perfil)</a>
                         </li>
-
                     }
                     @if (Session["Usuario"] == null)
                     {
@@ -57,7 +74,6 @@
                             <a class="nav-link js-scroll-trigger" href="/Home/Login">Login</a>
                         </li>
                     }
-
                     @if (Session["Usuario"] != null)
                     {
                         <li class="nav-item">
@@ -70,7 +86,6 @@
                             <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion"><i class="fa fa-power-off"></i></a>
                         </li>
                     }
-
                 </ul>
             </div>
         </div>
@@ -82,7 +97,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="text-center">
-                            <h4> VIAJERO: @Model.NombreUsuario </h4>
+                            <h4> @Model.NombreUsuario </h4>
                             <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
                         </div>
                     </div>
@@ -100,21 +115,63 @@
                         }
                         else
                         {
-                        <a href="#" class="btn btn-primary"><i class="fa fa-plus"></i> Invitar </a>
-                        <br><br>
+                            <h4>Amistad</h4>
+                            <a href="#" class="btn btn-primary"><i class="fa fa-plus"></i> Invitar </a>
+                            <br><br>
                         }
+                        <h4>Calificaci&oacute;n: @Model.Calificacion</h4> <br>
+                        @if (ViewBag.CheckeaAmistad != null)
+                        {
+                            <form action="/Usuario/Calificar" method="Post">
+                                @Html.HiddenFor(p => p.IdUsuario, new { @class = "form-control" })
+                                @Html.HiddenFor(p => p.Nombre, new { @class = "form-control" })
+                                @Html.HiddenFor(p => p.Apellido, new { @class = "form-control" })
+                                @Html.HiddenFor(p => p.NombreUsuario, new { @class = "form-control" })
+                                @Html.HiddenFor(p => p.Nacionalidad, new { @class = "form-control" })
+                                @Html.HiddenFor(p => p.Password, new { @class = "form-control" })
+                                @Html.HiddenFor(p => p.Email, new { @class = "form-control" })
+                                @Html.HiddenFor(p => p.Edad, new { @class = "form-control" })
+                                @Html.HiddenFor(p => p.Descripcion, new { @class = "form-control" })
+                                <div id="wrapper">
+                                    <p class="clasificacion">
+                                        @Html.RadioButtonFor(p => p.Calificacion, "4", new { id = "radio4" }) <label for="radio4">&#9733;</label>
+                                        @Html.RadioButtonFor(p => p.Calificacion, "3", new { id = "radio3" }) <label for="radio3">&#9733;</label>
+                                        @Html.RadioButtonFor(p => p.Calificacion, "2", new { id = "radio2" }) <label for="radio2">&#9733;</label>
+                                        @Html.RadioButtonFor(p => p.Calificacion, "1", new { id = "radio1" }) <label for="radio1">&#9733;</label>
+                                    </p>
+                                </div>
+                                <input class="btn btn-primary my-2 my-sm-0" type="submit" value="Calificar" />
+                            </form>
+                        }
+                        else
+                        {
 
-
-                        <h4>Calificar</h4>
-                        <form>
-                            <p class="clasificacion">
-                                <label for="radio1">&#9733;</label>
+                            if (Model.Calificacion > 10)
+                            {<label for="radio1">&#9733;</label>
                                 <label for="radio2">&#9733;</label>
                                 <label for="radio3">&#9733;</label>
-                                <label for="radio4">&#9733;</label>
-                                <label for="radio5">&#9733;</label>
-                            </p>
-                        </form>
+                                <label for="radio4">&#9733;</label>}
+
+                            if (Model.Calificacion < 10 && Model.Calificacion > 5)
+                            {<label for="radio1">&#9733;</label>
+                                <label for="radio2">&#9733;</label>
+                                <label for="radio3">&#9733;</label>
+                            }
+
+                            if (Model.Calificacion < 5)
+                            {<label for="radio1">&#9733;</label>
+                                <label for="radio2">&#9733;</label>
+
+                            }
+                            if (Model.Calificacion < 2)
+                            {<label for="radio1">&#9733;</label>
+
+                            }
+                            if (Model.Calificacion == null)
+                            {<label for="radio1">&#9733;</label>
+                                @: No fue calificado
+                            }
+                        }
                     </div>
                 </div>
             </div>

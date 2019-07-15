@@ -30,6 +30,43 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
 
+                    @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 1)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexAdmin">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+
+                    }
+                    @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 2)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexAgencia">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+                    }
+                    @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 3)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexViajero">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+
+                    }
+                    @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 4)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Usuario/IndexGuia">@ViewBag.Rol.Nombre (perfil)</a>
+                        </li>
+
+                    }
+                    @if (Session["Usuario"] != null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/Buscador">Buscar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion"><i class="fa fa-power-off"></i></a>
+                        </li>
+                    }
+
                     @if (Session["Usuario"] == null)
                     {
                         <li class="nav-item">
@@ -40,18 +77,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="/Home/Login">Login</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#">@ViewBag.Rol.Nombre (perfil)</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="/Home/Buscador">Buscar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion"><i class="fa fa-power-off"></i></a>
                         </li>
                     }
                 </ul>

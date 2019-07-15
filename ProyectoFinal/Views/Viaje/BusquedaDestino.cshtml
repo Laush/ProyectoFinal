@@ -22,7 +22,6 @@
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="/Usuario/IndexAdmin">@ViewBag.Rol.Nombre (perfil)</a>
                         </li>
-
                     }
                     @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 2)
                     {
@@ -35,14 +34,12 @@
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="/Usuario/IndexViajero">@ViewBag.Rol.Nombre (perfil)</a>
                         </li>
-
                     }
                     @if (Session["Usuario"] != null && ViewBag.Rol.IdRol == 4)
                     {
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="/Usuario/IndexGuia">@ViewBag.Rol.Nombre (perfil)</a>
                         </li>
-
                     }
                     @if (Session["Usuario"] != null)
                     {
@@ -50,7 +47,6 @@
                             <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion"><i class="fa fa-power-off"></i></a>
                         </li>
                     }
-
                     @if (Session["Usuario"] == null)
                     {
                         <li class="nav-item">

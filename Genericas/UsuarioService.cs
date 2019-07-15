@@ -154,7 +154,30 @@ namespace Genericas
             p.Descripcion = v.Descripcion;
             contexto.SaveChanges();
         }
-
+        public void EditarCalificacion(Usuario v)
+        {
+            Usuario p = contexto.Usuario.Find(v.IdUsuario);
+            p.Nombre = v.Nombre;
+            p.NombreUsuario = v.NombreUsuario;
+            p.Apellido = v.Apellido;
+            p.Nacionalidad = v.Nacionalidad;
+            p.Edad = v.Edad;
+            p.Email = v.Email;
+            p.UrlFotoPerfil = v.UrlFotoPerfil;
+            p.Password = v.Password;
+            p.MatriculaGuia = v.MatriculaGuia;
+            p.UrlFotoPerfil = v.UrlFotoPerfil;
+            p.Descripcion = v.Descripcion;
+            if (p.Calificacion == null)
+            {
+                p.Calificacion = v.Calificacion;
+            }
+            else
+            {
+                p.Calificacion = p.Calificacion + v.Calificacion;
+            }
+            contexto.SaveChanges();
+        }
         public void Eliminar(long id)
         {
             Usuario usuarioEliminar = contexto.Usuario.FirstOrDefault(u => u.IdUsuario == id);

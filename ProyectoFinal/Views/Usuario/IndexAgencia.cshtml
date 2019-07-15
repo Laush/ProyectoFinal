@@ -8,6 +8,12 @@
 
 <head>
     <link href="~/Content/css/agencyUsu.css" rel="stylesheet">
+    <style>
+        label {
+            color: orange;
+            font-size: 40px;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -52,7 +58,7 @@
                     <div class="col-lg-4">
                         <div class="text-center">
                             <h4> AGENCIA: @Model.NombreUsuario </h4>
-                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                            <img src="~/Content/img/avatar/@Model.UrlFotoPerfil" class="avatar img-circle img-thumbnail" alt="avatar">
                             <input type="file" class="text-center center-block file-upload">
                         </div>
                     </div>
@@ -63,14 +69,32 @@
                     </div>
                     <div class="col-lg-4">
                         <h4>Email</h4>@Model.Email<br><br>
-                        <h4>Password</h4>@Model.Password<br><br>
-                        <h4>Nacionalidad</h4>@Model.Nacionalidad<br><br>
+                        <h4>Calificaci&oacute;n: @Model.Calificacion</h4>  <br>
+                        @if (Model.Calificacion > 10)
+                        {<label for="radio1">&#9733;</label>
+                            <label for="radio2">&#9733;</label>
+                            <label for="radio3">&#9733;</label>
+                            <label for="radio4">&#9733;</label>}
+
+                        @if (Model.Calificacion < 10 && Model.Calificacion > 5)
+                        {<label for="radio1">&#9733;</label>
+                            <label for="radio2">&#9733;</label>
+                            <label for="radio3">&#9733;</label>
+                        }
+
+                        @if (Model.Calificacion < 5)
+                        {<label for="radio1">&#9733;</label>
+                            <label for="radio2">&#9733;</label>
+
+                        }
+                        @if (Model.Calificacion < 2)
+                        {<label for="radio1">&#9733;</label>
+                        }
+
 
                     </div>
                 </div>
-                @*<a href="/Usuario/EditarUsuario/@Model.IdUsuario"><i class="fa fa-edit fa-lg"></i>Editar Perfil</a>*@
-
-                @*<button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Editar Perfil</button>*@
+             
             </div>
         </div>
     </header>
@@ -98,8 +122,8 @@
                             <th>Id</th>
                             <th>Titulo</th>
                             <th>Descripcion</th>
-                            <th>Fecha Desde</th>
-                            <th>Fecha Hasta</th>
+                            <th>Fecha</th>
+                          
                             <th> </th>
                             <th> </th>
                         </tr>
@@ -109,14 +133,13 @@
                         <tbody>
                             <tr>
                                 <td>
-                               <img style="float: left;width: 50px; height: 50px; margin-top: 10px;
-                                    margin-bottom: 8px; margin-right: -10px; border-radius: 50%;" src="~/Content/img/portfolio/06-thumbnail.jpg" class="gaadiex-list-item-img" alt="Avatar">
+                                    <img style="float: left;width: 50px; height: 50px; margin-top: 10px;
+                                    margin-bottom: 8px; margin-right: -10px; border-radius: 50%;" src="~/Content/img/avatar/@p.UrlFoto" class="gaadiex-list-item-img" alt="Avatar">
                                 </td>
                                 <td>@p.IdPublicacion</td>
                                 <td>@p.Titulo</td>
                                 <td>@p.Descripcion</td>
-                                <td>@p.FechaDesde</td>
-                                <td>@p.FechaHasta</td>
+                                <td>@p.FechaDesde.ToString("dd/MM/yyyy")</td>
                                 <td>
                                     <a href="/Publicacion/EditarPublicacion/@p.IdPublicacion"><i class="fa fa-edit fa-lg"></i></a>
                                 </td>

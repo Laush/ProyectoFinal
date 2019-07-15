@@ -36,6 +36,7 @@ CREATE TABLE [dbo].[Usuario](
 	[Descripcion] [nvarchar](300) NULL,
 	[Nacionalidad] [bigint] NOT NULL,
 	[UrlFotoPerfil] [nvarchar](200) NULL,
+	[Calificacion] [bigint]  NULL,
  CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED 
 (
 	[IdUsuario] ASC
