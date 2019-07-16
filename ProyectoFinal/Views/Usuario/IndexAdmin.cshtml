@@ -25,9 +25,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-
-
-
                     @if (ViewBag.UsuarioAdmin.IdRol == 1)
                     {
                         <li class="nav-item">
@@ -39,13 +36,10 @@
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="#agencias">Agencias</a>
                         </li>
-                    }
-
-                 
+                    }               
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion"><i class="fa fa-power-off"></i></a>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -55,9 +49,7 @@
 
         <div class="container">
             <div class="intro-text">
-
                 <div class="row">
-
                     <div class="col-lg-4">
                         <div class="text-center">
                             <h4> ADMIN:  @ViewBag.UsuarioAdmin.NombreUsuario </h4>
@@ -69,7 +61,6 @@
                         <h4>Nombre y Apellido </h4>@ViewBag.UsuarioAdmin.Nombre , @ViewBag.UsuarioAdmin.Apellido<br> <br>
                         <h4>Edad</h4>@ViewBag.UsuarioAdmin.Edad <br><br>
                         <h4>Sobre mi..</h4>@ViewBag.UsuarioAdmin.Descripcion<br><br>
-
                     </div>
                     <div class="col-lg-4">
                         <h4>Email</h4>@ViewBag.UsuarioAdmin.Email<br><br>
@@ -78,28 +69,32 @@
                         {<label for="radio1">&#9733;</label>
                             <label for="radio2">&#9733;</label>
                             <label for="radio3">&#9733;</label>
-                            <label for="radio4">&#9733;</label>}
-
-                        @if (ViewBag.UsuarioAdmin.Calificacion < 10 && ViewBag.UsuarioAdmin.Calificacion > 5)
+                            <label for="radio4">&#9733;</label>
+                            <label for="radio5">&#9733;</label>}
+                        @if (ViewBag.UsuarioAdmin.Calificacion <= 10 && ViewBag.UsuarioAdmin.Calificacion > 5)
+                        {<label for="radio1">&#9733;</label>
+                            <label for="radio2">&#9733;</label>
+                            <label for="radio3">&#9733;</label>
+                            <label for="radio4">&#9733;</label>
+                        }
+                        @if (ViewBag.UsuarioAdmin.Calificacion <= 5)
                         {<label for="radio1">&#9733;</label>
                             <label for="radio2">&#9733;</label>
                             <label for="radio3">&#9733;</label>
                         }
-
-                        @if (ViewBag.UsuarioAdmin.Calificacion < 5)
+                        @if (ViewBag.UsuarioAdmin.Calificacion <= 2)
                         {<label for="radio1">&#9733;</label>
                             <label for="radio2">&#9733;</label>
-
                         }
-                        @if (ViewBag.UsuarioAdmin.Calificacion < 2)
+                        @if (ViewBag.UsuarioAdmin.Calificacion == 1)
                         {<label for="radio1">&#9733;</label>
                         }
-
+                        @if (ViewBag.UsuarioAdmin.Calificacion == null)
+                        {
+                        @: No fue calificado
+                        }
                     </div>
-
                 </div>
-                @*<button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Editar Perfil</button>*@
-
             </div>
 
         </div>

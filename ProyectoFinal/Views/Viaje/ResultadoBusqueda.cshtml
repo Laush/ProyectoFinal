@@ -57,7 +57,6 @@
     </script>
 }
 
-
 <head>
     <link href="~/Content/Viaje/ResultadoBusqueda.css" rel="stylesheet" />
     <style>
@@ -136,21 +135,30 @@
                                         {<label for="radio1">&#9733;</label>
                                             <label for="radio2">&#9733;</label>
                                             <label for="radio3">&#9733;</label>
-                                            <label for="radio4">&#9733;</label>                }
-
-                                        @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion < 10 && v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion > 5)
+                                            <label for="radio4">&#9733;</label>
+                                            <label for="radio5">&#9733;</label>}
+                                        @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion <= 10 && v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion > 5)
                                         {<label for="radio1">&#9733;</label>
                                             <label for="radio2">&#9733;</label>
-                                            <label for="radio3">&#9733;</label>                }
-
-                                        @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion < 5)
+                                            <label for="radio3">&#9733;</label>
+                                            <label for="radio4">&#9733;</label>
+                                        }
+                                        @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion <= 5)
                                         {<label for="radio1">&#9733;</label>
-                                            <label for="radio2">&#9733;</label>                }
-
-
+                                            <label for="radio2">&#9733;</label>
+                                            <label for="radio3">&#9733;</label>
+                                        }
+                                        @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion <= 2)
+                                        {<label for="radio1">&#9733;</label>
+                                            <label for="radio2">&#9733;</label>
+                                        }
+                                        @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion == 1)
+                                        {<label for="radio1">&#9733;</label>
+                                        }
                                         @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion == null)
-                                        {<label for="radio1">&#9733;</label>                }
-                                        @v.Ciudad1.Nombre - @v.Ciudad.Nombre
+                                        {
+                                            @: No fue calificado
+                                        }
                                     </h3>
 
                                     <h5> Vuelo: @v.Aerolinea ,@v.NumeroVuelo</h5>

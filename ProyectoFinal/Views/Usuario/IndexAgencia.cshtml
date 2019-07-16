@@ -74,24 +74,31 @@
                         {<label for="radio1">&#9733;</label>
                             <label for="radio2">&#9733;</label>
                             <label for="radio3">&#9733;</label>
-                            <label for="radio4">&#9733;</label>}
+                            <label for="radio4">&#9733;</label>
+                            <label for="radio5">&#9733;</label>}
 
-                        @if (Model.Calificacion < 10 && Model.Calificacion > 5)
+                        @if (Model.Calificacion <= 10 && Model.Calificacion > 5)
+                        {<label for="radio1">&#9733;</label>
+                            <label for="radio2">&#9733;</label>
+                            <label for="radio3">&#9733;</label>
+                            <label for="radio4">&#9733;</label>
+                        }
+                        @if (Model.Calificacion <= 5)
                         {<label for="radio1">&#9733;</label>
                             <label for="radio2">&#9733;</label>
                             <label for="radio3">&#9733;</label>
                         }
-
-                        @if (Model.Calificacion < 5)
+                        @if (Model.Calificacion <= 2)
                         {<label for="radio1">&#9733;</label>
                             <label for="radio2">&#9733;</label>
-
                         }
-                        @if (Model.Calificacion < 2)
+                        @if (Model.Calificacion == 1)
                         {<label for="radio1">&#9733;</label>
                         }
-
-
+                        @if (Model.Calificacion == null)
+                        {
+                        @: No fue calificado
+                        }
                     </div>
                 </div>
              
