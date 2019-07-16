@@ -113,7 +113,8 @@ namespace ProyectoFinal.Controllers
             if (Session["Usuario"] is Usuario usuarioLogueado)
             {
                 ViewBag.Rol = Session["Usuario"] as Usuario;
-                ViewBag.ListaNotificaciones = srvAmistad.BuscarInvitaciones(usuarioLogueado.IdUsuario);
+                //ViewBag.ListaNotificaciones = srvAmistad.BuscarInvitaciones(usuarioLogueado.IdUsuario);
+                ViewBag.ListaNotificaciones = srvAmistad.BuscarTodasInvitaciones(usuarioLogueado.IdUsuario);
                 return View(usuarioLogueado);
             }
             Session["RedireccionLogin"] = "Usuario/Notificaciones";

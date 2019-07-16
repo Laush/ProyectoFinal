@@ -47,6 +47,11 @@ namespace Genericas
             return contexto.AmistadUsuario.Where(a => a.IdSeguido == idUsuarioInvitado && a.Estado != "ACEPTADO").ToList();
         }
 
+        public List<AmistadUsuario> BuscarTodasInvitaciones(long idUsuarioInvitado)
+        {
+            return contexto.AmistadUsuario.Where(a => a.IdSeguido == idUsuarioInvitado).ToList();
+        }
+
         public void actualizarInvitacion(long IdResponsable, long IdInvitado, char EsAceptado)
         {
             AmistadUsuario Amistad = contexto.AmistadUsuario.Where(a => a.IdResponsable == IdResponsable && a.IdSeguido == IdInvitado).First();
@@ -59,6 +64,7 @@ namespace Genericas
             else if(EsAceptado == 'Y')
             {
                 Amistad.Estado = "ACEPTADO";
+                Amistad.FechaCoincidencia = DateTime.Now;
                 contexto.SaveChanges();
             }
         }

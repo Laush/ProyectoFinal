@@ -236,8 +236,8 @@ namespace ProyectoFinal.Controllers
 
         public JsonResult CancelarInvitarViajero(long idSeguido)
         {
-            var UsuarioResponsable = Session["Usuario"] as Usuario;
-            Usuario UsuarioInvitado = srvUsuario.GetById(idSeguido);
+            var UsuarioInvitado = Session["Usuario"] as Usuario;
+            Usuario UsuarioResponsable = srvUsuario.GetById(idSeguido);
 
             var result = "";
 
@@ -248,8 +248,8 @@ namespace ProyectoFinal.Controllers
 
             else
             {
-                srvAmistad.actualizarInvitacion(UsuarioResponsable.IdUsuario, idSeguido, 'N');
-                result = "Cancelaste la invitacion a conectarse con el Viajero " + UsuarioInvitado.Nombre + " " + UsuarioInvitado.Apellido;
+                srvAmistad.actualizarInvitacion(UsuarioResponsable.IdUsuario, UsuarioInvitado.IdUsuario, 'N');
+                result = "Cancelaste la invitacion a conectarse con el Viajero " + UsuarioResponsable.Nombre + " " + UsuarioResponsable.Apellido;
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -257,12 +257,17 @@ namespace ProyectoFinal.Controllers
 
         public JsonResult AceptarInvitarViajero(long idSeguido)
         {
-            var UsuarioResponsable = Session["Usuario"] as Usuario;
-            Usuario UsuarioInvitado = srvUsuario.GetById(idSeguido);
+            var UsuarioInvitado = Session["Usuario"] as Usuario;
+            Usuario UsuarioResponsable = srvUsuario.GetById(idSeguido);
 
             // parametros para el mail
-            string asunto = UsuarioInvitado.NombreUsuario + " ha aceptado tu invitación";
-            string cuerpoMensaje = "Hola " + UsuarioResponsable.NombreUsuario + ", te informamos que el usuario " + asunto + " para conectar. Puedes ver su perfil para podder ponerte en contacto con el.";
+            string asunto = UsuarioInvitado.NombreUsuario 
+                            + " ha aceptado tu invitación";
+            string cuerpoMensaje =  "Hola " 
+                                    + UsuarioResponsable.NombreUsuario 
+                                    + ", te informamos que el usuario " 
+                                    + asunto 
+                                    + " para conectar. Puedes ver su perfil para poder ponerte en contacto con el.";
 
             var result = "";
 
@@ -274,11 +279,11 @@ namespace ProyectoFinal.Controllers
             else
             {
                 // Acepto la invitacion del viajero responsable
-                srvAmistad.actualizarInvitacion(UsuarioResponsable.IdUsuario, idSeguido, 'Y');
+                srvAmistad.actualizarInvitacion(UsuarioResponsable.IdUsuario, UsuarioInvitado.IdUsuario, 'Y');
                 result = "Aceptaste la invitacion a conectarse con el Viajero "
-                        + UsuarioInvitado.Nombre 
+                        + UsuarioResponsable.Nombre 
                         + " " 
-                        + UsuarioInvitado.Apellido
+                        + UsuarioResponsable.Apellido
                         + ". Ahora puedes Conectarte con el Visita su Perfil en tu lista de Amigos.";
 
                 // Notifico al viajero responsable que su invitacion fue aceptada

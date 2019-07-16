@@ -1,11 +1,53 @@
-﻿
-@using Genericas;
+﻿@using Genericas;
+
 @{
     ViewBag.Title = "Notificaciones";
 }
 
+@section scripts{
+    <script type="text/javascript">
+        function aceptarInvitarViajero(idSeguido) {
+
+            $.ajax({
+                url: '@Url.Action("AceptarInvitarViajero", "Viaje")',
+                dataType: "json",
+                data: { idSeguido: idSeguido },
+                success: function (data) {
+                    // Muestro un alert con el resultado del metodo
+                    alert(data);
+                    var url = '@Url.Action("Notificaciones", "Usuario")';
+                    window.location.href = url;
+                },
+                error: function (xhr, status, error) {
+                    alert("Error: " + error);
+                }
+            });
+        };
+    </script>
+
+    <script type="text/javascript">
+        function cancelarInvitarViajero(idSeguido) {
+            $.ajax({
+                url: '@Url.Action("CancelarInvitarViajero", "Viaje")',
+                dataType: "json",
+                data: { idSeguido: idSeguido },
+                success: function (data) {
+                    // Muestro un alert con el resultado del metodo
+                    alert(data);
+                    var url = '@Url.Action("Notificaciones", "Usuario")';
+                    window.location.href = url;
+                },
+                error: function (xhr, status, error) {
+                    alert("Error llamada Ajax ");
+                }
+            });
+        };
+    </script>
+}
+
 <head>
     <link href="~/Content/css/agencyUsu.css" rel="stylesheet">
+    <link href="~/Content/Usuario/Notificaciones.css" rel="stylesheet" />
 </head>
 
 <body id="page-top">
@@ -70,8 +112,8 @@
                 <br>
                 @foreach (AmistadUsuario u in ViewBag.ListaNotificaciones)
                 {
-                    <div class="card" style="color:black;">
-                        <div class="gaadiex-list" style="padding: 0 22px;">
+                    <div class="card card-color-black">
+                        <div class="gaadiex-list gaadiex-list-padding">
                             <div class="row">
 
 
@@ -83,18 +125,27 @@
                                 }
                                 else
                                 {
-                            <img class="gaadiex-list-item-img" style="float: left;width: 5%; height: 5%;  margin-top: 20px;
+                                    <img class="gaadiex-list-item-img" style="float: left;width: 5%; height: 5%;  margin-top: 20px;
                                         margin-bottom: 8px; margin-right: 60px;  border-radius: 50%; margin-left: 20px;" src="~/Content/img/avatar/@u.Usuario.UrlFotoPerfil" alt=" ">
-                        }
+                                }
 
 
 
-                            <div class="col-sm-8">
-                                <h3 style="color:dimgrey;"> @u.Usuario1.NombreUsuario te invit&oacute; a conectarte.  </h3>                                    <h5 style="color:dimgrey;"> Estado de la invitacion: @u.Estado </h5>
-                            </div>
+                                <div class="col-sm-8">
+                                    <h3 style="color:dimgrey;"> @u.Usuario1.NombreUsuario te invit&oacute; a conectarte.  </h3>                                    <h5 style="color:dimgrey;"> Estado de la invitacion: @u.Estado </h5>
+                                </div>
+
                                 <div class="col-sm-2">
-                                    <a href="#" class="btn btn-primary" style="margin-top:15%;"><i class="fa fa-check"></i></a>
-                                    <a href="#" class="btn btn-danger" style="margin-top:15%;"><i class="fa fa-window-close"></i></a>
+                                    @if (u.Estado == "PENDIENTE")
+                                    {
+                                        <a href="#" class="btn btn-success btn-margin-top-15" onclick="aceptarInvitarViajero(@u.Usuario1.IdUsuario)" title="Aceptar Invitacion"><i class="fa fa-check"></i></a>
+                                        <a href="#" class="btn btn-danger" style="margin-top:15%;" onclick="cancelarInvitarViajero(@u.Usuario1.IdUsuario)" title="Cancelar Invitacion"><i class="fa fa-times"></i></a>
+                                    }
+
+                                    @if (u.Estado == "ACEPTADO")
+                                    {
+                                        <button class="btn btn-primary btn-margin-top-15" title="Conectados desde @u.FechaCoincidencia.ToShortDateString()"><i class="fa fa-users"></i></button>
+                                    }
                                 </div>
 
 
@@ -105,10 +156,9 @@
                     </div>
                 }
             </div>
-            </div>
+        </div>
 
     </header>
-
 
     <!-- Bootstrap core JavaScript -->
     <script src="~/Content/vendor/jquery/jquery.min.js"></script>

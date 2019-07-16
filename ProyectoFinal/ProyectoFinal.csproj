@@ -224,6 +224,7 @@
     <Content Include="Content\js\dateSpicker.js" />
     <Content Include="Content\js\jqBootstrapValidation.js" />
     <Content Include="Content\mail\contact_me.php" />
+    <Content Include="Content\Usuario\Notificaciones.css" />
     <Content Include="Content\Usuario\RegistroViajero.css" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css" />
