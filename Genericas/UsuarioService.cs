@@ -198,5 +198,23 @@ namespace Genericas
         {
             return contexto.Pais.Find(IdPais);
         }
+
+        public List<Usuario> ObtenerUsuariosPorNumeroVuelo(string numeroVuelo, long idUsuarioResponsable)
+        {
+            List<Usuario> UsuariosCoincidencia = new List<Usuario>();
+
+            foreach (var viaje in contexto.Viaje.Where(v => v.NumeroVuelo == numeroVuelo))
+            {
+                Usuario u = contexto.Usuario.Find(viaje.IdUsuario);
+                UsuariosCoincidencia.Add(u);
+            }
+
+            foreach (Usuario item in UsuariosCoincidencia)
+            {
+                Usuario UsuarioResponsable = contexto.Usuario.Find(idUsuarioResponsable);
+                UsuariosCoincidencia.Remove(UsuarioResponsable);
+            }
+            return UsuariosCoincidencia;
+        }
     }
 }

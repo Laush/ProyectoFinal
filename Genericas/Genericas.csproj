@@ -66,6 +66,7 @@
     <Compile Include="AmistadUsuario.cs">
       <DependentUpon>DB_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="AmistadUsuarioModel.cs" />
     <Compile Include="Ciudad.cs">
       <DependentUpon>DB_Model.tt</DependentUpon>
     </Compile>
@@ -109,6 +110,7 @@
     </Compile>
     <Compile Include="ViajeModel.cs" />
     <Compile Include="ViajeService.cs" />
+    <Compile Include="VueloModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

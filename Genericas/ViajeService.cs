@@ -253,11 +253,6 @@ namespace Genericas
             Context.SaveChanges();
         }
 
-        public List<Ciudad> ObtenerCiudades()
-        {
-            return Context.Ciudad.ToList();
-        }
-
         public IQueryable<Ciudad> CiudadCompleto()
         {
             return Context.Ciudad
@@ -273,10 +268,6 @@ namespace Genericas
                 .FirstOrDefault(c => c.IdCiudad == idCiudad);
         }
 
-        public List<Pais> ObtenerPaises()
-        {
-            return Context.Pais.ToList();
-        }
         public void EditarViaje(Viaje v)
         {
             Viaje p = Context.Viaje.Find(v.IdViaje);
@@ -318,6 +309,7 @@ namespace Genericas
             p.UrlFoto = p.UrlFoto;
             Context.SaveChanges();
         }
+
         public void EliminarPublicacion(long id)
         {
             Publicacion pubEliminar = Context.Publicacion.FirstOrDefault(u => u.IdPublicacion == id);
@@ -328,6 +320,98 @@ namespace Genericas
         public Publicacion ObtenerPublicacionPorId(int id)
         {
             return Context.Publicacion.FirstOrDefault(p => p.IdPublicacion == id);
+        }
+
+        public List<Pais> ObtenerPaises()
+        {
+            return Context.Pais.ToList();
+        }
+
+        public List<Provincia> ObtenerProvincias()
+        {
+            return Context.Provincia.ToList();
+        }
+
+        public List<Ciudad> ObtenerCiudades()
+        {
+            return Context.Ciudad.ToList();
+        }
+
+        public List<CiudadModel> CiudadProvinciaPaisCompleto()
+        {
+            List<CiudadModel> destinos = new List<CiudadModel>();
+
+            long ids = 1;
+
+            foreach (var ciudad in this.ObtenerCiudades())
+            {
+                CiudadModel cd = new CiudadModel
+                {
+                    Nombre = ciudad.Nombre,
+                    IdCiudad = ids++
+                };
+                destinos.Add(cd);
+            }
+
+            foreach (var provincia in this.ObtenerProvincias())
+            {
+                CiudadModel cd = new CiudadModel
+                {
+                    Nombre = provincia.Nombre,
+                    IdCiudad = ids++
+                };
+                destinos.Add(cd);
+            }
+
+            foreach (var pais in this.ObtenerPaises())
+            {
+                CiudadModel cd = new CiudadModel
+                {
+                    Nombre = pais.Nombre,
+                    IdCiudad = ids++
+                };
+                destinos.Add(cd);
+            }
+
+            destinos = destinos.GroupBy(a => a.Nombre).Select(g => g.First()).ToList();
+
+            return destinos;
+        }
+
+        public List<VueloModel> VuelosAerolineasCompleto()
+        {
+            List<VueloModel> vuelos = new List<VueloModel>();
+
+            long ids = 1;
+
+            foreach (var viaje in this.Listar())
+            {
+                VueloModel vm = new VueloModel
+                {
+                    Nombre = viaje.NumeroVuelo,
+                    IdVuelo = ids++
+                };
+                vuelos.Add(vm);
+            }
+
+            foreach (var viaje in this.Listar())
+            {
+                VueloModel vm = new VueloModel
+                {
+                    Nombre = viaje.Aerolinea,
+                    IdVuelo = ids++
+                };
+                vuelos.Add(vm);
+            }
+
+            vuelos = vuelos.GroupBy(a => a.Nombre).Select(g => g.First()).ToList();
+
+            return vuelos;
+        }
+
+        public bool ExisteNumeroVuelo(string numeroVuelo)
+        {
+            return (Context.Viaje.FirstOrDefault(v => v.NumeroVuelo == numeroVuelo) != null) ? true : false;
         }
     }
 }

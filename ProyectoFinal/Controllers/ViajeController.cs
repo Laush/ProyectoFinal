@@ -11,6 +11,9 @@ namespace ProyectoFinal.Controllers
     {
         //Servicios
         private ViajeService srvViaje = new ViajeService();
+        private AmistadService srvAmistad = new AmistadService();
+        private UsuarioService srvUsuario = new UsuarioService();
+        private EmailService srvEmail = new EmailService();
         
         //GET: Busqueda Destino
         [HttpGet]
@@ -79,6 +82,11 @@ namespace ProyectoFinal.Controllers
         [HttpGet]
         public ActionResult ResultadoBusqueda()
         {
+            if (Session["Usuario"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
             List<Viaje> ds = new List<Viaje>();
             ViewBag.Rol = Session["Usuario"] as Usuario;
             //devuelvo la lista con los datos de busqueda
@@ -107,13 +115,30 @@ namespace ProyectoFinal.Controllers
 
             return RedirectToAction("Login", "Home");
         }
+
         [HttpPost]
         public ActionResult AgregarViaje(Viaje v)
         {
+            var UsuarioResponsable = Session["Usuario"] as Usuario;
 
-            var usuarioLogueado = Session["Usuario"] as Usuario;
-            srvViaje.AgregarViaje(v, usuarioLogueado);
+            srvViaje.AgregarViaje(v, UsuarioResponsable);
 
+            var NumeroDeVuelo = v.NumeroVuelo;
+
+            if (srvViaje.ExisteNumeroVuelo(NumeroDeVuelo))
+            {
+                // Busco los viajeros que tengan el mismo numero de vuelo, sacando al responsable y envio email
+                List<Usuario> UsuariosConMismoNumeroVuelo = srvUsuario.ObtenerUsuariosPorNumeroVuelo(NumeroDeVuelo, UsuarioResponsable.IdUsuario);
+
+                foreach (var usuario in UsuariosConMismoNumeroVuelo)
+                {
+                    // parametros para el mail
+                    string asunto = UsuarioResponsable.NombreUsuario + " registro un Viaje con el mismo Numero de Vuelo.";
+                    string cuerpoMensaje = "Hola " + usuario.NombreUsuario + ", " + asunto + " invitalo a conectarte. Entra en la aplicación, coincidi y conectate para disfrutar o compartir actividades.";
+
+                    srvEmail.enviarMensaje(usuario.Email, usuario.Nombre + " " + usuario.Apellido, asunto, cuerpoMensaje);
+                }
+            }
             //return RedirectToAction("IndexViajero", "Usuario", v);
             return RedirectToAction("IndexViajero", "Usuario");
         }
@@ -166,5 +191,127 @@ namespace ProyectoFinal.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        ///  Mediante Ajax y JsonResult cambio el estado de la tabla AmistadUsuario mediante la accion del viajero
+        ///  de Invitar
+        /// </summary>
+        /// <param name="idSeguido"></param>
+        /// <returns> Retorna un AmistadUsuarioModel con un mensaje para funcionamiento ok, error o viajero no encontrado </returns>
+        public JsonResult InvitarViajero(long idSeguido)
+        {
+            var UsuarioResponsable = Session["Usuario"] as Usuario;
+            Usuario UsuarioInvitado = srvUsuario.GetById(idSeguido);
+
+            var invitacionViajero = srvAmistad.BuscarAmistad(UsuarioResponsable.IdUsuario, idSeguido);
+
+            // parametros para el mail
+            string asunto = UsuarioResponsable.NombreUsuario + " te ha enviado una invitación";
+            string cuerpoMensaje = "Hola " + UsuarioInvitado.NombreUsuario + ", " + asunto + " para conectar. Puedes aceptar la misma entrando en la aplicación.";
+
+            AmistadUsuarioModel amistadUsuarioModel = new AmistadUsuarioModel
+            {
+                IdResponsable = UsuarioResponsable.IdUsuario,
+                IdSeguido = idSeguido,
+                FechaCoincidencia = DateTime.Now,
+                Estado = "PENDIENTE",
+                Result = "OK"
+            };
+
+            if (srvUsuario.GetById(idSeguido) == null)
+                amistadUsuarioModel.Result = "Viajero invitado no encontrado. Vuelve a intentarlo.";
+
+            if (srvAmistad.SeguirUsuario(UsuarioResponsable.IdUsuario, idSeguido) == true)
+            {
+                amistadUsuarioModel.Result = "Viajero invitado correctamente. Tu proximo compañero de viaje esta muy cerca.";
+                // Notifico al viajero invitado que tiene una invitacion a conectar
+                srvEmail.enviarMensaje(UsuarioInvitado.Email, UsuarioInvitado.NombreUsuario, asunto, cuerpoMensaje);
+            }
+            else
+            {
+                amistadUsuarioModel.Result = "Ya invitaste al Viajero o hubo un error.";
+            }
+
+            return Json(amistadUsuarioModel, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CancelarInvitarViajero(long idSeguido)
+        {
+            var UsuarioResponsable = Session["Usuario"] as Usuario;
+            Usuario UsuarioInvitado = srvUsuario.GetById(idSeguido);
+
+            var result = "";
+
+            if (UsuarioInvitado == null)
+            {
+                result = "Viajero invitado no encontrado";
+            }
+
+            else
+            {
+                srvAmistad.actualizarInvitacion(UsuarioResponsable.IdUsuario, idSeguido, 'N');
+                result = "Cancelaste la invitacion a conectarse con el Viajero " + UsuarioInvitado.Nombre + " " + UsuarioInvitado.Apellido;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult AceptarInvitarViajero(long idSeguido)
+        {
+            var UsuarioResponsable = Session["Usuario"] as Usuario;
+            Usuario UsuarioInvitado = srvUsuario.GetById(idSeguido);
+
+            // parametros para el mail
+            string asunto = UsuarioInvitado.NombreUsuario + " ha aceptado tu invitación";
+            string cuerpoMensaje = "Hola " + UsuarioResponsable.NombreUsuario + ", te informamos que el usuario " + asunto + " para conectar. Puedes ver su perfil para podder ponerte en contacto con el.";
+
+            var result = "";
+
+            if (UsuarioInvitado == null)
+            {
+                result = "Viajero no encontrado.";
+            }
+
+            else
+            {
+                // Acepto la invitacion del viajero responsable
+                srvAmistad.actualizarInvitacion(UsuarioResponsable.IdUsuario, idSeguido, 'Y');
+                result = "Aceptaste la invitacion a conectarse con el Viajero "
+                        + UsuarioInvitado.Nombre 
+                        + " " 
+                        + UsuarioInvitado.Apellido
+                        + ". Ahora puedes Conectarte con el Visita su Perfil en tu lista de Amigos.";
+
+                // Notifico al viajero responsable que su invitacion fue aceptada
+                srvEmail.enviarMensaje(UsuarioResponsable.Email, UsuarioResponsable.NombreUsuario, asunto, cuerpoMensaje);
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult AutocompleteDestinoCompleto(string search)
+        {
+            List<CiudadModel> destinos = srvViaje.CiudadProvinciaPaisCompleto()
+                                        .Where(x => x.Nombre.ToLower().Contains(search.ToLower()))
+                                        .Select(x => new CiudadModel
+                                        {
+                                            IdCiudad = x.IdCiudad,
+                                            Nombre = x.Nombre
+                                        }).ToList();
+
+            return Json(destinos, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult AutocompleteVuelos(string search)
+        {
+            List<VueloModel> vuelos = srvViaje.VuelosAerolineasCompleto()
+                                        .Where(x => x.Nombre.ToLower().Contains(search.ToLower()))
+                                        .Select(x => new VueloModel
+                                        {
+                                            IdVuelo = x.IdVuelo,
+                                            Nombre = x.Nombre
+                                        }).ToList();
+
+            return Json(vuelos, JsonRequestBehavior.AllowGet);
+        }
     }
 }

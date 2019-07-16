@@ -1,12 +1,61 @@
 ﻿@using Genericas;
 
 @{
-    ViewBag.Title = "ResultadoBusqueda";
+                /**/
+
+                ViewBag.Title = "ResultadoBusqueda";
 
 
 }
 
 @model List<Viaje>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".aCancelarInvitar").hide();
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        function invitarViajero(idSeguido) {
+
+            $.ajax({
+                url: '@Url.Action("InvitarViajero", "Viaje")',
+                dataType: "json",
+                data: { idSeguido: idSeguido },
+                success: function (data) {
+                    //$(".aInvitar").hide();
+                    //$(".aCancelarInvitar").show();
+
+                    alert(data.Result);
+                },
+                error: function (xhr, status, error) {
+                    alert("Error: " + error);
+                }
+            });
+        };
+    </script>
+
+    <script type="text/javascript">
+        function cancelarInvitarViajero(idSeguido) {
+            $.ajax({
+                url: '@Url.Action("CancelarInvitarViajero", "Viaje")',
+                dataType: "json",
+                data: { idSeguido: idSeguido },
+                success: function (data) {
+                    //$(".aInvitar").show(),
+                    //$(".aCancelarInvitar").hide(),
+                    alert(data.Result);
+                },
+                error: function (xhr, status, error) {
+                    alert("Error llamada Ajax ");
+                }
+            });
+        };
+    </script>
+}
 
 
 <head>
@@ -54,7 +103,7 @@
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="/Usuario/IndexGuia">@ViewBag.Rol.Nombre (perfil)</a>
                         </li>
-                    }           
+                    }
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="/Home/CerrarSesion"><i class="fa fa-power-off"></i></a>
                     </li>
@@ -87,20 +136,20 @@
                                         {<label for="radio1">&#9733;</label>
                                             <label for="radio2">&#9733;</label>
                                             <label for="radio3">&#9733;</label>
-                                            <label for="radio4">&#9733;</label>}
+                                            <label for="radio4">&#9733;</label>                }
 
                                         @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion < 10 && v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion > 5)
                                         {<label for="radio1">&#9733;</label>
                                             <label for="radio2">&#9733;</label>
-                                            <label for="radio3">&#9733;</label>}
+                                            <label for="radio3">&#9733;</label>                }
 
                                         @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion < 5)
                                         {<label for="radio1">&#9733;</label>
-                                            <label for="radio2">&#9733;</label>}
+                                            <label for="radio2">&#9733;</label>                }
 
 
                                         @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion == null)
-                                        {<label for="radio1">&#9733;</label>}
+                                        {<label for="radio1">&#9733;</label>                }
                                         @v.Ciudad1.Nombre - @v.Ciudad.Nombre
                                     </h3>
 
@@ -135,7 +184,10 @@
 
                                 </div>
                                 <div class="col-sm-2">
-                                    <a href="#" class="btn btn-primary" style="margin-top:25%;"><i class="fa fa-heart"></i>  </a>
+                                    <span class="aInvitar"><a href="#" class="btn btn-primary" style="margin-top:25%;" onclick="invitarViajero(@v.IdUsuario)"><i class="fa fa-user-plus"></i> </a></span>
+
+                                    <span class="aCancelarInvitar"><a href="#" class="btn btn-danger" style="margin-top:25%;" onclick="cancelarInvitarViajero(@v.IdUsuario)"><i class="fa fa-user-times"></i> </a></span>
+
                                     <a href="/Usuario/IndexPerfil/@v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).IdUsuario" class="btn btn-primary" style="margin-top:25%;"><i class="fa fa-eye"></i> </a>
                                 </div>
                             </div>
@@ -160,8 +212,6 @@
     </header>
 
     <!-- filtro-->
-
-
     <!-- Bootstrap core JavaScript -->
     <script src="~/Content/vendor/jquery/jquery.min.js"></script>
     <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
