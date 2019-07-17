@@ -58,7 +58,7 @@
                     <div class="col-lg-4">
                         <div class="text-center">
                             <h4> AGENCIA: @Model.NombreUsuario </h4>
-                            <img src="~/Content/img/avatar/@Model.UrlFotoPerfil" class="avatar img-circle img-thumbnail" alt="avatar">
+                            <img src="@Model.UrlFotoPerfil" class="avatar img-circle img-thumbnail" alt="avatar">
                             <input type="file" class="text-center center-block file-upload">
                         </div>
                     </div>
@@ -126,7 +126,6 @@
                     <thead>
                         <tr>
                             <th> </th>
-                            <th>Id</th>
                             <th>Titulo</th>
                             <th>Descripcion</th>
                             <th>Fecha</th>
@@ -143,7 +142,6 @@
                                     <img style="float: left;width: 50px; height: 50px; margin-top: 10px;
                                     margin-bottom: 8px; margin-right: -10px; border-radius: 50%;" src="~/Content/img/avatar/@p.UrlFoto" class="gaadiex-list-item-img" alt="Avatar">
                                 </td>
-                                <td>@p.IdPublicacion</td>
                                 <td>@p.Titulo</td>
                                 <td>@p.Descripcion</td>
                                 <td>@p.FechaDesde.ToString("dd/MM/yyyy")</td>

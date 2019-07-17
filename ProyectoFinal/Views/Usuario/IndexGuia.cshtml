@@ -58,7 +58,7 @@
                     <div class="col-lg-4">
                         <div class="text-center">
                             <h4> GUIA: @Model.NombreUsuario </h4>
-                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                            <img src="@Model.UrlFotoPerfil" class="avatar img-circle img-thumbnail" alt="avatar">
                             <input type="file" class="text-center center-block file-upload">
                         </div>
                     </div>
@@ -125,7 +125,6 @@
                     <thead>
                         <tr>
                             <th> </th>
-                            <th>Id</th>
                             <th>Titulo</th>
                             <th>Descripcion</th>
                             <th>Fecha Desde</th>
@@ -140,9 +139,8 @@
                             <tr>
                                 <td>
                                     <img style="float: left;width: 50px; height: 50px; margin-top: 10px;
-                                    margin-bottom: 8px; margin-right: -10px; border-radius: 50%;" src="~/Content/img/avatar/@p.UrlFoto" class="gaadiex-list-item-img" alt="Avatar">
+                                    margin-bottom: 8px; margin-right: -10px; border-radius: 50%;" src="@p.UrlFoto" class="gaadiex-list-item-img" alt="Avatar">
                                 </td>
-                                <td>@p.IdPublicacion</td>
                                 <td>@p.Titulo</td>
                                 <td>@p.Descripcion</td>
                                 <td>@p.FechaDesde</td>

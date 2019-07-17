@@ -74,9 +74,9 @@ namespace Genericas
 
         public Usuario VerificarExistenciaUsuario(Usuario u)
         {
-            var user = contexto.Usuario.Where(us => us.Email.Equals(u.Email) && us.Password.Equals(u.Password)).FirstOrDefault();
+            string hashedPassword = HashPassword(u.Password);
 
-            return user;
+            return contexto.Usuario.FirstOrDefault(us => (us.NombreUsuario == u.NombreUsuario || us.Email == u.Email) && us.Password == hashedPassword);
         }
 
         public List<Usuario> ListarAgencias()
@@ -134,7 +134,12 @@ namespace Genericas
         {
             Usuario nuevoUsuario = u;
             nuevoUsuario.IdRol = 3;
-            nuevoUsuario.Calificacion = 0;
+
+
+            string hashedPassword = HashPassword(u.Password);
+            nuevoUsuario.Password = hashedPassword;
+
+            nuevoUsuario.Calificacion = null;
             contexto.Usuario.Add(nuevoUsuario);
             contexto.SaveChanges();
 
@@ -150,7 +155,10 @@ namespace Genericas
             p.Edad = v.Edad;
             p.Email = v.Email;
             p.UrlFotoPerfil = v.UrlFotoPerfil;
-            p.Password = v.Password;
+
+            string hashedPassword = HashPassword(v.Password);
+            p.Password = hashedPassword;
+
             p.MatriculaGuia = v.MatriculaGuia;
             p.UrlFotoPerfil = v.UrlFotoPerfil;
             p.Descripcion = v.Descripcion;

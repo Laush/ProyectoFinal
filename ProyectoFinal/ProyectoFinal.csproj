@@ -173,6 +173,7 @@
     <Content Include="Content\img\about\2.jpg" />
     <Content Include="Content\img\about\3.jpg" />
     <Content Include="Content\img\about\4.jpg" />
+    <Content Include="Content\img\avatar\caminodelvino.jpg" />
     <Content Include="Content\img\avatar\laura.jpg" />
     <Content Include="Content\img\avatar\lucho.jpg" />
     <Content Include="Content\img\avatar\gaston.jpg" />
@@ -187,6 +188,7 @@
     <Content Include="Content\img\avatar\maria.jpg" />
     <Content Include="Content\img\avatar\minaclavero.jpg" />
     <Content Include="Content\img\avatar\pedro.jpg" />
+    <Content Include="Content\img\avatar\sanrafael.jpg" />
     <Content Include="Content\img\avatar\sheldon.jpg" />
     <Content Include="Content\img\avatar\sunway.jpg" />
     <Content Include="Content\img\avatar\termascolon.jpg" />
