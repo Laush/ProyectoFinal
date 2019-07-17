@@ -27,6 +27,6 @@ namespace API.Models
         public string Email { get; set; }
         public string UrlFotoPerfil { get; set; }
         public int? Edad { get; set; }
-        Nullable<long> Calificacion { get; set; }
+        public Nullable<long> Calificacion { get; set; }
     }
 }
