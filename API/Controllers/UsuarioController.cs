@@ -94,7 +94,18 @@ namespace API.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, Nacionalidades);
         }
 
-        //falta el metodo para eliminar perfil, que requiere la anotaacion [Authorize]
-        
+        [HttpPut]
+        [Route("api/Usuario/Calificar/{IdUsuario}/{Calificacion}")]
+        public HttpResponseMessage CalificarUsuario(long IdUsuario, long Calificacion)
+        {
+            Usuario UsuarioCalificado = usuarioService.GetById(IdUsuario);
+
+            if (UsuarioCalificado == null)
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Usuario no encontrado");
+
+            usuarioService.CalificarUsuario(UsuarioCalificado,Calificacion);
+
+            return Request.CreateResponse(HttpStatusCode.OK,"El usuario ha sido calificado");
+        }
     }
 }

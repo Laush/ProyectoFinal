@@ -17,5 +17,6 @@ namespace API.Models
         public string Descripcion { get; set; }
         public string Nacionalidad { get; set; }
         public string UrlFotoPerfil { get; set; }
+        public Nullable<long> Calificacion { get; set; }
     }
 }
