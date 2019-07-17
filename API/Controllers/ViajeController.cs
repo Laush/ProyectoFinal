@@ -105,6 +105,7 @@ namespace API.Controllers
                     ViajeEncontrado.IdUsuario = Usuario.IdUsuario;
                     ViajeEncontrado.Email =Usuario.Email;
                     ViajeEncontrado.NombreUsuario = Usuario.NombreUsuario;
+                    ViajeEncontrado.Edad = Usuario.Edad;
 
                     Viajes.Add(ViajeEncontrado);
                 }
