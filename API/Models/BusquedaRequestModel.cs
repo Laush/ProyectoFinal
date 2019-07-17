@@ -9,5 +9,6 @@ namespace API.Models
     {
         public string Destino { get; set; }
         public string Vuelo { get; set; }
+        public long IdUsuario { get; set; }
     }
 }
