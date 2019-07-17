@@ -43,7 +43,9 @@ namespace ProyectoFinal.Controllers
                 return RedirectToAction("BusquedaDestino", "Viaje");
             }
 
-            TempData["ResultadoBusqueda"] = srvViaje.BuscarDestino(buscarDestino);
+            var UsuarioResponsable = Session["Usuario"] as Usuario;
+
+            TempData["ResultadoBusqueda"] = srvViaje.BuscarDestino(buscarDestino, UsuarioResponsable.IdUsuario);
 
             return RedirectToAction("ResultadoBusqueda");
         }
@@ -73,7 +75,9 @@ namespace ProyectoFinal.Controllers
                 return RedirectToAction("BusquedaVuelo", "Viaje");
             }
 
-            TempData["ResultadoBusqueda"] = srvViaje.BuscarVuelo(buscarVuelo);
+            var UsuarioResponsable = Session["Usuario"] as Usuario;
+
+            TempData["ResultadoBusqueda"] = srvViaje.BuscarVuelo(buscarVuelo, UsuarioResponsable.IdUsuario);
 
             return RedirectToAction("ResultadoBusqueda");
         }
@@ -106,10 +110,9 @@ namespace ProyectoFinal.Controllers
         {
             var usuarioLogueado = Session["Usuario"] as Usuario;
             if (usuarioLogueado != null) {
-                 ViewBag.ListaPaises = srvViaje.ObtenerPaises();
-                 ViewBag.ListaCiudades = srvViaje.ObtenerCiudades();
-                // Viaje v = new Viaje();
-                //return View(v);
+                ViewBag.ListaPaises = srvViaje.ObtenerPaises();
+                ViewBag.ListaCiudades = srvViaje.ObtenerCiudades();
+
                 return View();
             }
 
@@ -139,7 +142,7 @@ namespace ProyectoFinal.Controllers
                     srvEmail.enviarMensaje(usuario.Email, usuario.Nombre + " " + usuario.Apellido, asunto, cuerpoMensaje);
                 }
             }
-            //return RedirectToAction("IndexViajero", "Usuario", v);
+
             return RedirectToAction("IndexViajero", "Usuario");
         }
 

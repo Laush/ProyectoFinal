@@ -58,6 +58,20 @@ namespace ProyectoFinal.Controllers
             return RedirectToAction("Login", "Home");
         }
 
+        [HttpGet]
+        public ActionResult IndexGuia()
+        {
+            if (Session["Usuario"] is Usuario usuarioLogueado)
+            {
+                ViewBag.Rol = Session["Usuario"] as Usuario;
+                ViewBag.ListaPublicaciones = srvUsuario.ObtenerPublicacionesByUsuario(usuarioLogueado.IdUsuario);
+                return View(usuarioLogueado);
+            }
+            Session["RedireccionLogin"] = "Usuario/IndexGuia";
+            return RedirectToAction("Login", "Home");
+        }
+
+        [HttpGet]
         public ActionResult IndexPerfil(long id)
         {
             if (Session["Usuario"] is Usuario usuarioLogueado)
@@ -77,19 +91,6 @@ namespace ProyectoFinal.Controllers
             var usuarioLogueado = Session["Usuario"] as Usuario;
             Usuario usu = srvUsuario.GetById(id);
             return View(usu);
-        }
-
-        [HttpGet]
-        public ActionResult IndexGuia()
-        {
-            if (Session["Usuario"] is Usuario usuarioLogueado)
-            {
-                ViewBag.Rol = Session["Usuario"] as Usuario;
-                ViewBag.ListaPublicaciones = srvUsuario.ObtenerPublicacionesByUsuario(usuarioLogueado.IdUsuario);         
-                return View(usuarioLogueado);
-            }
-            Session["RedireccionLogin"] = "Usuario/IndexGuia";
-            return RedirectToAction("Login", "Home");
         }
 
         [HttpPost]
@@ -133,6 +134,7 @@ namespace ProyectoFinal.Controllers
             Session["RedireccionLogin"] = "Usuario/ListaAmigos";
             return RedirectToAction("Login", "Home");
         }
+
         [HttpPost]
         public ActionResult Calificar(Usuario u)
         {
@@ -147,6 +149,7 @@ namespace ProyectoFinal.Controllers
                 return View(u);
             }
         }
+
         public ActionResult PostCalificacion(Usuario u)
         {
             return View(u);

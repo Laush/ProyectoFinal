@@ -14,3 +14,27 @@
 .table-striped > thead > tr > th {
     background-color: #808080;
 }
+
+.card-color-black {
+    color: black;
+    margin-top: 1%;
+}
+
+.gaadiex-list-padding-0-22 {
+    padding: 0 22px;
+}
+
+.gaadiex-list-img-avatar {
+    float: left;
+    width: 70px; 
+    height: 70px; 
+    margin-top: 20px; 
+    margin-bottom: 8px;
+    margin-right: 60px;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+.btn-margin-top-25 {
+    margin-top: 25%;
+}

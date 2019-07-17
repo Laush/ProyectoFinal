@@ -52,7 +52,8 @@ namespace Genericas
             }
         }
 
-        public bool existeUsuario(Usuario Usuario) // verifica la existencia de un usuario, ya sea por nombre de usuario o por e-mail
+        // verifica la existencia de un usuario, ya sea por nombre de usuario o por e-mail
+        public bool existeUsuario(Usuario Usuario) 
         {
             Usuario UsuarioExistente = contexto.Usuario.FirstOrDefault(u => u.NombreUsuario == Usuario.NombreUsuario || u.Email == Usuario.Email);
 
@@ -66,17 +67,18 @@ namespace Genericas
             return contexto.Usuario.FirstOrDefault(u => (u.NombreUsuario == loginRequest.usuario || u.Email == loginRequest.usuario) && u.Password == hashedPassword);
         }
 
-        // INICIO - Estos metodos los traigo de Servicios/UsuarioServicio.cs que estaban en ProyectoFinal (web)
         public List<Usuario> Listar()
         {
             return contexto.Usuario.ToList();
         }
+
         public Usuario VerificarExistenciaUsuario(Usuario u)
         {
             var user = contexto.Usuario.Where(us => us.Email.Equals(u.Email) && us.Password.Equals(u.Password)).FirstOrDefault();
 
             return user;
         }
+
         public List<Usuario> ListarAgencias()
         {
             var query = from a in contexto.Usuario
@@ -85,6 +87,7 @@ namespace Genericas
 
             return query.ToList();
         }
+
         public List<Usuario> ListarGuias()
         {
             var query = from a in contexto.Usuario
@@ -108,7 +111,6 @@ namespace Genericas
         {
             return contexto.Usuario.FirstOrDefault(x => x.IdUsuario.Equals(u));
         }
-        // FIN - Estos metodos los traigo de Servicios/UsuarioServicio.cs que estaban en ProyectoFinal (web)
 
         public List<Viaje> ObtenerViajesUsuario(long id)
         {
@@ -127,12 +129,12 @@ namespace Genericas
             return contexto.Publicacion.FirstOrDefault(x => x.IdPublicacion == idPublicacion);
         }
 
-
         //abm usuario viajero
         public void Agregar(Usuario u)
         {
             Usuario nuevoUsuario = u;
             nuevoUsuario.IdRol = 3;
+            nuevoUsuario.Calificacion = 0;
             contexto.Usuario.Add(nuevoUsuario);
             contexto.SaveChanges();
 
@@ -154,6 +156,7 @@ namespace Genericas
             p.Descripcion = v.Descripcion;
             contexto.SaveChanges();
         }
+
         public void EditarCalificacion(Usuario v)
         {
             Usuario p = contexto.Usuario.Find(v.IdUsuario);
@@ -178,6 +181,7 @@ namespace Genericas
             }
             contexto.SaveChanges();
         }
+
         public void Eliminar(long id)
         {
             Usuario usuarioEliminar = contexto.Usuario.FirstOrDefault(u => u.IdUsuario == id);
@@ -186,7 +190,7 @@ namespace Genericas
         }
         //fin abm usuario
 
-            // Verificar si tiene uso
+        // Verificar si tiene uso
         public AmistadUsuario EstadoSeguimiento(long IdResponsable, long IdSeguido)
         {
             var Amistad = contexto.AmistadUsuario.Where(a => a.IdResponsable == IdResponsable && a.IdSeguido == IdSeguido);
@@ -205,15 +209,18 @@ namespace Genericas
 
             foreach (var viaje in contexto.Viaje.Where(v => v.NumeroVuelo == numeroVuelo))
             {
-                Usuario u = contexto.Usuario.Find(viaje.IdUsuario);
-                UsuariosCoincidencia.Add(u);
+                if (viaje.IdUsuario == idUsuarioResponsable)
+                {
+                    Usuario u = contexto.Usuario.Find(viaje.IdUsuario);
+                    UsuariosCoincidencia.Remove(u);
+                }
+                else
+                {
+                    Usuario u = contexto.Usuario.Find(viaje.IdUsuario);
+                    UsuariosCoincidencia.Add(u);
+                }
             }
 
-            foreach (Usuario item in UsuariosCoincidencia)
-            {
-                Usuario UsuarioResponsable = contexto.Usuario.Find(idUsuarioResponsable);
-                UsuariosCoincidencia.Remove(UsuarioResponsable);
-            }
             return UsuariosCoincidencia;
         }
     }

@@ -119,7 +119,32 @@ namespace Genericas
             return Context.Viaje.ToList();
         }
 
-        //Metodo para buscar por destinos, devuelve una lista de viajes
+        //Metodo para buscar destinos por string y IdUsuario, devuelve una lista de viajes
+        public List<Viaje> BuscarDestino(string[] keywords, long idUsuarioResponsable)
+        {
+            var predicate = PredicateBuilder.False<Viaje>();
+
+            foreach (string keyword in keywords)
+            {
+                string temp = keyword;
+                predicate = predicate.Or(v =>
+                                            v.Ciudad.Nombre.Contains(temp) ||
+                                            v.Ciudad.Provincia.Nombre.Contains(temp) ||
+                                            v.Ciudad.Provincia.Pais.Nombre.Contains(temp)
+                                        );
+            }
+
+            List<Viaje> viajes = Context.Viaje.AsExpandable().Where(predicate).ToList();
+
+            foreach (var item in this.ObtenerViajesPorIdUsuario(idUsuarioResponsable))
+            {
+                viajes.Remove(item);
+            }
+
+            return viajes;
+        }
+
+        //Metodo para buscar por destinos, devuelve una lista de viajes completa
         public List<Viaje> BuscarDestino(params string[] keywords)
         {
             var predicate = PredicateBuilder.False<Viaje>();
@@ -135,6 +160,30 @@ namespace Genericas
             }
 
             return Context.Viaje.AsExpandable().Where(predicate).ToList();
+        }
+
+        //Metodo para buscar por vuelos por string y IdUsuario, devuelve una lista de viajes
+        public List<Viaje> BuscarVuelo(string[] keywords, long idUsuarioResponsable)
+        {
+            var predicate = PredicateBuilder.False<Viaje>();
+
+            foreach (string keyword in keywords)
+            {
+                string temp = keyword;
+                predicate = predicate.Or(v =>
+                                            v.NumeroVuelo.Contains(temp) ||
+                                            v.Aerolinea.Contains(temp)
+                                        );
+            }
+
+            List<Viaje> viajes = Context.Viaje.AsExpandable().Where(predicate).ToList();
+
+            foreach (var item in this.ObtenerViajesPorIdUsuario(idUsuarioResponsable))
+            {
+                viajes.Remove(item);
+            }
+
+            return viajes;
         }
 
         //Metodo para buscar por vuelos, devuelve una lista de viajes
@@ -412,6 +461,11 @@ namespace Genericas
         public bool ExisteNumeroVuelo(string numeroVuelo)
         {
             return (Context.Viaje.FirstOrDefault(v => v.NumeroVuelo == numeroVuelo) != null) ? true : false;
+        }
+
+        public List<Viaje> ObtenerViajesPorIdUsuario(long idUsuario)
+        {
+            return Context.Viaje.Where(v => v.IdUsuario == idUsuario).ToList();
         }
     }
 }

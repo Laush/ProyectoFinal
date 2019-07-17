@@ -173,6 +173,10 @@
     <Content Include="Content\img\about\2.jpg" />
     <Content Include="Content\img\about\3.jpg" />
     <Content Include="Content\img\about\4.jpg" />
+    <Content Include="Content\img\avatar\laura.jpg" />
+    <Content Include="Content\img\avatar\lucho.jpg" />
+    <Content Include="Content\img\avatar\gaston.jpg" />
+    <Content Include="Content\img\avatar\nico.jpg" />
     <Content Include="Content\img\avatar\altus.jpg" />
     <Content Include="Content\img\avatar\ana.jpg" />
     <Content Include="Content\img\avatar\avatar_2x.png" />
@@ -183,6 +187,7 @@
     <Content Include="Content\img\avatar\maria.jpg" />
     <Content Include="Content\img\avatar\minaclavero.jpg" />
     <Content Include="Content\img\avatar\pedro.jpg" />
+    <Content Include="Content\img\avatar\sheldon.jpg" />
     <Content Include="Content\img\avatar\sunway.jpg" />
     <Content Include="Content\img\avatar\termascolon.jpg" />
     <Content Include="Content\img\avatar\terramar.jpg" />
@@ -224,6 +229,7 @@
     <Content Include="Content\js\dateSpicker.js" />
     <Content Include="Content\js\jqBootstrapValidation.js" />
     <Content Include="Content\mail\contact_me.php" />
+    <Content Include="Content\Usuario\ListaAmigos.css" />
     <Content Include="Content\Usuario\Notificaciones.css" />
     <Content Include="Content\Usuario\RegistroViajero.css" />
     <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css" />

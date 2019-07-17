@@ -40,10 +40,10 @@
                                 Edad: @Html.TextBoxFor(p => p.Edad, new { @class = "form-control" })
                                 Descripcion:@Html.TextBoxFor(p => p.Descripcion, new { @class = "form-control" })
                                 @Html.LabelFor(p => p.UrlFotoPerfil, "Foto de Perfil: ")
-                                @*@Html.TextBoxFor(p => p.UrlFotoPerfil, new { type = "file", @class = "form-control" })*@
-                                <label class="btn btn-default btn-file">
+                                @Html.TextBoxFor(p => p.UrlFotoPerfil, new { type = "file", @class = "text-center center-block file-upload" })
+                                @*<label class="btn btn-default btn-file">
                                     Cargar Foto <input type="file" style="display: none;">
-                                </label>
+                                </label>*@
                                 @*<br> BOTON EXAMINAR MAS LINDO
                                 <input type="file" class="text-center center-block file-upload">*@
                                 @*@Html.TextBoxFor(p => p.UrlFotoPerfil, new { type = "file", @class = "btn btn-default btn-file form-control " })*@

@@ -1,0 +1,27 @@
+﻿.card-color-black {
+    color: black;
+    margin-top: 1%;
+}
+
+.gaadiex-list-padding {
+    padding: 0 22px;
+}
+
+.btn-margin-top-25 {
+    margin-top: 25%;
+}
+
+.btn-margin-top-10 {
+    margin-top: 10%;
+}
+
+.gaadiex-list-img-avatar {
+    float: left;
+    width: 70px;
+    height: 70px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    margin-right: 60px;
+    border-radius: 50%;
+    margin-left: 20px;
+}

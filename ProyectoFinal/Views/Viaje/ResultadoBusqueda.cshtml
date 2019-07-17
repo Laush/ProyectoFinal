@@ -1,9 +1,9 @@
 ﻿@using Genericas;
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "ResultadoBusqueda";
+    ViewBag.Title = "ResultadoBusqueda";
 
 
 }
@@ -118,18 +118,22 @@
                 <br>
                 @foreach (Viaje v in Model)
                 {
-                    <div class="card" style="color:black;">
-                        <div class="gaadiex-list" style="padding: 0 22px;">
+                    <div class="card card-color-black">
+                        <div class="gaadiex-list gaadiex-list-padding-0-22">
                             <div class="row">
-                                <img class="gaadiex-list-item-img" style="float: left;width: 70px; height: 70px; margin-top: 20px;
-                                        margin-bottom: 8px; margin-right: 60px; border-radius: 50%; margin-left: 20px;"
-                                     src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="List user">
-
+                                @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).UrlFotoPerfil == null)
+                                {
+                                    <img class="gaadiex-list-item-img gaadiex-list-img-avatar" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="List user">
+                                }
+                                else
+                                {
+                                    <img class="gaadiex-list-item-img gaadiex-list-img-avatar" src="@v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).UrlFotoPerfil" alt="List user">
+                                }
                                 <div class="col-sm-8">
                                     <h3>
                                         <a href="#">
-                                            @v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).NombreUsuario,
-                                            @v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Edad Años
+                                            @v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).NombreUsuario -
+                                            @v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Edad A&ntilde;os
                                         </a>
                                         @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion > 10)
                                         {<label for="radio1">&#9733;</label>
@@ -158,45 +162,45 @@
                                         @if (v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).Calificacion == null)
                                         {
                                             @: No fue calificado
-                                        }
+                        }
                                     </h3>
 
-                                    <h5> Vuelo: @v.Aerolinea ,@v.NumeroVuelo</h5>
+                                    <h5> Vuelo: @v.Aerolinea - @v.NumeroVuelo</h5>
                                     <h5>
                                         Intereses:
                                         @if (v.InteresActividades == true)
                                         {
                                             @: Actividades
-                                        }
+                        }
                                         @if (v.InteresAlojamiento == true)
                                         {
                                             @: Alojamientos
-                                        }
+                        }
                                         @if (v.InteresAmistades == true)
                                         {
                                             @: Amistades
-                                        }
+                        }
                                         @if (v.InteresExcursiones == true)
                                         {
                                             @: Excursiones
-                                        }
+                        }
                                         @if (v.InteresTraslados == true)
                                         {
                                             @: Traslados
-                                        }
+                        }
                                         @if (v.InteresOtros == true)
                                         {
                                             @: Otros
-                                        }
+                        }
                                     </h5>
 
                                 </div>
                                 <div class="col-sm-2">
-                                    <span class="aInvitar"><a href="#" class="btn btn-primary" style="margin-top:25%;" onclick="invitarViajero(@v.IdUsuario)"><i class="fa fa-user-plus"></i> </a></span>
+                                    <span class="aInvitar"><a href="#" class="btn btn-primary btn-margin-top-25" onclick="invitarViajero(@v.IdUsuario)"><i class="fa fa-user-plus"></i> </a></span>
 
-                                    <span class="aCancelarInvitar"><a href="#" class="btn btn-danger" style="margin-top:25%;" onclick="cancelarInvitarViajero(@v.IdUsuario)"><i class="fa fa-user-times"></i> </a></span>
+                                    <span class="aCancelarInvitar"><a href="#" class="btn btn-danger btn-margin-top-25" onclick="cancelarInvitarViajero(@v.IdUsuario)"><i class="fa fa-user-times"></i> </a></span>
 
-                                    <a href="/Usuario/IndexPerfil/@v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).IdUsuario" class="btn btn-primary" style="margin-top:25%;"><i class="fa fa-eye"></i> </a>
+                                    <a href="/Usuario/IndexPerfil/@v.Usuario.FirstOrDefault(u => u.IdUsuario == v.IdUsuario).IdUsuario" class="btn btn-primary btn-margin-top-25"><i class="fa fa-eye"></i> </a>
                                 </div>
                             </div>
 

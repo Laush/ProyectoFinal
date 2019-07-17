@@ -6,7 +6,8 @@
 
 <head>
     <link href="~/Content/css/agencyUsu.css" rel="stylesheet">
- </head>
+    <link href="~/Content/Usuario/ListaAmigos.css" rel="stylesheet" />
+</head>
 
 <body id="page-top">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -73,21 +74,17 @@
                 @foreach (AmistadUsuario u in ViewBag.ListaAmigos)
                 {
                     
-                    <div class="card" style="color:black;">
-                        <div class="gaadiex-list" style="padding: 0 22px;">
+                    <div class="card card-color-black">
+                        <div class="gaadiex-list gaadiex-list-padding">
                             <div class="row">
 
                                 @if (u.IdResponsable == ViewBag.Usu.IdUsuario)
                                 {
-                                    <img class="gaadiex-list-item-img" style="float: left;width: 70px; height: 70px; margin-top: 20px;
-                                        margin-bottom: 8px; margin-right: 60px; border-radius: 50%; margin-left: 20px;"
-                                         src="~/Content/img/avatar/@u.Usuario.UrlFotoPerfil" alt="">
+                                    <img class="gaadiex-list-item-img gaadiex-list-img-avatar" src="@u.Usuario.UrlFotoPerfil" alt="">
                                 }
                                else
                                 {
-                                    <img class="gaadiex-list-item-img" style="float: left;width: 70px; height: 70px; margin-top: 20px;
-                                        margin-bottom: 8px; margin-right: 60px; border-radius: 50%; margin-left: 20px;"
-                                         src="~/Content/img/avatar/@u.Usuario1.UrlFotoPerfil" alt="avatar">
+                                    <img class="gaadiex-list-item-img gaadiex-list-img-avatar" src="@u.Usuario1.UrlFotoPerfil" alt="avatar">
                                 }     
 
                                 <div class="col-sm-8" >
@@ -108,7 +105,7 @@
 
 </div>
                                 <div class="col-sm-2">
-                                    <a href="#" class="btn btn-primary" style="margin-top:25%;"><i class="fa fa-user-times"></i>  </a>
+                                    <a href="#" class="btn btn-primary btn-margin-top-25"><i class="fa fa-user-times"></i>  </a>
 
                                 </div>
                             </div>

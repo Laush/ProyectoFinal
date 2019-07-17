@@ -12,18 +12,22 @@
         input[type = "radio"] {
             display: none; /*position: absolute;top: -1000em;*/
         }
+
         label {
             color: grey;
-            font-size:40px;
+            font-size: 40px;
         }
+
         .clasificacion {
             direction: rtl;
             unicode-bidi: bidi-override;
         }
+
         label:hover,
         label:hover ~ label {
             color: orange;
         }
+
         input[type = "radio"]:checked ~ label {
             color: orange;
         }
@@ -98,7 +102,15 @@
                     <div class="col-lg-4">
                         <div class="text-center">
                             <h4> @Model.NombreUsuario </h4>
-                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+
+                            @if (Model.UrlFotoPerfil == null)
+                            {
+                                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                            }
+                            else
+                            {
+                                <img src="@Model.UrlFotoPerfil" class="avatar img-circle img-thumbnail" alt="@Model.Nombre @Model.Apellido">
+                            }
                         </div>
                     </div>
                     <div class="col-lg-4">
