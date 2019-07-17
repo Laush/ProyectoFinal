@@ -154,5 +154,34 @@ namespace ProyectoFinal.Controllers
         {
             return View(u);
         }
+
+        public JsonResult CalificarUsuario(long idUsuarioCalificado, long numeroCalificacion)
+        {
+            Usuario UsuarioResponsable = Session["Usuario"] as Usuario;
+            Usuario UsuarioCalificado = srvUsuario.GetById(idUsuarioCalificado);
+
+            var result = "Error en Calificacion.";
+
+            if (UsuarioCalificado != null)
+            {
+                result = "Viajero "
+                            + UsuarioCalificado.Nombre
+                            + " "
+                            + UsuarioCalificado.Apellido
+                            + " Calificado correctamente.";
+
+                srvUsuario.CalificarUsuario(UsuarioCalificado, numeroCalificacion);
+            }
+            else
+            {
+                result = "No se pudo Calificar al Viajero " 
+                            + UsuarioCalificado.Nombre
+                            + " "
+                            + UsuarioCalificado.Apellido
+                            + " correctamente";
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

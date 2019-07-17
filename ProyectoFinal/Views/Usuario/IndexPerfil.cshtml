@@ -5,7 +5,69 @@
     ViewBag.Title = "IndexPerfil";
 }
 @model Usuario
+@section scripts{
+    <script type="text/javascript">
+        function calificar(idUsuarioCalificado) {
 
+            var valueCalificacion = $("input[class='estrellaCalificacion']:checked").val();
+
+            $.ajax({
+                url: '@Url.Action("CalificarUsuario", "Usuario")',
+                dataType: "json",
+                data: { idUsuarioCalificado: idUsuarioCalificado, numeroCalificacion: valueCalificacion},
+                success: function (data) {
+                    // Muestro un alert con el resultado del metodo
+                    alert(data);
+                    var url = '@Url.Action("IndexPerfil", "Usuario", Model.IdUsuario)';
+                    window.location.href = url;
+                },
+                error: function (xhr, status, error) {
+                    alert("Error: " + error);
+                }
+            });
+        };
+    </script>
+
+    <script type="text/javascript">
+        function cancelarInvitarViajero(idSeguido) {
+            $.ajax({
+                url: '@Url.Action("CancelarInvitarViajero", "Viaje")',
+                dataType: "json",
+                data: { idSeguido: idSeguido },
+                success: function (data) {
+                    // Muestro un alert con el resultado del metodo
+                    alert(data);
+                    var url = '@Url.Action("IndexViajero", "Usuario")';
+                    window.location.href = url;
+                },
+                error: function (xhr, status, error) {
+                    alert("Error llamada Ajax ");
+                }
+            });
+        };
+    </script>
+
+    <script type="text/javascript">
+
+        function invitarViajero(idSeguido) {
+
+            $.ajax({
+                url: '@Url.Action("InvitarViajero", "Viaje")',
+                dataType: "json",
+                data: { idSeguido: idSeguido },
+                success: function (data) {
+                    //$(".aInvitar").hide();
+                    //$(".aCancelarInvitar").show();
+
+                    alert(data.Result);
+                },
+                error: function (xhr, status, error) {
+                    alert("Error: " + error);
+                }
+            });
+        };
+    </script>
+}
 <head>
     <link href="~/Content/css/agencyUsu.css" rel="stylesheet">
     <style>
@@ -123,38 +185,39 @@
                         @if (ViewBag.CheckeaAmistad != null)
                         {
                             <h4>Email</h4>@Model.Email <br><br>
-                            <h4>Amistad</h4> <a href="#" class="btn btn-primary"><i class="fa fa-check"></i> Dejar de seguir </a><br><br>
+                            <h4>Amistad</h4> <a href="#" class="btn btn-danger" onclick="cancelarInvitarViajero(@Model.IdUsuario)"><i class="fa fa-times"></i> Dejar de seguir </a><br><br>
                         }
                         else
                         {
                             <h4>Amistad</h4>
-                            <a href="#" class="btn btn-primary"><i class="fa fa-plus"></i> Invitar </a>
+                            <a href="#" class="btn btn-success"><i class="fa fa-plus" onclick="invitarViajero(@Model.IdUsuario)"></i> Invitar </a>
                             <br><br>
                         }
                         <h4>Calificaci&oacute;n: @Model.Calificacion</h4> <br>
                         @if (ViewBag.CheckeaAmistad != null)
                         {
-                            <form action="/Usuario/Calificar" method="Post">
-                                @Html.HiddenFor(p => p.IdUsuario, new { @class = "form-control" })
-                                @Html.HiddenFor(p => p.Nombre, new { @class = "form-control" })
-                                @Html.HiddenFor(p => p.Apellido, new { @class = "form-control" })
-                                @Html.HiddenFor(p => p.NombreUsuario, new { @class = "form-control" })
-                                @Html.HiddenFor(p => p.Nacionalidad, new { @class = "form-control" })
-                                @Html.HiddenFor(p => p.Password, new { @class = "form-control" })
-                                @Html.HiddenFor(p => p.Email, new { @class = "form-control" })
-                                @Html.HiddenFor(p => p.Edad, new { @class = "form-control" })
-                                @Html.HiddenFor(p => p.Descripcion, new { @class = "form-control" })
-                                <div id="wrapper">
-                                    <p class="clasificacion">
-                                        @Html.RadioButtonFor(p => p.Calificacion, "5", new { id = "radio5" }) <label for="radio5">&#9733;</label>
-                                        @Html.RadioButtonFor(p => p.Calificacion, "4", new { id = "radio4" }) <label for="radio4">&#9733;</label>
-                                        @Html.RadioButtonFor(p => p.Calificacion, "3", new { id = "radio3" }) <label for="radio3">&#9733;</label>
-                                        @Html.RadioButtonFor(p => p.Calificacion, "2", new { id = "radio2" }) <label for="radio2">&#9733;</label>
-                                        @Html.RadioButtonFor(p => p.Calificacion, "1", new { id = "radio1" }) <label for="radio1">&#9733;</label>
-                                    </p>
-                                </div>
-                                <input class="btn btn-primary my-2 my-sm-0" type="submit" value="Calificar" />
-                            </form>
+                            @*<form action="/Usuario/Calificar" method="Post">
+                                    <input class="btn btn-primary my-2 my-sm-0" type="submit" value="Calificar" />
+                                </form>*@
+                            @Html.HiddenFor(p => p.IdUsuario, new { @class = "form-control" })
+                            @Html.HiddenFor(p => p.Nombre, new { @class = "form-control" })
+                            @Html.HiddenFor(p => p.Apellido, new { @class = "form-control" })
+                            @Html.HiddenFor(p => p.NombreUsuario, new { @class = "form-control" })
+                            @Html.HiddenFor(p => p.Nacionalidad, new { @class = "form-control" })
+                            @Html.HiddenFor(p => p.Password, new { @class = "form-control" })
+                            @Html.HiddenFor(p => p.Email, new { @class = "form-control" })
+                            @Html.HiddenFor(p => p.Edad, new { @class = "form-control" })
+                            @Html.HiddenFor(p => p.Descripcion, new { @class = "form-control" })
+                            <div id="wrapper">
+                                <p class="clasificacion">
+                                    @Html.RadioButtonFor(p => p.Calificacion, "5", new { id = "radio5", @class = "estrellaCalificacion" }) <label for="radio5">&#9733;</label>
+                                    @Html.RadioButtonFor(p => p.Calificacion, "4", new { id = "radio4", @class = "estrellaCalificacion" }) <label for="radio4">&#9733;</label>
+                                    @Html.RadioButtonFor(p => p.Calificacion, "3", new { id = "radio3", @class = "estrellaCalificacion" }) <label for="radio3">&#9733;</label>
+                                    @Html.RadioButtonFor(p => p.Calificacion, "2", new { id = "radio2", @class = "estrellaCalificacion" }) <label for="radio2">&#9733;</label>
+                                    @Html.RadioButtonFor(p => p.Calificacion, "1", new { id = "radio1", @class = "estrellaCalificacion" }) <label for="radio1">&#9733;</label>
+                                </p>
+                            </div>
+                            <a href="#" class="btn btn-warning" onclick="calificar(@Model.IdUsuario)" title="Calificar" value="Calificar">Calificar</a>
                         }
                         else
                         {

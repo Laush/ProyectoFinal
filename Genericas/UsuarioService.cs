@@ -223,5 +223,19 @@ namespace Genericas
 
             return UsuariosCoincidencia;
         }
+
+        public void CalificarUsuario(Usuario usuarioCalificado, long numeroCalificacion)
+        {
+            try
+            {
+                Usuario usuario = contexto.Usuario.Find(usuarioCalificado.IdUsuario);
+                usuario.Calificacion = usuario.Calificacion + numeroCalificacion;
+                contexto.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

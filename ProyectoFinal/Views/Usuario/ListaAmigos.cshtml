@@ -73,7 +73,7 @@
                 <br>
                 @foreach (AmistadUsuario u in ViewBag.ListaAmigos)
                 {
-                    
+
                     <div class="card card-color-black">
                         <div class="gaadiex-list gaadiex-list-padding">
                             <div class="row">
@@ -82,12 +82,12 @@
                                 {
                                     <img class="gaadiex-list-item-img gaadiex-list-img-avatar" src="@u.Usuario.UrlFotoPerfil" alt="">
                                 }
-                               else
+                                else
                                 {
                                     <img class="gaadiex-list-item-img gaadiex-list-img-avatar" src="@u.Usuario1.UrlFotoPerfil" alt="avatar">
-                                }     
+                                }
 
-                                <div class="col-sm-8" >
+                                <div class="col-sm-8">
                                     <h3> <br></h3>
                                     <h5 style="color:dimgrey;">
                                         <a href="#">
@@ -103,10 +103,9 @@
                                         Amigos desde  @u.FechaCoincidencia.ToString("dd/MM/yyyy")
                                     </h5>
 
-</div>
+                                </div>
                                 <div class="col-sm-2">
-                                    <a href="#" class="btn btn-primary btn-margin-top-25"><i class="fa fa-user-times"></i>  </a>
-
+                                    <a href="/Usuario/IndexPerfil/@u.Usuario1.IdUsuario" class="btn btn-primary btn-margin-top-25" title="Ir a Perfil"><i class="fa fa-eye"></i> </a>
                                 </div>
                             </div>
 
@@ -118,7 +117,7 @@
 
                 }
 
-                
+
 
 
 

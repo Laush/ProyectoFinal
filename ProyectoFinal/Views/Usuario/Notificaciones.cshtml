@@ -137,16 +137,16 @@
 
                                 <div class="col-sm-2">
                                     @if (u.Estado == "PENDIENTE")
-    {
-                                <a href="#" class="btn btn-success btn-margin-top-15" onclick="aceptarInvitarViajero(@u.Usuario1.IdUsuario)" title="Aceptar Invitacion"><i class="fa fa-check"></i></a>
-                                <a href="#" class="btn btn-danger btn-margin-top-15" onclick="cancelarInvitarViajero(@u.Usuario1.IdUsuario)" title="Cancelar Invitacion"><i class="fa fa-times"></i></a>
-}
+                                    {
+                                        <a href="#" class="btn btn-success btn-margin-top-15" onclick="aceptarInvitarViajero(@u.Usuario1.IdUsuario)" title="Aceptar Invitacion"><i class="fa fa-check"></i></a>
+                                        <a href="#" class="btn btn-danger btn-margin-top-15" onclick="cancelarInvitarViajero(@u.Usuario1.IdUsuario)" title="Cancelar Invitacion"><i class="fa fa-times"></i></a>
+                                    }
 
                                     @if (u.Estado == "ACEPTADO")
-    {
-                                <a href="#" class="btn btn-primary btn-margin-top-15" title="Conectados desde @u.FechaCoincidencia.ToShortDateString()"><i class="fa fa-users"></i></a>
-                                <a href="/Usuario/IndexPerfil/@u.Usuario1.IdUsuario" class="btn btn-primary btn-margin-top-15"><i class="fa fa-eye"></i> </a>
-}
+                                    {
+                                        <a href="#" class="btn btn-primary btn-margin-top-15" title="Conectados desde @u.FechaCoincidencia.ToShortDateString()"><i class="fa fa-users"></i></a>
+                                        <a href="/Usuario/IndexPerfil/@u.Usuario1.IdUsuario" class="btn btn-primary btn-margin-top-15"><i class="fa fa-eye"></i> </a>
+                                    }
                                 </div>
 
 
