@@ -18,6 +18,7 @@ namespace Genericas
         public Pais()
         {
             this.Provincia = new HashSet<Provincia>();
+            this.Usuario = new HashSet<Usuario>();
         }
     
         public long IdPais { get; set; }
@@ -25,5 +26,7 @@ namespace Genericas
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Provincia> Provincia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

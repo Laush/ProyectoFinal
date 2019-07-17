@@ -193,5 +193,5 @@ GO
 
 /*relacion 1 a n usuario nacionalidad*/
 ALTER TABLE [dbo].[Usuario]  WITH CHECK ADD  CONSTRAINT [FK_Usuario_Nacionalidad] FOREIGN KEY([Nacionalidad])
-REFERENCES [dbo].[Ciudad] ([IdCiudad])
+REFERENCES [dbo].[Pais] ([IdPais])
 GO

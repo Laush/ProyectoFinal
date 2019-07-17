@@ -157,11 +157,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_Nacionalidad">
-          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="1" />
+          <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Ciudad">
-              <PropertyRef Name="IdCiudad" />
+            <Principal Role="Pais">
+              <PropertyRef Name="IdPais" />
             </Principal>
             <Dependent Role="Usuario">
               <PropertyRef Name="Nacionalidad" />
@@ -246,7 +246,7 @@
             <End Role="Publicacion" EntitySet="Publicacion" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Nacionalidad" Association="Self.FK_Usuario_Nacionalidad">
-            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Pais" EntitySet="Pais" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
           <AssociationSet Name="FK_UsuarioViaje" Association="Self.FK_UsuarioViaje">
@@ -301,6 +301,7 @@
           <Property Name="IdPais" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Provincia" Relationship="Self.FK_Provincia_Pais" FromRole="Pais" ToRole="Provincia" />
+          <NavigationProperty Name="Usuario" Relationship="DB_Model.FK_Usuario_Nacionalidad1" FromRole="Pais" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -347,6 +348,7 @@
           <NavigationProperty Name="Publicacion" Relationship="Self.FK_Publicacion_Usuario" FromRole="Usuario" ToRole="Publicacion" />
           <NavigationProperty Name="Viaje" Relationship="Self.UsuarioViaje" FromRole="Usuario" ToRole="Viaje" />
           <Property Name="Calificacion" Type="Int64" />
+          <NavigationProperty Name="Pais" Relationship="DB_Model.FK_Usuario_Nacionalidad1" FromRole="Usuario" ToRole="Pais" />
         </EntityType>
         <EntityType Name="Viaje">
           <Key>
@@ -515,7 +517,23 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Viaje" EntitySet="Viaje" />
           </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Nacionalidad1" Association="DB_Model.FK_Usuario_Nacionalidad1">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Usuario_Nacionalidad1">
+          <End Type="DB_Model.Pais" Role="Pais" Multiplicity="1" />
+          <End Type="DB_Model.Usuario" Role="Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="IdPais" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="Nacionalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

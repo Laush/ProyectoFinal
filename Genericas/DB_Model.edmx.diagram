@@ -21,6 +21,7 @@
         <AssociationConnector Association="DB_Model.FK_Provincia_Pais" ManuallyRouted="false" />
         <AssociationConnector Association="DB_Model.FK_Publicacion_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="DB_Model.UsuarioViaje" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_Model.FK_Usuario_Nacionalidad1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
