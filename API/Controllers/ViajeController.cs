@@ -83,7 +83,7 @@ namespace API.Controllers
                        
             if (RequestModel.Destino != null)
             {
-                foreach( Viaje Viaje in ViajeService.BuscarDestino(RequestModel.Destino))
+                foreach( Viaje Viaje in ViajeService.BuscarDestino(new []{ RequestModel.Destino }, RequestModel.IdUsuario))
                 {
                     BusquedaResponseModel ViajeEncontrado = new BusquedaResponseModel();
 
@@ -112,7 +112,7 @@ namespace API.Controllers
 
             if(RequestModel.Vuelo != null)
             {
-                foreach (Viaje Viaje in ViajeService.BuscarVuelo(RequestModel.Vuelo))
+                foreach (Viaje Viaje in ViajeService.BuscarVuelo(new[] { RequestModel.Vuelo }, RequestModel.IdUsuario))
                 {
                     BusquedaResponseModel ViajeEncontrado = new BusquedaResponseModel();
 
