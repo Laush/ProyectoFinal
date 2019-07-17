@@ -140,6 +140,7 @@ namespace API.Controllers
                     Amigo.Descripcion = Amistad.Usuario1.Descripcion;
                     Amigo.UrlFotoPerfil = Amistad.Usuario1.UrlFotoPerfil;
                     Amigo.Nacionalidad = usuarioService.ObtenerNacionalidad(Amistad.Usuario1.Nacionalidad).Nombre;
+                    Amigo.Calificacion = Amistad.Usuario1.Calificacion;
 
                     Amigos.Add(Amigo);
                 }
@@ -155,6 +156,7 @@ namespace API.Controllers
                     Amigo.Descripcion = Amistad.Usuario.Descripcion;
                     Amigo.UrlFotoPerfil = Amistad.Usuario.UrlFotoPerfil;
                     Amigo.Nacionalidad = usuarioService.ObtenerNacionalidad(Amistad.Usuario.Nacionalidad).Nombre;
+                    Amigo.Calificacion = Amistad.Usuario.Calificacion;
 
                     Amigos.Add(Amigo);
                 }
